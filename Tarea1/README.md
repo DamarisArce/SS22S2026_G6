@@ -66,3 +66,12 @@ Se aplicaron las siguientes transformaciones:
 ## Archivos generados
 
 Después de ejecutar el script `limpieza_dataset.py`, se generan los siguientes archivos:
+
+### Clientes por categoría
+![clientes por categoría](./resultados/clientes_por_categoria.png)
+
+### Clientes por género
+![clientes por genero](./resultados/clientes_por_genero.png)
+
+### Gasto promedio por ciudad
+![Gasto promedio por ciudad](./resultados/gasto_promedio_por_ciudad.png)

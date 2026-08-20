@@ -1,0 +1,27 @@
+Changed database context to 'SS2_Practica1_VuelosDW'.
+===== RESULTADO DETALLADO DE PRUEBAS =====
+numero|prueba|resultado|detalle
+------|------|---------|-------
+1|Control positivo: registro válido|PASS|El registro válido fue aceptado correctamente.
+2|CHECK: género inválido|PASS|The INSERT statement conflicted with the CHECK constraint "CK_DimPasajero_Genero". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.DimPasajero", column 'genero'.
+3|CHECK: edad fuera de rango|PASS|The INSERT statement conflicted with the CHECK constraint "CK_DimPasajero_Edad". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.DimPasajero", column 'edad'.
+4|FK: aerolínea inexistente|PASS|The INSERT statement conflicted with the FOREIGN KEY constraint "FK_FactVueloPasajero_Aerolinea". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.DimAerolinea", column 'id_aerolinea'.
+5|CHECK: origen igual a destino|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Aeropuertos". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+6|CHECK: precio negativo|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Precios". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+7|CHECK: equipaje inconsistente|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Equipaje". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+8|CHECK: llegada anterior a salida|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_OrdenVuelo". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+9|CHECK: reserva posterior a salida|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_OrdenReserva". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+10|CHECK: duración igual a cero|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Duracion". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero", column 'duracion_min'.
+11|CHECK: retraso negativo|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Retraso". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero", column 'retraso_min'.
+12|CHECK: llegada dimensional/timestamp inconsistente|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_ConsistenciaLlegada". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero".
+13|CHECK: record_id_fuente no positivo|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_RecordId". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero", column 'record_id_fuente'.
+14|CHECK: cantidad_registros distinta de 1|PASS|The INSERT statement conflicted with the CHECK constraint "CK_FactVueloPasajero_Cantidad". The conflict occurred in database "SS2_Practica1_VuelosDW", table "dw.FactVueloPasajero", column 'cantidad_registros'.
+===== RESUMEN =====
+total_pruebas|pruebas_exitosas|pruebas_fallidas
+-------------|----------------|----------------
+14|14|0
+===== VALIDACION DE LIMPIEZA POST-ROLLBACK =====
+ejecuciones_prueba_restantes|aerolineas_prueba_restantes|aeropuertos_prueba_restantes|hechos_prueba_restantes
+----------------------------|---------------------------|----------------------------|-----------------------
+0|0|0|0
+Validaciones de integridad finalizadas.

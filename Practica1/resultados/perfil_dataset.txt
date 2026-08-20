@@ -1,0 +1,138 @@
+
+==============================================================================
+1. RESUMEN GENERAL
+==============================================================================
+Registros: 10000
+Columnas: 26
+record_id únicos: 10000
+passenger_id únicos: 10000
+
+==============================================================================
+2. VALORES VACÍOS
+==============================================================================
+arrival_datetime              560
+duration_min                  560
+delay_min                     560
+seat                          560
+passenger_age                 112
+passenger_nationality         209
+sales_channel                 144
+
+==============================================================================
+3. CARDINALIDAD CRUDA
+==============================================================================
+record_id                   10000
+airline_code                   12
+airline_name                   23
+flight_number                9612
+origin_airport                 30
+destination_airport            30
+departure_datetime           9964
+arrival_datetime             9404
+duration_min                  376
+status                          4
+delay_min                     232
+aircraft_type                  12
+cabin_class                     4
+seat                          270
+passenger_id                10000
+passenger_gender               12
+passenger_age                  78
+passenger_nationality          11
+booking_datetime             9971
+sales_channel                   5
+payment_method                  5
+ticket_price                 7470
+currency                        4
+ticket_price_usd_est         6876
+bags_total                      4
+bags_checked                    3
+
+==============================================================================
+4. NORMALIZACIONES DETECTADAS
+==============================================================================
+Aeropuertos origen en minúscula: 402
+Aeropuertos destino en minúscula: 403
+Números de vuelo con minúsculas: 310
+Precios con coma decimal: 930
+Variantes crudas de género: 12
+Variantes crudas de nombre de aerolínea: 23
+
+==============================================================================
+5. VARIANTES DE GÉNERO
+==============================================================================
+F                      4099
+Femenino                422
+M                      4254
+Masculino               468
+NoBinario                42
+X                       338
+f                       158
+femenino                 19
+m                       163
+masculino                27
+nobinario                 2
+x                         8
+
+==============================================================================
+6. AEROLÍNEAS POR CÓDIGO
+==============================================================================
+AA: AMERICAN AIRLINES | American Airlines
+AM: AEROMEXICO | Aeromexico
+AV: AVIANCA | Avianca
+B6: JETBLUE | JetBlue
+BA: BRITISH AIRWAYS | British Airways
+CM: COPA AIRLINES | Copa Airlines
+DL: DELTA | Delta
+FR: RYANAIR | Ryanair
+IB: IBERIA | Iberia
+LA: LATAM
+UA: UNITED | United
+WN: SOUTHWEST | Southwest
+
+==============================================================================
+7. ESTADOS DEL VUELO
+==============================================================================
+ON_TIME                7278
+DELAYED                1970
+CANCELLED               560
+DIVERTED                192
+
+==============================================================================
+8. AMBIGÜEDAD DE FECHAS
+==============================================================================
+departure_datetime
+  sin fecha/candidato: 0
+  interpretación única: 6448
+  interpretación ambigua: 3552
+arrival_datetime
+  sin fecha/candidato: 560
+  interpretación única: 6096
+  interpretación ambigua: 3344
+booking_datetime
+  sin fecha/candidato: 0
+  interpretación única: 6410
+  interpretación ambigua: 3590
+
+==============================================================================
+9. PROBLEMAS DE UNA INTERPRETACIÓN INGENUA
+==============================================================================
+Llegadas anteriores a la salida: 620
+Reservas posteriores a la salida: 621
+
+==============================================================================
+10. RELACIÓN ENTRE DURACIÓN, RETRASO Y FECHAS NO AMBIGUAS
+==============================================================================
+Diferencia mínima [tiempo real - (duración + retraso)]: -10 min
+Diferencia máxima [tiempo real - (duración + retraso)]: 25 min
+Anticipación mínima de reserva observada: 1.01 días
+Anticipación máxima de reserva observada: 120.97 días
+
+==============================================================================
+11. CONSISTENCIA DE CANCELACIONES
+==============================================================================
+Vuelos CANCELLED: 560
+arrival_datetime: vacíos CANCELLED=560, vacíos no CANCELLED=0
+duration_min: vacíos CANCELLED=560, vacíos no CANCELLED=0
+delay_min: vacíos CANCELLED=560, vacíos no CANCELLED=0
+seat: vacíos CANCELLED=560, vacíos no CANCELLED=0

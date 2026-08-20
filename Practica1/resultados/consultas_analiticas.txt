@@ -1,0 +1,247 @@
+Changed database context to 'SS2_Practica1_VuelosDW'.
+===== 01. RESUMEN GENERAL =====
+total_registros_pasajero_vuelo|record_id_unicos|pasajeros_distintos|monto_total_usd_estimado|precio_promedio_usd_estimado|duracion_promedio_min|retraso_promedio_min
+------------------------------|----------------|-------------------|------------------------|----------------------------|---------------------|--------------------
+10000|10000|10000|770024.71|77.00|233.36|26.07
+===== 02. OCURRENCIAS DISTINTAS DE VUELO =====
+ocurrencias_vuelo_distintas
+---------------------------
+10000
+===== 03. DISTRIBUCION POR ESTADO =====
+estado_vuelo|cantidad_registros|porcentaje
+------------|------------------|----------
+ON_TIME|7278|72.78
+DELAYED|1970|19.70
+CANCELLED|560|5.60
+DIVERTED|192|1.92
+===== 04. TOP 5 DESTINOS =====
+destino|cantidad_registros|porcentaje_total|monto_usd_estimado
+-------|------------------|----------------|------------------
+SAP|701|7.01|56012.70
+CUN|699|6.99|53576.74
+BCN|696|6.96|51229.53
+BOG|696|6.96|54204.54
+HAV|693|6.93|55368.96
+===== 05. TOP 5 ORIGENES =====
+origen|cantidad_registros|monto_usd_estimado
+------|------------------|------------------
+HAV|740|55225.15
+MIA|708|55574.55
+SAL|707|56457.56
+SJO|685|51665.01
+JFK|681|50493.54
+===== 06. TOP 5 RUTAS =====
+origen|destino|ruta|cantidad_registros|monto_usd_estimado|duracion_promedio_min
+------|-------|----|------------------|------------------|---------------------
+MIA|HAV|MIA -> HAV|76|5621.97|229.19
+HAV|CUN|HAV -> CUN|66|4395.22|216.81
+SAL|LAX|SAL -> LAX|64|4986.49|252.81
+HAV|GUA|HAV -> GUA|63|5137.62|232.77
+CUN|BOG|CUN -> BOG|62|4951.79|227.11
+===== 07. VOLUMEN POR AEROLINEA =====
+codigo_aerolinea|nombre_aerolinea|cantidad_registros|porcentaje_total
+----------------|----------------|------------------|----------------
+CM|Copa Airlines|888|8.88
+WN|Southwest|868|8.68
+IB|Iberia|867|8.67
+B6|JetBlue|853|8.53
+FR|Ryanair|850|8.50
+AV|Avianca|835|8.35
+BA|British Airways|829|8.29
+AA|American Airlines|824|8.24
+DL|Delta|814|8.14
+LA|LATAM|803|8.03
+UA|United|797|7.97
+AM|Aeromexico|772|7.72
+===== 08. PUNTUALIDAD POR AEROLINEA =====
+codigo_aerolinea|nombre_aerolinea|total_registros|on_time|delayed|cancelled|diverted|porcentaje_puntualidad
+----------------|----------------|---------------|-------|-------|---------|--------|----------------------
+B6|JetBlue|853|646|155|34|18|75.73
+DL|Delta|814|598|160|35|21|73.46
+CM|Copa Airlines|888|652|167|58|11|73.42
+LA|LATAM|803|589|155|46|13|73.35
+FR|Ryanair|850|622|172|46|10|73.18
+AM|Aeromexico|772|562|151|43|16|72.80
+BA|British Airways|829|602|153|53|21|72.62
+IB|Iberia|867|629|185|42|11|72.55
+UA|United|797|573|160|48|16|71.89
+AA|American Airlines|824|592|166|48|18|71.84
+AV|Avianca|835|596|162|60|17|71.38
+WN|Southwest|868|617|184|47|20|71.08
+===== 09. RETRASOS POR AEROLINEA =====
+codigo_aerolinea|nombre_aerolinea|registros_retrasados|retraso_promedio_min|retraso_minimo_min|retraso_maximo_min
+----------------|----------------|--------------------|--------------------|------------------|------------------
+FR|Ryanair|172|137.20|11|239
+LA|LATAM|155|130.32|10|239
+BA|British Airways|153|130.27|13|240
+AM|Aeromexico|151|129.26|11|239
+WN|Southwest|184|125.82|11|240
+UA|United|160|125.63|10|240
+CM|Copa Airlines|167|124.68|10|240
+B6|JetBlue|155|123.14|10|238
+AV|Avianca|162|122.49|11|235
+IB|Iberia|185|120.54|10|239
+DL|Delta|160|116.10|10|239
+AA|American Airlines|166|114.40|10|240
+===== 10. CANCELACIONES POR AEROLINEA =====
+codigo_aerolinea|nombre_aerolinea|total_registros|cancelaciones|porcentaje_cancelacion
+----------------|----------------|---------------|-------------|----------------------
+AV|Avianca|835|60|7.19
+CM|Copa Airlines|888|58|6.53
+BA|British Airways|829|53|6.39
+UA|United|797|48|6.02
+AA|American Airlines|824|48|5.83
+LA|LATAM|803|46|5.73
+AM|Aeromexico|772|43|5.57
+WN|Southwest|868|47|5.41
+FR|Ryanair|850|46|5.41
+IB|Iberia|867|42|4.84
+DL|Delta|814|35|4.30
+B6|JetBlue|853|34|3.99
+===== 11. MONTO DE BOLETOS POR AEROLINEA =====
+codigo_aerolinea|nombre_aerolinea|registros|monto_total_usd_estimado|precio_promedio_usd_estimado
+----------------|----------------|---------|------------------------|----------------------------
+CM|Copa Airlines|888|69528.66|78.30
+FR|Ryanair|850|68177.33|80.21
+B6|JetBlue|853|67886.40|79.59
+WN|Southwest|868|66926.08|77.10
+AV|Avianca|835|66029.48|79.08
+IB|Iberia|867|65700.43|75.78
+AA|American Airlines|824|62565.21|75.93
+DL|Delta|814|62054.47|76.23
+LA|LATAM|803|61611.29|76.73
+UA|United|797|60386.13|75.77
+AM|Aeromexico|772|60086.07|77.83
+BA|British Airways|829|59073.16|71.26
+===== 12. MONTOS POR MONEDA =====
+codigo_moneda|cantidad_registros|total_moneda_original|precio_promedio_moneda_original|total_usd_estimado
+-------------|------------------|---------------------|-------------------------------|------------------
+USD|6176|646306.15|104.65|646306.15
+EUR|806|85646.07|106.26|93354.34
+GTQ|1662|172586.12|103.84|22091.03
+MXN|1356|142643.50|105.19|8273.19
+===== 13. CLASES DE CABINA =====
+clase_cabina|cantidad_registros|precio_promedio_usd|monto_total_usd|cancelaciones
+------------|------------------|-------------------|---------------|-------------
+ECONOMY|7866|63.54|499766.74|439
+PREMIUM_ECONOMY|974|89.39|87062.70|56
+BUSINESS|956|143.65|137327.10|56
+FIRST|204|224.84|45868.17|9
+===== 14. CANALES DE VENTA =====
+canal_venta|cantidad_registros|porcentaje|monto_usd_estimado
+-----------|------------------|----------|------------------
+AEROPUERTO|2024|20.24|153369.90
+WEB|1995|19.95|154924.20
+AGENCIA|1958|19.58|147886.49
+CALL_CENTER|1947|19.47|152055.24
+APP|1932|19.32|150837.60
+DESCONOCIDO|144|1.44|10951.28
+===== 15. METODOS DE PAGO =====
+metodo_pago|cantidad_registros|porcentaje|monto_usd_estimado
+-----------|------------------|----------|------------------
+PAYPAL|2067|20.67|157990.59
+TARJETA|2042|20.42|161957.84
+TRANSFERENCIA|1984|19.84|151413.06
+PUNTOS|1958|19.58|148746.15
+EFECTIVO|1949|19.49|149917.07
+===== 16. TENDENCIA MENSUAL DE SALIDAS =====
+anio|mes|nombre_mes|cantidad_registros|on_time|delayed|cancelled|diverted|monto_usd_estimado
+----|---|----------|------------------|-------|-------|---------|--------|------------------
+2024|1|ENERO|425|311|88|21|5|35900.07
+2024|2|FEBRERO|382|272|81|22|7|30168.29
+2024|3|MARZO|423|312|83|22|6|33284.01
+2024|4|ABRIL|417|300|80|23|14|30019.73
+2024|5|MAYO|403|300|78|14|11|30915.29
+2024|6|JUNIO|369|269|65|26|9|29017.48
+2024|7|JULIO|406|307|80|16|3|31382.49
+2024|8|AGOSTO|426|306|89|21|10|36409.81
+2024|9|SEPTIEMBRE|395|296|70|20|9|30483.10
+2024|10|OCTUBRE|458|322|93|33|10|32472.31
+2024|11|NOVIEMBRE|380|274|79|21|6|30909.90
+2024|12|DICIEMBRE|443|337|66|29|11|34372.23
+2025|1|ENERO|433|314|89|22|8|33583.69
+2025|2|FEBRERO|402|293|74|22|13|30676.43
+2025|3|MARZO|389|279|80|24|6|29287.12
+2025|4|ABRIL|456|333|90|21|12|33190.95
+2025|5|MAYO|430|314|84|23|9|33465.27
+2025|6|JUNIO|449|322|88|34|5|33549.01
+2025|7|JULIO|450|336|88|22|4|35841.33
+2025|8|AGOSTO|398|278|96|20|4|29981.50
+2025|9|SEPTIEMBRE|388|280|80|21|7|27989.45
+2025|10|OCTUBRE|412|303|81|20|8|30587.91
+2025|11|NOVIEMBRE|435|306|97|27|5|34033.36
+2025|12|DICIEMBRE|431|314|71|36|10|32503.98
+===== 17. ANTICIPACION DE RESERVA =====
+rango_anticipacion|cantidad_registros|anticipacion_promedio_dias
+------------------|------------------|--------------------------
+01. 0-7 días|532|4.21
+02. 8-30 días|1958|18.99
+03. 31-60 días|2521|45.23
+04. 61-90 días|2471|75.30
+05. Más de 90 días|2518|105.64
+===== 18. EQUIPAJE =====
+maletas_total|cantidad_registros|promedio_maletas_facturadas
+-------------|------------------|---------------------------
+0|1493|.00
+1|5448|.00
+2|2589|1.00
+3|470|2.00
+===== 19. DISTRIBUCION POR GENERO =====
+genero|cantidad_registros|porcentaje
+------|------------------|----------
+M|4912|49.12
+F|4698|46.98
+X|390|3.90
+===== 20. NACIONALIDADES =====
+nacionalidad|cantidad_registros|porcentaje
+------------|------------------|----------
+PA|923|9.23
+US|909|9.09
+MX|908|9.08
+SV|900|9.00
+ES|899|8.99
+GT|891|8.91
+PE|886|8.86
+CU|882|8.82
+CR|882|8.82
+HN|869|8.69
+CO|842|8.42
+DESCONOCIDA|209|2.09
+===== 21. RANGOS DE EDAD =====
+rango_edad|cantidad_registros|porcentaje
+----------|------------------|----------
+00. DESCONOCIDA|112|1.12
+01. MENOR DE 18|1068|10.68
+02. 18-25|1620|16.20
+03. 26-35|2879|28.79
+04. 36-45|2504|25.04
+05. 46-60|1624|16.24
+06. MAYOR DE 60|193|1.93
+===== 22. TIPOS DE AERONAVE =====
+tipo_aeronave|cantidad_registros|duracion_promedio_min|precio_promedio_usd
+-------------|------------------|---------------------|-------------------
+A319|872|236.52|78.28
+B738|871|234.28|78.20
+B757|867|228.36|77.76
+A321|853|233.78|76.01
+A320|847|228.52|77.37
+B739|844|235.34|75.69
+B787|828|230.83|76.62
+B777|821|231.23|71.56
+B737|816|230.73|78.36
+E190|806|235.24|77.94
+CRJ9|801|241.07|77.58
+B767|774|234.96|78.67
+===== 23. TOP 5 DESTINOS POR MONTO DE BOLETOS =====
+destino|cantidad_registros|monto_total_usd_estimado|precio_promedio_usd_estimado
+-------|------------------|------------------------|----------------------------
+SAP|701|56012.70|79.90
+HAV|693|55368.96|79.90
+BOG|696|54204.54|77.88
+SJO|667|53852.48|80.74
+CUN|699|53576.74|76.65
+===== 24. CONTROL FINAL DE CALIDAD =====
+total_hechos|record_id_unicos|llegadas_antes_salida|reservas_despues_salida|origen_igual_destino|equipaje_inconsistente|precios_negativos
+------------|----------------|---------------------|-----------------------|--------------------|----------------------|-----------------
+10000|10000|0|0|0|0|0
+===== CONSULTAS ANALITICAS FINALIZADAS =====

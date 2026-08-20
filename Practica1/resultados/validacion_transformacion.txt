@@ -1,0 +1,53 @@
+===== VALIDACIÓN DE TRANSFORMACIÓN =====
+SHA-256: a3a6b5cc67697a069a7057789accde217ecc580d03098b643db672978abd753e
+Registros recibidos: 10000
+Registros transformados: 10000
+Resolución temporal única: 8297
+Resolución temporal con desempate: 1703
+Máximo de candidatos temporales: 4
+
+===== PRUEBAS =====
+01. [PASS] SHA-256 del dataset: a3a6b5cc67697a069a7057789accde217ecc580d03098b643db672978abd753e
+02. [PASS] Cantidad de registros recibidos: 10000
+03. [PASS] Cantidad de registros transformados: 10000
+04. [PASS] record_id sin duplicados: 10000
+05. [PASS] passenger_id sin duplicados: 10000
+06. [PASS] Homologación de género: {'M': 4912, 'F': 4698, 'X': 390}
+07. [PASS] Distribución de estados: {'ON_TIME': 7278, 'CANCELLED': 560, 'DELAYED': 1970, 'DIVERTED': 192}
+08. [PASS] Aerolíneas homologadas: códigos=12, nombres=12
+09. [PASS] Aeropuertos homologados: 15
+10. [PASS] Canal DESCONOCIDO para nulos: 144
+11. [PASS] No hay llegadas anteriores a salida: 0
+12. [PASS] No hay reservas posteriores a salida: 0
+13. [PASS] Rango de anticipación de reserva: mínimo=1.01181, máximo=120.98819
+14. [PASS] Rango residual duración/retraso: mínimo=-10, máximo=25
+15. [PASS] Cantidad de cancelaciones: 560
+16. [PASS] Nulos correctos en arrival_datetime: CANCELLED=560, no_CANCELLED=0
+17. [PASS] Nulos correctos en duration_min: CANCELLED=560, no_CANCELLED=0
+18. [PASS] Nulos correctos en delay_min: CANCELLED=560, no_CANCELLED=0
+19. [PASS] Nulos correctos en seat: CANCELLED=560, no_CANCELLED=0
+20. [PASS] Edades nulas preservadas: 112
+21. [PASS] Nacionalidades nulas preservadas: 209
+22. [PASS] Asientos faltantes son None nativo: 560
+23. [PASS] Nacionalidades faltantes son None nativo: 209
+24. [PASS] Filas con solución temporal única: 8297
+25. [PASS] Filas con múltiples soluciones válidas: 1703
+26. [PASS] Máximo de combinaciones válidas por fila: 4
+27. [PASS] Sin record_id duplicados: 0
+28. [PASS] Equipaje consistente: 0
+29. [PASS] Origen diferente de destino: 0
+
+===== RESUMEN =====
+Pruebas totales: 29
+Pruebas exitosas: 29
+Pruebas fallidas: 0
+
+===== EJEMPLOS TRANSFORMADOS =====
+ record_id airline_code airline_name flight_number origin_airport destination_airport    status passenger_gender ticket_price
+         1           FR      Ryanair        FR5515            MEX                 GUA   ON_TIME                M        77.60
+         2           AV      Avianca        AV1170            SAP                 JFK CANCELLED                M       138.80
+         3           IB       Iberia        IB2267            PTY                 BOG   ON_TIME                F       101.30
+         4           DL        Delta        DL8318            HAV                 MIA   ON_TIME                X       106.55
+         5           WN    Southwest        WN6538            GUA                 SAL   ON_TIME                M       216.66
+
+RESULTADO GENERAL: PASS

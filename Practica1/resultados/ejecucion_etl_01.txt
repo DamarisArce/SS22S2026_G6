@@ -1,0 +1,38 @@
+===== INICIANDO ETL =====
+Fuente: /home/nelsonlinux/Documentos/USAC/FIUSAC/2026/Semestre_2/Seminario de sistemas 2/Lab/Repositorio/SS22S2026_6/Practica1/data/dataset_vuelos_crudo.csv
+Ejecución ETL: 3
+
+===== 1. EXTRACCION =====
+Registros extraídos: 10000
+Columnas extraídas: 26
+
+===== STAGING =====
+Registros crudos cargados en staging: 10000
+
+===== 2. TRANSFORMACION =====
+Registros transformados: 10000
+Resolución temporal única: 8297
+Resolución temporal con desempate: 1703
+Máximo de candidatos temporales: 4
+
+===== 3. CARGA =====
+
+===== DIMENSIONES =====
+DimFecha                 844
+DimAerolinea              12
+DimAeropuerto             15
+DimPasajero            10000
+DimAeronave               12
+DimClaseCabina             4
+DimEstadoVuelo             4
+DimCanalVenta              6
+DimMetodoPago              5
+DimMoneda                  4
+
+===== TABLA DE HECHOS =====
+Registros insertados: 10000
+Registros ya existentes: 0
+Total de hechos: 10000
+
+===== RESULTADO =====
+ETL COMPLETADO CORRECTAMENTE

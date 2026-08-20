@@ -1,0 +1,27 @@
+# Entorno virtual de Python
+.venv/
+venv/
+
+# Variables locales y secretos
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Herramientas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs locales
+*.log

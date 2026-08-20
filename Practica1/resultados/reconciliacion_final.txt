@@ -1,0 +1,66 @@
+Changed database context to 'SS2_Practica1_VuelosDW'.
+===== 01. AUDITORIA ETL =====
+id_ejecucion|archivo_fuente|estado|filas_extraidas|filas_transformadas|filas_cargadas|filas_rechazadas|fecha_inicio|fecha_fin
+------------|--------------|------|---------------|-------------------|--------------|----------------|------------|---------
+3|dataset_vuelos_crudo.csv|EXITOSO|10000|10000|10000|0|2026-08-20 08:25:39|2026-08-20 08:25:43
+===== 02. RECONCILIACION DE CANTIDADES =====
+filas_staging|filas_fact|record_id_unicos
+-------------|----------|----------------
+10000|10000|10000
+===== 03. STAGING SIN HECHO =====
+staging_sin_hecho
+-----------------
+0
+===== 04. HECHOS SIN STAGING =====
+hechos_sin_staging
+------------------
+0
+===== 05. CARDINALIDAD DE DIMENSIONES =====
+dimension|registros
+---------|---------
+DimAerolinea|12
+DimAeronave|12
+DimAeropuerto|15
+DimCanalVenta|6
+DimClaseCabina|4
+DimEstadoVuelo|4
+DimFecha|844
+DimMetodoPago|5
+DimMoneda|4
+DimPasajero|10000
+===== 06. NULOS ESPERADOS =====
+asientos_null|llegadas_null|duraciones_null|retrasos_null
+-------------|-------------|---------------|-------------
+560|560|560|560
+edades_null|nacionalidades_null
+-----------|-------------------
+112|209
+===== 07. CONSISTENCIA DE CANCELACIONES =====
+cancelados|cancelados_correctos|activos_con_nulos_indebidos
+----------|--------------------|---------------------------
+560|560|0
+===== 08. CONSISTENCIA TEMPORAL =====
+llegadas_antes_salida|reservas_despues_salida
+---------------------|-----------------------
+0|0
+===== 09. CONSISTENCIA DE NEGOCIO =====
+origen_igual_destino|equipaje_inconsistente|precios_negativos
+--------------------|----------------------|-----------------
+0|0|0
+===== 10. DUPLICADOS =====
+grupos_record_id_duplicados
+---------------------------
+0
+===== 11. FOREIGN KEYS =====
+foreign_keys_problematicas
+--------------------------
+0
+===== 12. ERRORES ETL =====
+errores_etl
+-----------
+0
+===== 13. RANGO DE FECHAS =====
+fecha_minima|fecha_maxima|fechas_distintas
+------------|------------|----------------
+2023-09-04|2025-12-31|844
+===== RECONCILIACION FINALIZADA =====

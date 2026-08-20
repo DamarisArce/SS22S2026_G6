@@ -115,10 +115,8 @@ Este patrón evita crear estructuras duplicadas para entidades que conceptualmen
 
 También se incluyen las siguientes versiones del diagrama:
 
-- `docs/modelo_estrella.mmd`: fuente Mermaid editable.
-- `docs/modelo_estrella.md`: versión renderizable desde Markdown.
-- `docs/modelo_estrella.svg`: versión vectorial.
-- `docs/modelo_estrella.png`: versión raster utilizada en esta documentación.
+- `https://drive.google.com/file/d/186FrI8j8wCKL5OFiX6u0uqw7WvjEU1At/view?usp=sharing`: archivo fuente en drawio.
+
 
 ---
 

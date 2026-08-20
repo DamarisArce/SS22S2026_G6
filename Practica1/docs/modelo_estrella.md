@@ -1,9 +1,5 @@
 # Modelo dimensional en estrella
 
-El modelo utiliza una tabla de hechos central, `FactVueloPasajero`, relacionada con diez dimensiones. `DimFecha` y `DimAeropuerto` se reutilizan mediante distintos roles para evitar duplicación de estructuras.
-
-```mermaid
-erDiagram
 
     DimFecha {
         INT id_fecha PK
@@ -110,26 +106,3 @@ erDiagram
         DATETIME2 fecha_carga
     }
 
-    DimFecha ||--o{ FactVueloPasajero : "fecha de salida"
-    DimFecha ||--o{ FactVueloPasajero : "fecha de llegada"
-    DimFecha ||--o{ FactVueloPasajero : "fecha de reserva"
-
-    DimAerolinea ||--o{ FactVueloPasajero : "aerolinea"
-
-    DimAeropuerto ||--o{ FactVueloPasajero : "aeropuerto origen"
-    DimAeropuerto ||--o{ FactVueloPasajero : "aeropuerto destino"
-
-    DimPasajero ||--o{ FactVueloPasajero : "pasajero"
-    DimAeronave ||--o{ FactVueloPasajero : "aeronave"
-    DimClaseCabina ||--o{ FactVueloPasajero : "clase de cabina"
-    DimEstadoVuelo ||--o{ FactVueloPasajero : "estado"
-    DimCanalVenta ||--o{ FactVueloPasajero : "canal de venta"
-    DimMetodoPago ||--o{ FactVueloPasajero : "metodo de pago"
-    DimMoneda ||--o{ FactVueloPasajero : "moneda"
-```
-
-## Grano
-
-Una fila de `dw.FactVueloPasajero` representa un registro fuente de un pasajero asociado con una reserva y una ocurrencia de vuelo.
-
-Por esta razón, un `COUNT(*)` sobre la tabla de hechos debe interpretarse como cantidad de registros pasajero-vuelo y no necesariamente como cantidad de vuelos físicos distintos.

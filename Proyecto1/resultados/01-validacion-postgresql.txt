@@ -1,0 +1,20 @@
+=== VALIDACION POSTGRESQL SG-FOOD ===
+2026-10-12T22:36:17-06:00
+=== SERVICIOS ===
+NAME                                                IMAGE                     COMMAND                  SERVICE                   CREATED             STATUS                       PORTS
+sgfood-ss2-g6-proyecto1-sgfood-airflow-postgres-1   postgres:16.15-bookworm   "docker-entrypoint.s…"   sgfood-airflow-postgres   About an hour ago   Up About an hour (healthy)   5432/tcp
+sgfood-ss2-g6-proyecto1-sgfood-dw-postgres-1        postgres:16.15-bookworm   "docker-entrypoint.s…"   sgfood-dw-postgres        3 minutes ago       Up 3 minutes (healthy)       127.0.0.1:15434->5432/tcp
+sgfood-ss2-g6-proyecto1-sgfood-oltp-postgres-1      postgres:16.15-bookworm   "docker-entrypoint.s…"   sgfood-oltp-postgres      3 minutes ago       Up 3 minutes (healthy)       127.0.0.1:15433->5432/tcp
+=== CONTEOS OLTP ===
+sucursal|6
+categoria|8
+marca|10
+producto|80
+cliente|250
+venta|1200
+venta_detalle|3209
+=== SCHEMAS DW ===
+intermediate
+marts
+raw
+staging

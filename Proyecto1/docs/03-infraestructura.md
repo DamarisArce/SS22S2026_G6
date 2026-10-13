@@ -1,13 +1,17 @@
 # Bloque 1A — Infraestructura PostgreSQL
 
-Estado: **preparada y validada estáticamente; no iniciada**.
+Estado al **12 de octubre de 2026**: **COMPROBADO en ejecución** para la
+infraestructura PostgreSQL descrita en este documento.
 
 ## Alcance y fuentes de diseño
 
-Esta especificación se basa en `insumos/798_Proyecto_1_2S2026.pdf`, en los
-tres documentos técnicos existentes y en la inspección estática de
-`insumos/Data-20260930.zip`. No se ejecutó SQL, no se inició Docker y no se
-crearon contenedores, redes ni volúmenes durante esta fase.
+Esta especificación combina `AGENTS.md`, `compose.yaml`, este documento y la
+evidencia guardada en `resultados/01-validacion-postgresql.txt`, fechada
+`2026-10-12T22:36:17-06:00`.
+
+- **COMPROBADO:** respaldado por la configuración y la evidencia disponible.
+- **PENDIENTE:** aún no realizado o no validado.
+- **RECOMENDADO:** medida propuesta, no cumplimiento actual.
 
 El ZIP contiene ocho entradas: seis fuentes operativas y dos apoyos. Se copiaron
 sin transformación a `data/` únicamente `sgfood_oltp.sql`,
@@ -19,23 +23,30 @@ como catálogo/diccionario. Ninguno de los dos se usa como dato operativo.
 ## Arquitectura física
 
 ```text
-Red privada sgfood_elt_net (internal)
-├── sgfood-oltp-postgres   -> sgfood_oltp / volumen sgfood_elt_oltp_data
-├── sgfood-dw-postgres     -> sgfood_dw   / volumen sgfood_elt_dw_data
-└── sgfood-airflow-postgres-> airflow     / volumen sgfood_elt_airflow_data
+sgfood_access_net (bridge)
+├── sgfood-oltp-postgres
+└── sgfood-dw-postgres
+
+sgfood_elt_net (internal)
+├── sgfood-oltp-postgres
+├── sgfood-dw-postgres
+└── sgfood-airflow-postgres
 ```
 
 Todos usan la etiqueta fija `postgres:16.15-bookworm`, sin `latest`, sin
 `container_name` y sin reutilizar recursos externos. Cada servicio tiene
 healthcheck `pg_isready`, límites locales de memoria/CPU y un volumen exclusivo.
-La red es interna de Compose (`internal: true`) y el proyecto declara el nombre
+La red es interna de Compose (`internal: true`) y `sgfood_access_net` usa el
+driver `bridge`. El proyecto declara el nombre
 `sgfood-ss2-g6-proyecto1`. Compose generará efectivamente la red
 `sgfood-ss2-g6-proyecto1_sgfood_elt_net` y los volúmenes
 `sgfood-ss2-g6-proyecto1_sgfood_elt_oltp_data`,
 `sgfood-ss2-g6-proyecto1_sgfood_elt_dw_data` y
 `sgfood-ss2-g6-proyecto1_sgfood_elt_airflow_data` a partir de las claves
 lógicas. No se utilizan recursos externos preexistentes; antes del primer
-arranque el operador debe comprobar que esos nombres no existan.
+arranque el operador debe comprobar que esos nombres no existan. OLTP y DW
+están conectados a ambas redes; Airflow está conectado únicamente a la red
+interna. La red interna restringe la conectividad externa de sus servicios.
 
 ## Servicios, puertos y variables
 
@@ -45,7 +56,9 @@ arranque el operador debe comprobar que esos nombres no existan.
 | `sgfood-dw-postgres` | `sgfood_dw` | `127.0.0.1:15434` | Raw y modelos analíticos futuros |
 | `sgfood-airflow-postgres` | `airflow` | Ninguno | Metadatos de Airflow |
 
-Los nombres de usuario, contraseñas, bases, puertos, red y volúmenes provienen
+**COMPROBADO:** los tres servicios usan `postgres:16.15-bookworm`, reportan
+estado `healthy`, y los puertos publicados son `127.0.0.1:15433` y
+`127.0.0.1:15434`. Los nombres de usuario, contraseñas, bases, puertos, red y volúmenes provienen
 de `.env`. `.env.example` contiene solo marcadores de secreto y valores de
 validación; nunca se deben versionar contraseñas reales. El arranque requiere
 un archivo `.env` local con credenciales propias; nunca deben usarse los
@@ -63,11 +76,18 @@ durante la creación de un directorio de datos vacío y aislado del volumen
 cuando el directorio ya está inicializado: los scripts solo se ejecutan
 automáticamente con el directorio de datos vacío. Una inicialización fallida no
 se resuelve necesariamente reiniciando el contenedor; requiere revisar la
-causa y el estado del directorio de datos. No se ejecutó el SQL en esta fase.
+causa y el estado del directorio de datos.
+
+**COMPROBADO:** la primera inicialización OLTP fue exitosa. La evidencia
+registra `sucursal` 6, `categoria` 8, `marca` 10, `producto` 80, `cliente` 250,
+`venta` 1200 y `venta_detalle` 3209.
 
 El DW monta `docker/postgres/dw/init/001-create-schemas.sql`, que crea de forma
 idempotente `raw`, `staging`, `intermediate` y `marts` en un directorio nuevo.
 No crea todavía tablas raw, dimensiones, hechos ni modelos dbt.
+
+**COMPROBADO:** la inicialización de los cuatro schemas DW fue exitosa:
+`raw`, `staging`, `intermediate` y `marts`.
 
 ## Permisos futuros
 
@@ -85,6 +105,11 @@ base con privilegios administrativos elevados; los futuros procesos ETL y dbt
 deberán utilizar roles separados con privilegios mínimos. No se implementan
 todavía esos roles ni se considera al administrador una solución final.
 
+**COMPROBADO:** la conexión autenticada con `airflow_admin` fue exitosa.
+**PENDIENTE:** implementar y validar los roles separados de ETL y dbt.
+**RECOMENDADO:** no utilizar administradores como solución final y aplicar
+privilegios mínimos.
+
 ## Procedimiento de arranque propuesto
 
 1. Copiar `.env.example` a `.env` y reemplazar cada marcador por credenciales
@@ -94,8 +119,11 @@ todavía esos roles ni se considera al administrador una solución final.
 3. Ejecutar `docker compose --env-file .env config --quiet`.
 4. Solo con esa revisión aprobada, ejecutar `docker compose --env-file .env up
    -d`.
-5. Esperar los healthchecks y revisar los logs de cada servicio. Este
-   procedimiento queda **PENDIENTE de ejecución**.
+5. Esperar los healthchecks y revisar los logs de cada servicio.
+
+**COMPROBADO:** se recrearon OLTP y DW conservando sus volúmenes, y las
+pruebas TCP desde Ubuntu fueron satisfactorias. La ejecución inicial y la
+validación indicada en `resultados/01-validacion-postgresql.txt` ya ocurrieron.
 
 No usar `docker compose down -v`, `docker system prune` ni comandos de borrado
 de volúmenes como parte del procedimiento normal.
@@ -112,10 +140,10 @@ Después del primer arranque, comprobar sin exponer secretos:
 - el contenedor Airflow responde a `pg_isready` dentro de la red.
 
 `pg_isready` solo indica disponibilidad del servidor; no valida credenciales ni
-la existencia de datos. Las tablas y schemas se verificarán con SQL después del
-arranque. Estas verificaciones no se han ejecutado y permanecen
-**PENDIENTES**. La red interna restringe la conectividad externa de los
-servicios conectados a ella.
+la existencia de datos. **COMPROBADO:** las tablas y schemas se verificaron con
+SQL y los resultados se conservaron en `resultados/`; los servicios están
+saludables, existen los cuatro schemas DW y funcionó la conexión autenticada de
+Airflow. **PENDIENTE:** validar el flujo completo de aplicaciones y modelos.
 
 ## Parada segura
 
@@ -156,12 +184,13 @@ carga futura.
 - **Compatibilidad:** `postgres:16.15-bookworm` es una etiqueta fija elegida
   para esta entrega; la compatibilidad con Airflow/dbt se debe comprobar cuando se
   incorporen esos componentes.
-- **Estado no funcional:** no hay evidencia de contenedores saludables, schemas
-  creados ni conexiones exitosas porque el usuario solicitó no iniciar servicios.
+- **Estado funcional parcial:** la evidencia confirma la infraestructura y las
+  verificaciones indicadas, pero no la implementación de las capas posteriores.
 
 ## Criterios pendientes
 
-Permanecen pendientes la ejecución de Compose, la prueba de inicialización
-aislada, la carga de fuentes, la creación de roles, Airflow, Python, dbt,
-modelos, pruebas de calidad y consultas analíticas. Los servicios todavía no se
-han ejecutado. Los documentos técnicos existentes no se modificaron.
+**PENDIENTE:** creación y validación de roles mínimos, implementación de
+Airflow, Python ETL y dbt, carga de fuentes adicionales, modelos analíticos,
+pruebas de calidad, consultas analíticas y validación funcional del flujo
+completo. **RECOMENDADO:** conservar nuevas ejecuciones en `resultados/` con
+fecha, alcance y resultados verificables, sin secretos.

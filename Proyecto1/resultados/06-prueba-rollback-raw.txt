@@ -1,0 +1,25 @@
+=== ESTADO CONFIRMADO ANTES DEL FALLO ===
+OK: 12 tablas y 8864 filas verificadas
+
+=== EJECUCIÓN CON FALLO INYECTADO ===
+OK: inserciones realizadas y nuevo lote visible dentro de la transacción
+Inyectando fallo antes del COMMIT
+OK: fallo controlado capturado
+
+=== VALIDACIÓN DESPUÉS DEL ROLLBACK ===
+OK: raw.oltp_sucursal permanece idéntica
+OK: raw.oltp_categoria permanece idéntica
+OK: raw.oltp_marca permanece idéntica
+OK: raw.oltp_producto permanece idéntica
+OK: raw.oltp_cliente permanece idéntica
+OK: raw.oltp_venta permanece idéntica
+OK: raw.oltp_venta_detalle permanece idéntica
+OK: raw.csv_inventario_bodega permanece idéntica
+OK: raw.csv_devoluciones permanece idéntica
+OK: raw.csv_metas_ventas permanece idéntica
+OK: raw.csv_promociones permanece idéntica
+OK: raw.csv_proveedores_precios permanece idéntica
+
+TOTAL RAW CONSERVADO: 8864
+OK: datos y metadatos sin cambios
+VALIDACIÓN DE ROLLBACK REAL APROBADA

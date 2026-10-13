@@ -192,11 +192,10 @@ contraseña desde un mecanismo seguro y sin registrarla en las evidencias.
 - **COMPROBADO:** `sgfood_dbt_runner` leyó una tabla futura creada en `raw` por
   `sgfood_raw_loader`; `INSERT`, `UPDATE` y `DELETE` sobre ella fueron
   rechazados.
-- Se creó una tabla de prueba como `sgfood_raw_loader` en `raw`, se verificó
-  que `sgfood_dbt_runner` puede leerla y después eliminar la tabla solo en un
-  entorno de prueba autorizado. La prueba demuestra el
-  `ALTER DEFAULT PRIVILEGES`; las pruebas del DW se revirtieron y no dejaron
-  tablas de prueba.
+- La prueba de tabla futura se realizó dentro de una transacción autorizada:
+  se creó una tabla como `sgfood_raw_loader` en `raw`, se verificó que
+  `sgfood_dbt_runner` puede leerla y se revirtió la transacción. La prueba
+  demuestra el `ALTER DEFAULT PRIVILEGES` y no conservó tablas de prueba.
 
 **COMPROBADO:** la validación OLTP aprobó autenticación, atributos
 restringidos, lectura de 4763 registros y rechazo efectivo de `INSERT`,
@@ -216,8 +215,8 @@ no valida. Esta prueba no crea roles ni modifica bases.
 
 ## Riesgos y límites pendientes
 
-- Las contraseñas de los tres roles todavía deben generarse localmente y
-  protegerse fuera del repositorio.
+- Las contraseñas de los tres roles ya existen localmente y deben mantenerse
+  protegidas fuera del repositorio; no se almacenan ni se imprimen aquí.
 - El aprovisionamiento requiere conectividad y credenciales administrativas
   correctas para cada base; eso no autoriza modificar otras bases o roles.
 - La observación sobre `PUBLIC` se mantiene: la revocación de `CONNECT` y

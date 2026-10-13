@@ -1,0 +1,45 @@
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=sucursal rows=6
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=categoria rows=8
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=marca rows=10
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=producto rows=80
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=cliente rows=250
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=venta rows=1200
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=venta_detalle rows=3209
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=inventario_bodega.csv rows=3840
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=devoluciones.csv rows=80
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=metas_ventas.csv rows=48
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=promociones.csv rows=30
+INFO raw source count: load_id=dac2fed3-7a33-42e1-a7a6-f5de7b66ff6c source=proveedores_precios.csv rows=103
+=== ESTADO ANTES DE LA SEGUNDA CARGA ===
+OK: oltp_sucursal = 6
+OK: oltp_categoria = 8
+OK: oltp_marca = 10
+OK: oltp_producto = 80
+OK: oltp_cliente = 250
+OK: oltp_venta = 1200
+OK: oltp_venta_detalle = 3209
+OK: csv_inventario_bodega = 3840
+OK: csv_devoluciones = 80
+OK: csv_metas_ventas = 48
+OK: csv_promociones = 30
+OK: csv_proveedores_precios = 103
+
+=== EJECUTANDO SEGUNDA CARGA ===
+
+=== VERIFICACIÓN POSTERIOR ===
+OK: oltp_sucursal — conteo y datos idénticos
+OK: oltp_categoria — conteo y datos idénticos
+OK: oltp_marca — conteo y datos idénticos
+OK: oltp_producto — conteo y datos idénticos
+OK: oltp_cliente — conteo y datos idénticos
+OK: oltp_venta — conteo y datos idénticos
+OK: oltp_venta_detalle — conteo y datos idénticos
+OK: csv_inventario_bodega — conteo y datos idénticos
+OK: csv_devoluciones — conteo y datos idénticos
+OK: csv_metas_ventas — conteo y datos idénticos
+OK: csv_promociones — conteo y datos idénticos
+OK: csv_proveedores_precios — conteo y datos idénticos
+
+TOTAL RAW: 8864
+OK: nuevo identificador de carga en las doce tablas
+VALIDACIÓN DE IDEMPOTENCIA APROBADA

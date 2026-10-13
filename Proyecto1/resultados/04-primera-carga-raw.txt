@@ -1,0 +1,12 @@
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=sucursal rows=6
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=categoria rows=8
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=marca rows=10
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=producto rows=80
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=cliente rows=250
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=venta rows=1200
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=venta_detalle rows=3209
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=inventario_bodega.csv rows=3840
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=devoluciones.csv rows=80
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=metas_ventas.csv rows=48
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=promociones.csv rows=30
+INFO raw source count: load_id=3c3c5e10-3f55-4511-be32-8404ddd34b09 source=proveedores_precios.csv rows=103

@@ -5,8 +5,11 @@ infraestructura PostgreSQL descrita en este documento.
 
 ## Alcance y fuentes de diseño
 
-Esta especificación combina `AGENTS.md`, `compose.yaml`, este documento y la
-evidencia guardada en `resultados/01-validacion-postgresql.txt`, fechada
+Esta especificación combina `insumos/798_Proyecto_1_2S2026.pdf`, los documentos
+técnicos versionados `docs/00-matriz-requisitos.md`,
+`docs/01-catalogo-fuentes.md` y `docs/02-arquitectura-y-decisiones.md`, además
+de `compose.yaml`, este documento y la evidencia guardada en
+`resultados/01-validacion-postgresql.txt`, fechada
 `2026-10-12T22:36:17-06:00`.
 
 - **COMPROBADO:** respaldado por la configuración y la evidencia disponible.

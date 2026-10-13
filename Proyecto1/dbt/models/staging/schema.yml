@@ -1,0 +1,173 @@
+version: 2
+
+models:
+  - name: stg_oltp_sucursal
+    description: "Sucursal, conservando el grano y las columnas técnicas de raw."
+    columns:
+      - name: id_sucursal
+        description: "Clave natural de sucursal."
+        tests: [not_null, unique]
+      - {name: nombre, description: "Nombre de la sucursal."}
+      - {name: ciudad, description: "Ciudad de la sucursal."}
+      - {name: departamento, description: "Departamento de la sucursal."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_categoria
+    description: "Categoría de producto, una fila por clave natural."
+    columns:
+      - {name: id_categoria, description: "Clave natural de categoría.", tests: [not_null, unique]}
+      - {name: nombre, description: "Nombre de la categoría."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_marca
+    description: "Marca de producto, una fila por clave natural."
+    columns:
+      - {name: id_marca, description: "Clave natural de marca.", tests: [not_null, unique]}
+      - {name: nombre, description: "Nombre de la marca."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_producto
+    description: "Producto tipado desde OLTP; se conserva precio y costo de origen."
+    columns:
+      - {name: id_producto, description: "Clave natural de producto.", tests: [not_null, unique]}
+      - {name: sku, description: "SKU alterno del producto.", tests: [not_null, unique]}
+      - {name: nombre, description: "Nombre del producto."}
+      - {name: id_categoria, description: "Clave de categoría.", tests: [{relationships: {arguments: {to: ref('stg_oltp_categoria'), field: id_categoria}}}]}
+      - {name: id_marca, description: "Clave de marca.", tests: [{relationships: {arguments: {to: ref('stg_oltp_marca'), field: id_marca}}}]}
+      - {name: unidad_medida, description: "Unidad de medida de origen."}
+      - {name: costo_base, description: "Costo base de origen; no se recalcula."}
+      - {name: precio_lista, description: "Precio de lista de origen; no se recalcula."}
+      - {name: activo, description: "Indicador de actividad de origen."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_cliente
+    description: "Cliente tipado desde OLTP, sin aplicar reglas SCD."
+    columns:
+      - {name: id_cliente, description: "Clave natural de cliente.", tests: [not_null, unique]}
+      - {name: nit, description: "Identificador tributario de origen."}
+      - {name: nombre, description: "Nombre del cliente."}
+      - {name: tipo_cliente, description: "Tipo de cliente de origen."}
+      - {name: municipio, description: "Municipio; puede ser nulo en el origen."}
+      - {name: departamento, description: "Departamento; puede ser nulo en el origen."}
+      - {name: fecha_alta, description: "Fecha de alta de origen."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_venta
+    description: "Cabecera de venta, una fila por id_venta."
+    columns:
+      - {name: id_venta, description: "Clave natural de venta.", tests: [not_null, unique]}
+      - {name: fecha, description: "Fecha de la venta."}
+      - {name: id_cliente, description: "Cliente de la venta.", tests: [{relationships: {arguments: {to: ref('stg_oltp_cliente'), field: id_cliente}}}]}
+      - {name: id_sucursal, description: "Sucursal de la venta.", tests: [{relationships: {arguments: {to: ref('stg_oltp_sucursal'), field: id_sucursal}}}]}
+      - {name: canal, description: "Canal de origen; no se impone dominio sin catálogo aprobado."}
+      - {name: metodo_pago, description: "Método de pago de origen; no se impone dominio sin catálogo aprobado."}
+      - {name: estado, description: "Estado de origen; no se impone dominio sin catálogo aprobado."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_oltp_venta_detalle
+    description: "Detalle de venta, preservando una fila por id_detalle y subtotal de origen."
+    columns:
+      - {name: id_detalle, description: "Clave natural de detalle.", tests: [not_null, unique]}
+      - {name: id_venta, description: "Venta padre.", tests: [{relationships: {arguments: {to: ref('stg_oltp_venta'), field: id_venta}}}]}
+      - {name: id_producto, description: "Producto vendido.", tests: [{relationships: {arguments: {to: ref('stg_oltp_producto'), field: id_producto}}}]}
+      - {name: cantidad, description: "Cantidad de origen."}
+      - {name: precio_unitario, description: "Precio unitario de origen."}
+      - {name: descuento, description: "Descuento de origen; no se atribuyen promociones aquí."}
+      - {name: subtotal, description: "Subtotal de origen; no se sustituye por un cálculo."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_table, description: "Tabla OLTP de procedencia."}
+      - {name: _etl_extracted_at, description: "Instante técnico de extracción."}
+
+  - name: stg_csv_inventario_bodega
+    description: "Inventario tipado; grano compuesto por corte, sucursal, producto y lote."
+    columns:
+      - {name: fecha_corte, description: "Fecha del corte; vacío se normaliza a NULL y otros formatos inválidos fallan."}
+      - {name: id_sucursal, description: "Sucursal del inventario.", tests: [{relationships: {arguments: {to: ref('stg_oltp_sucursal'), field: id_sucursal}}}]}
+      - {name: id_producto, description: "Producto del inventario.", tests: [{relationships: {arguments: {to: ref('stg_oltp_producto'), field: id_producto}}}]}
+      - {name: stock_disponible, description: "Existencia disponible tipada."}
+      - {name: stock_minimo, description: "Mínimo reportado; no se interpreta como regla comercial."}
+      - {name: stock_maximo, description: "Máximo reportado; no se interpreta como regla comercial."}
+      - {name: lote, description: "Lote reportado."}
+      - {name: fecha_vencimiento, description: "Vencimiento reportado; se compara con fecha_corte solo en una fase posterior."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_name, description: "Archivo de procedencia."}
+      - {name: _etl_source_sha256, description: "Huella SHA-256 del archivo."}
+      - {name: _etl_row_number, description: "Fila original del archivo."}
+
+  - name: stg_csv_devoluciones
+    description: "Devolución tipada; no se une a detalles en staging."
+    columns:
+      - {name: id_devolucion, description: "Clave natural de devolución.", tests: [not_null, unique]}
+      - {name: fecha, description: "Fecha de devolución."}
+      - {name: id_venta, description: "Venta relacionada de forma explícita.", tests: [{relationships: {arguments: {to: ref('stg_oltp_venta'), field: id_venta}}}]}
+      - {name: id_producto, description: "Producto relacionado de forma explícita.", tests: [{relationships: {arguments: {to: ref('stg_oltp_producto'), field: id_producto}}}]}
+      - {name: cantidad, description: "Cantidad devuelta."}
+      - {name: motivo, description: "Motivo reportado; vacío se normaliza a NULL."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_name, description: "Archivo de procedencia."}
+      - {name: _etl_source_sha256, description: "Huella SHA-256 del archivo."}
+      - {name: _etl_row_number, description: "Fila original del archivo."}
+
+  - name: stg_csv_metas_ventas
+    description: "Meta mensual tipada; una fila por periodo y sucursal."
+    columns:
+      - {name: periodo, description: "Periodo mensual YYYY-MM normalizado explícitamente al primer día del mes (DATE); los campos vacíos permanecen NULL y no se infiere otro día."}
+      - {name: id_sucursal, description: "Sucursal de la meta.", tests: [{relationships: {arguments: {to: ref('stg_oltp_sucursal'), field: id_sucursal}}}]}
+      - {name: meta_ventas, description: "Meta monetaria reportada."}
+      - {name: meta_unidades, description: "Meta de unidades reportada."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_name, description: "Archivo de procedencia."}
+      - {name: _etl_source_sha256, description: "Huella SHA-256 del archivo."}
+      - {name: _etl_row_number, description: "Fila original del archivo."}
+
+  - name: stg_csv_promociones
+    description: "Promoción tipada, sin atribuirla a ventas."
+    columns:
+      - {name: id_promocion, description: "Clave natural de promoción.", tests: [not_null, unique]}
+      - {name: nombre, description: "Nombre de la promoción."}
+      - {name: fecha_inicio, description: "Inicio de vigencia."}
+      - {name: fecha_fin, description: "Fin de vigencia."}
+      - {name: id_categoria, description: "Categoría de la promoción.", tests: [{relationships: {arguments: {to: ref('stg_oltp_categoria'), field: id_categoria}}}]}
+      - {name: porcentaje_descuento, description: "Porcentaje reportado; no se aplica a ventas en staging."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_name, description: "Archivo de procedencia."}
+      - {name: _etl_source_sha256, description: "Huella SHA-256 del archivo."}
+      - {name: _etl_row_number, description: "Fila original del archivo."}
+
+  - name: stg_csv_proveedores_precios
+    description: "Precio de proveedor tipado; no se crea todavía una dimensión de proveedor."
+    columns:
+      - {name: id_proveedor, description: "Clave del proveedor reportado."}
+      - {name: proveedor, description: "Nombre del proveedor."}
+      - {name: id_producto, description: "Producto del precio.", tests: [{relationships: {arguments: {to: ref('stg_oltp_producto'), field: id_producto}}}]}
+      - {name: costo_proveedor, description: "Costo reportado por proveedor."}
+      - {name: plazo_dias, description: "Plazo reportado en días."}
+      - {name: fecha_vigencia, description: "Fecha de vigencia."}
+      - {name: _etl_load_id, description: "Identificador técnico de carga."}
+      - {name: _etl_loaded_at, description: "Instante técnico de carga."}
+      - {name: _etl_source_name, description: "Archivo de procedencia."}
+      - {name: _etl_source_sha256, description: "Huella SHA-256 del archivo."}
+      - {name: _etl_row_number, description: "Fila original del archivo."}

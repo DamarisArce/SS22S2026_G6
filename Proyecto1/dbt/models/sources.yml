@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Copia técnica administrada por el ETL Python; dbt solo la lee."
+    schema: raw
+    database: sgfood_dw
+    loader: etl.raw_loader
+    meta:
+      owner: sgfood_raw_loader
+      access: read_only_for_dbt
+      expected_total_rows: 8864
+    tables:
+      - name: oltp_sucursal
+        description: "Una fila por sucursal."
+        meta: {expected_rows: 6, natural_key: id_sucursal}
+      - name: oltp_categoria
+        description: "Una fila por categoría."
+        meta: {expected_rows: 8, natural_key: id_categoria}
+      - name: oltp_marca
+        description: "Una fila por marca."
+        meta: {expected_rows: 10, natural_key: id_marca}
+      - name: oltp_producto
+        description: "Una fila por producto."
+        meta: {expected_rows: 80, natural_key: id_producto}
+      - name: oltp_cliente
+        description: "Una fila por cliente."
+        meta: {expected_rows: 250, natural_key: id_cliente}
+      - name: oltp_venta
+        description: "Una fila por cabecera de venta."
+        meta: {expected_rows: 1200, natural_key: id_venta}
+      - name: oltp_venta_detalle
+        description: "Una fila por producto dentro de una venta."
+        meta: {expected_rows: 3209, natural_key: id_detalle}
+      - name: csv_inventario_bodega
+        description: "Una existencia por lote, producto, sucursal y corte."
+        meta: {expected_rows: 3840, natural_key: [fecha_corte, id_sucursal, id_producto, lote]}
+      - name: csv_devoluciones
+        description: "Una devolución reportada."
+        meta: {expected_rows: 80, natural_key: id_devolucion}
+      - name: csv_metas_ventas
+        description: "Una meta mensual por sucursal."
+        meta: {expected_rows: 48, natural_key: [periodo, id_sucursal]}
+      - name: csv_promociones
+        description: "Una promoción por categoría y vigencia."
+        meta: {expected_rows: 30, natural_key: id_promocion}
+      - name: csv_proveedores_precios
+        description: "Un precio reportado por proveedor, producto y vigencia."
+        meta: {expected_rows: 103, natural_key: [id_proveedor, id_producto, fecha_vigencia]}

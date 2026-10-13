@@ -1,0 +1,37 @@
+[0m21:53:08  Running with dbt=1.11.12
+[0m21:53:08  Registered adapter: postgres=1.10.2
+[0m21:53:11  Found 12 models, 41 data tests, 12 sources, 466 macros
+[0m21:53:11  
+[0m21:53:11  Concurrency: 2 threads (target='dev')
+[0m21:53:11  
+[0m21:53:11  1 of 12 START sql view model staging.stg_csv_devoluciones ...................... [RUN]
+[0m21:53:11  2 of 12 START sql view model staging.stg_csv_inventario_bodega ................. [RUN]
+[0m21:53:11  2 of 12 OK created sql view model staging.stg_csv_inventario_bodega ............ [[32mCREATE VIEW[0m in 0.32s]
+[0m21:53:11  1 of 12 OK created sql view model staging.stg_csv_devoluciones ................. [[32mCREATE VIEW[0m in 0.33s]
+[0m21:53:11  3 of 12 START sql view model staging.stg_csv_metas_ventas ...................... [RUN]
+[0m21:53:11  4 of 12 START sql view model staging.stg_csv_promociones ....................... [RUN]
+[0m21:53:12  3 of 12 OK created sql view model staging.stg_csv_metas_ventas ................. [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  4 of 12 OK created sql view model staging.stg_csv_promociones .................. [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  5 of 12 START sql view model staging.stg_csv_proveedores_precios ............... [RUN]
+[0m21:53:12  6 of 12 START sql view model staging.stg_oltp_categoria ........................ [RUN]
+[0m21:53:12  6 of 12 OK created sql view model staging.stg_oltp_categoria ................... [[32mCREATE VIEW[0m in 0.08s]
+[0m21:53:12  5 of 12 OK created sql view model staging.stg_csv_proveedores_precios .......... [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  7 of 12 START sql view model staging.stg_oltp_cliente .......................... [RUN]
+[0m21:53:12  8 of 12 START sql view model staging.stg_oltp_marca ............................ [RUN]
+[0m21:53:12  7 of 12 OK created sql view model staging.stg_oltp_cliente ..................... [[32mCREATE VIEW[0m in 0.08s]
+[0m21:53:12  9 of 12 START sql view model staging.stg_oltp_producto ......................... [RUN]
+[0m21:53:12  8 of 12 OK created sql view model staging.stg_oltp_marca ....................... [[32mCREATE VIEW[0m in 0.10s]
+[0m21:53:12  10 of 12 START sql view model staging.stg_oltp_sucursal ........................ [RUN]
+[0m21:53:12  9 of 12 OK created sql view model staging.stg_oltp_producto .................... [[32mCREATE VIEW[0m in 0.10s]
+[0m21:53:12  11 of 12 START sql view model staging.stg_oltp_venta ........................... [RUN]
+[0m21:53:12  10 of 12 OK created sql view model staging.stg_oltp_sucursal ................... [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  12 of 12 START sql view model staging.stg_oltp_venta_detalle ................... [RUN]
+[0m21:53:12  11 of 12 OK created sql view model staging.stg_oltp_venta ...................... [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  12 of 12 OK created sql view model staging.stg_oltp_venta_detalle .............. [[32mCREATE VIEW[0m in 0.09s]
+[0m21:53:12  
+[0m21:53:12  Finished running 12 view models in 0 hours 0 minutes and 1.02 seconds (1.02s).
+[0m21:53:12  
+[0m21:53:12  [32mCompleted successfully[0m
+[0m21:53:12  
+[0m21:53:12  Done. PASS=12 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=12
+

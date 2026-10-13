@@ -1,0 +1,17 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE STAGING
+Fecha: 2026-10-13T16:05:30.868494-06:00
+OK: staging.stg_oltp_sucursal = 6
+OK: staging.stg_oltp_categoria = 8
+OK: staging.stg_oltp_marca = 10
+OK: staging.stg_oltp_producto = 80
+OK: staging.stg_oltp_cliente = 250
+OK: staging.stg_oltp_venta = 1200
+OK: staging.stg_oltp_venta_detalle = 3209
+OK: staging.stg_csv_inventario_bodega = 3840
+OK: staging.stg_csv_devoluciones = 80
+OK: staging.stg_csv_metas_ventas = 48
+OK: staging.stg_csv_promociones = 30
+OK: staging.stg_csv_proveedores_precios = 103
+TOTAL STAGING: 8864
+OK: 12 vistas, tipos evaluados y propietarios correctos
+VALIDACIÓN INDEPENDIENTE STAGING APROBADA

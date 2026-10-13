@@ -1,0 +1,8 @@
+# SG-Food: versiones de referencia compatibles de dbt Core v1.
+# Basadas en el conjunto publicado por dbt Labs en julio de 2026.
+dbt-core==1.11.12
+dbt-postgres==1.10.2
+dbt-adapters==1.22.10
+dbt-common==1.37.5
+dbt-extractor==0.6.0
+dbt-semantic-interfaces==0.9.0

@@ -1,0 +1,12 @@
+sgfood_dw:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DBT_HOST', '127.0.0.1') }}"
+      port: "{{ env_var('DBT_PORT', '15434') | int }}"
+      user: sgfood_dbt_runner
+      password: "{{ env_var('SGFOOD_DBT_RUNNER_PASSWORD') }}"
+      dbname: sgfood_dw
+      schema: staging
+      threads: 4

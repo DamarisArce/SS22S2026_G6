@@ -1,0 +1,17 @@
+2026-10-13T10:04:20-06:00
+OK: autenticación del lector OLTP
+OK: atributos del rol restringidos
+OK: USAGE autorizado; CREATE denegado en oltp_sgfood
+OK: sucursal=6, únicamente SELECT
+OK: categoria=8, únicamente SELECT
+OK: marca=10, únicamente SELECT
+OK: producto=80, únicamente SELECT
+OK: cliente=250, únicamente SELECT
+OK: venta=1200, únicamente SELECT
+OK: venta_detalle=3209, únicamente SELECT
+OK: total OLTP = 4763
+OK: INSERT rechazado efectivamente
+OK: UPDATE rechazado efectivamente
+OK: DELETE rechazado efectivamente
+OK: CREATE rechazado efectivamente
+VALIDACIÓN FUNCIONAL DE PERMISOS OLTP APROBADA

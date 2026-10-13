@@ -10,7 +10,9 @@ técnicos versionados `docs/00-matriz-requisitos.md`,
 `docs/01-catalogo-fuentes.md` y `docs/02-arquitectura-y-decisiones.md`, además
 de `compose.yaml`, este documento y la evidencia guardada en
 `resultados/01-validacion-postgresql.txt`, fechada
-`2026-10-12T22:36:17-06:00`.
+`2026-10-12T22:36:17-06:00`, junto con las validaciones de permisos de
+`resultados/02-validacion-permisos-dw.txt` y
+`resultados/03-validacion-permisos-oltp.txt`, ejecutadas el 13/10/2026.
 
 - **COMPROBADO:** respaldado por la configuración y la evidencia disponible.
 - **PENDIENTE:** aún no realizado o no validado.
@@ -92,7 +94,7 @@ No crea todavía tablas raw, dimensiones, hechos ni modelos dbt.
 **COMPROBADO:** la inicialización de los cuatro schemas DW fue exitosa:
 `raw`, `staging`, `intermediate` y `marts`.
 
-## Permisos futuros
+## Permisos y seguridad de roles
 
 La implementación posterior deberá separar, como mínimo:
 
@@ -104,12 +106,29 @@ La implementación posterior deberá separar, como mínimo:
 No se otorgan permisos cruzados ni privilegios amplios en el Bloque 1A. La
 conectividad entre PostgreSQL requerirá una decisión posterior sobre credenciales
 y roles. En la imagen oficial, `POSTGRES_USER` genera el usuario inicial de la
-base con privilegios administrativos elevados; los futuros procesos ETL y dbt
-deberán utilizar roles separados con privilegios mínimos. No se implementan
-todavía esos roles ni se considera al administrador una solución final.
+base con privilegios administrativos elevados; los procesos ETL y dbt utilizan
+roles separados con privilegios mínimos. El administrador no se considera una
+solución final.
 
 **COMPROBADO:** la conexión autenticada con `airflow_admin` fue exitosa.
-**PENDIENTE:** implementar y validar los roles separados de ETL y dbt.
+Los roles separados fueron aprovisionados y validados con autenticación real.
+`sgfood_oltp_reader` consultó las siete tablas OLTP, con un total de 4763
+registros, y sus operaciones `INSERT`, `UPDATE`, `DELETE` y `CREATE` fueron
+rechazadas. `sgfood_raw_loader` y `sgfood_dbt_runner` se autenticaron con
+éxito; el primero puede crear tablas únicamente en `raw` y el segundo puede
+crear tablas en `staging`, `intermediate` y `marts`, pero no en `raw`.
+También se comprobó que `dbt_runner` puede leer una tabla futura creada en
+`raw` por `raw_loader`, mientras `INSERT`, `UPDATE` y `DELETE` sobre ella son
+rechazados. Las pruebas del DW se revirtieron y no dejaron tablas de prueba.
+
+La validación fue ejecutada mediante los validadores
+`scripts/validar_permisos_oltp.py` y `scripts/validar_permisos_dw.py`. Sus
+evidencias están en `resultados/03-validacion-permisos-oltp.txt` y
+`resultados/02-validacion-permisos-dw.txt`, respectivamente.
+
+**PENDIENTE:** implementar y validar Airflow, ETL Python, dbt y los modelos
+analíticos; esta validación cubre únicamente el aprovisionamiento y los
+privilegios de los roles.
 **RECOMENDADO:** no utilizar administradores como solución final y aplicar
 privilegios mínimos.
 
@@ -127,6 +146,15 @@ privilegios mínimos.
 **COMPROBADO:** se recrearon OLTP y DW conservando sus volúmenes, y las
 pruebas TCP desde Ubuntu fueron satisfactorias. La ejecución inicial y la
 validación indicada en `resultados/01-validacion-postgresql.txt` ya ocurrieron.
+
+### Actualización de seguridad — 13/10/2026
+
+Se cerró la validación funcional de los roles PostgreSQL de SG-Food. El detalle
+reproducible está en `scripts/validar_permisos_oltp.py` y
+`scripts/validar_permisos_dw.py`; las salidas conservadas están en
+`resultados/03-validacion-permisos-oltp.txt` y
+`resultados/02-validacion-permisos-dw.txt`. Esta actualización complementa el
+registro histórico de infraestructura del 12/10/2026 y no lo sustituye.
 
 No usar `docker compose down -v`, `docker system prune` ni comandos de borrado
 de volúmenes como parte del procedimiento normal.
@@ -192,8 +220,8 @@ carga futura.
 
 ## Criterios pendientes
 
-**PENDIENTE:** creación y validación de roles mínimos, implementación de
-Airflow, Python ETL y dbt, carga de fuentes adicionales, modelos analíticos,
+**PENDIENTE:** implementación de Airflow, Python ETL y dbt, carga de fuentes
+adicionales, modelos analíticos,
 pruebas de calidad, consultas analíticas y validación funcional del flujo
 completo. **RECOMENDADO:** conservar nuevas ejecuciones en `resultados/` con
 fecha, alcance y resultados verificables, sin secretos.

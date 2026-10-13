@@ -1,0 +1,14 @@
+OK: raw_loader puede crear y leer en raw
+OK: denegado raw_loader CREATE en staging
+OK: denegado raw_loader CREATE en intermediate
+OK: denegado raw_loader CREATE en marts
+OK: dbt_runner puede crear en staging
+OK: dbt_runner puede crear en intermediate
+OK: dbt_runner puede crear en marts
+OK: denegado dbt_runner CREATE en raw
+OK: dbt_runner puede leer una tabla raw futura
+OK: denegado dbt_runner INSERT sobre raw
+OK: denegado dbt_runner UPDATE sobre raw
+OK: denegado dbt_runner DELETE sobre raw
+OK: ninguna tabla de prueba persistió
+VALIDACIÓN FUNCIONAL DE PERMISOS DW APROBADA

@@ -1,0 +1,74 @@
+name: sgfood-ss2-g6-proyecto1
+
+services:
+  sgfood-oltp-postgres:
+    image: postgres:16.15-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_OLTP_DB:?Define POSTGRES_OLTP_DB}
+      POSTGRES_USER: ${POSTGRES_OLTP_USER:?Define POSTGRES_OLTP_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_OLTP_PASSWORD:?Define POSTGRES_OLTP_PASSWORD}
+    ports:
+      - "127.0.0.1:${POSTGRES_OLTP_HOST_PORT:?Define POSTGRES_OLTP_HOST_PORT}:5432"
+    volumes:
+      - sgfood_elt_oltp_data:/var/lib/postgresql/data
+      - ./data/sgfood_oltp.sql:/docker-entrypoint-initdb.d/001-sgfood_oltp.sql:ro
+    networks:
+      - sgfood_elt_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    mem_limit: 768m
+    cpus: 1.0
+
+  sgfood-dw-postgres:
+    image: postgres:16.15-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_DW_DB:?Define POSTGRES_DW_DB}
+      POSTGRES_USER: ${POSTGRES_DW_USER:?Define POSTGRES_DW_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DW_PASSWORD:?Define POSTGRES_DW_PASSWORD}
+    ports:
+      - "127.0.0.1:${POSTGRES_DW_HOST_PORT:?Define POSTGRES_DW_HOST_PORT}:5432"
+    volumes:
+      - sgfood_elt_dw_data:/var/lib/postgresql/data
+      - ./docker/postgres/dw/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - sgfood_elt_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    mem_limit: 768m
+    cpus: 1.0
+
+  sgfood-airflow-postgres:
+    image: postgres:16.15-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_AIRFLOW_DB:?Define POSTGRES_AIRFLOW_DB}
+      POSTGRES_USER: ${POSTGRES_AIRFLOW_USER:?Define POSTGRES_AIRFLOW_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_AIRFLOW_PASSWORD:?Define POSTGRES_AIRFLOW_PASSWORD}
+    volumes:
+      - sgfood_elt_airflow_data:/var/lib/postgresql/data
+    networks:
+      - sgfood_elt_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    mem_limit: 512m
+    cpus: 0.75
+
+networks:
+  sgfood_elt_net:
+    internal: true
+
+volumes:
+  sgfood_elt_oltp_data:
+  sgfood_elt_dw_data:
+  sgfood_elt_airflow_data:

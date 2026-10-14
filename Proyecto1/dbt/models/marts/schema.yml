@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: fct_ventas_detalle
+    description: >-
+      Hecho de detalles de venta registrados. Su grano es una fila por
+      id_detalle y conserva las claves naturales, medidas y metadatos técnicos
+      del modelo intermediate de procedencia. No aplica filtros comerciales,
+      cálculos monetarios ni relaciones con otros hechos.
+    columns:
+      - name: id_detalle
+        description: "Clave natural y grano del hecho: una fila por detalle de venta."
+        tests: [not_null, unique]
+      - name: id_venta
+        description: "Clave natural de la venta padre."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_venta')
+                field: id_venta
+      - name: id_producto
+        description: "Clave natural del producto vendido."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_producto')
+                field: id_producto
+      - name: id_cliente
+        description: "Clave natural del cliente de la venta; futura relación dimensional."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_cliente')
+                field: id_cliente
+      - name: id_sucursal
+        description: "Clave natural de la sucursal de la venta; futura relación dimensional."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_sucursal')
+                field: id_sucursal
+      - name: fecha
+        description: "Fecha registrada de la venta; futura relación con una dimensión calendario."
+        tests: [not_null]
+      - name: cantidad
+        description: "Cantidad original registrada; medida potencialmente aditiva según el contexto."
+        tests: [not_null]
+      - name: precio_unitario
+        description: "Precio unitario original; medida no aditiva y no debe sumarse."
+        tests: [not_null]
+      - name: descuento
+        description: "Descuento original del OLTP; su unidad semántica se conserva sin inferirla."
+        tests: [not_null]
+      - name: subtotal
+        description: "Subtotal original registrado; medida potencialmente aditiva según reglas posteriores."
+        tests: [not_null]
+      - name: _etl_load_id
+        description: "Identificador técnico de carga conservado desde el detalle."
+        tests: [not_null]
+      - name: _etl_loaded_at
+        description: "Instante técnico de carga conservado desde el detalle."
+        tests: [not_null]
+      - name: _etl_source_table
+        description: "Tabla OLTP de procedencia conservada desde el detalle."
+        tests: [not_null]
+      - name: _etl_extracted_at
+        description: "Instante técnico de extracción conservado desde el detalle."
+        tests: [not_null]

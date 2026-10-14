@@ -1,0 +1,18 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE PRIMER MART
+Fecha: 2026-10-13T23:04:56.145027-06:00
+OK: identidad PostgreSQL y READ ONLY
+OK: cuatro vistas intermediate preservadas
+OK: únicamente fct_ventas_detalle en marts
+OK: propietarios y materialización correctos
+OK: 14 columnas originales preservadas
+OK: tipos PostgreSQL compatibles con origen
+OK: 3209 filas originales preservadas
+OK: 3209 identificadores únicos
+OK: cantidad original = 19174
+OK: subtotal original = 838452.07
+OK: EXCEPT ALL bidireccional sin diferencias
+OK: catorce columnas idénticas, incluidos metadatos
+OK: ventas mensuales preservadas
+OK: inventario histórico preservado
+OK: devoluciones anteriores preservadas
+VALIDACIÓN INDEPENDIENTE PRIMER MART APROBADA

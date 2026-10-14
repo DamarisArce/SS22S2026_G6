@@ -1,0 +1,26 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE DIM_PRODUCTO
+Fecha: 2026-10-14T00:03:10.014119-06:00
+OK: PostgreSQL, rol y READ ONLY
+OK: cuatro vistas intermediate preservadas
+OK: exactamente tres vistas marts
+OK: propietarios y materialización correctos
+OK: 13 columnas originales preservadas
+OK: tipos PostgreSQL idénticos al origen
+OK: 80 productos originales conservados
+OK: 80 id_producto únicos
+OK: 80 SKU únicos
+OK: 13 columnas sin valores NULL
+OK: EXCEPT ALL bidireccional sin diferencias
+OK: precios, estado y metadatos preservados
+OK: categorías y marcas existentes
+OK: relación con catálogos sin fanout
+OK: todas las ventas tienen producto
+OK: relación producto-ventas 1:N sin fanout
+OK: 3209 detalles de venta conservados
+OK: cantidad 19174 y subtotal 838452.07
+OK: fct_ventas_detalle preservado
+OK: dim_sucursal preservada
+OK: ventas mensuales preservadas
+OK: inventario histórico preservado
+OK: devoluciones preservadas
+VALIDACIÓN INDEPENDIENTE DIM_PRODUCTO APROBADA

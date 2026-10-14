@@ -1,0 +1,55 @@
+[0m06:01:01  Running with dbt=1.11.12
+[0m06:01:01  Registered adapter: postgres=1.10.2
+[0m06:01:04  Found 19 models, 167 data tests, 12 sources, 466 macros
+[0m06:01:04  
+[0m06:01:04  Concurrency: 1 threads (target='dev')
+[0m06:01:04  
+[0m06:01:04  1 of 21 START test dim_producto_clave_unica .................................... [RUN]
+[0m06:01:04  1 of 21 PASS dim_producto_clave_unica .......................................... [[32mPASS[0m in 0.07s]
+[0m06:01:04  2 of 21 START test dim_producto_integridad_origen .............................. [RUN]
+[0m06:01:04  2 of 21 PASS dim_producto_integridad_origen .................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  3 of 21 START test dim_producto_integridad_ventas .............................. [RUN]
+[0m06:01:04  3 of 21 PASS dim_producto_integridad_ventas .................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  4 of 21 START test dim_producto_reconciliacion ................................. [RUN]
+[0m06:01:04  4 of 21 PASS dim_producto_reconciliacion ....................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  5 of 21 START test not_null_dim_producto__etl_extracted_at ..................... [RUN]
+[0m06:01:04  5 of 21 PASS not_null_dim_producto__etl_extracted_at ........................... [[32mPASS[0m in 0.04s]
+[0m06:01:04  6 of 21 START test not_null_dim_producto__etl_load_id .......................... [RUN]
+[0m06:01:04  6 of 21 PASS not_null_dim_producto__etl_load_id ................................ [[32mPASS[0m in 0.03s]
+[0m06:01:04  7 of 21 START test not_null_dim_producto__etl_loaded_at ........................ [RUN]
+[0m06:01:04  7 of 21 PASS not_null_dim_producto__etl_loaded_at .............................. [[32mPASS[0m in 0.03s]
+[0m06:01:04  8 of 21 START test not_null_dim_producto__etl_source_table ..................... [RUN]
+[0m06:01:04  8 of 21 PASS not_null_dim_producto__etl_source_table ........................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  9 of 21 START test not_null_dim_producto_activo ................................ [RUN]
+[0m06:01:04  9 of 21 PASS not_null_dim_producto_activo ...................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  10 of 21 START test not_null_dim_producto_costo_base ........................... [RUN]
+[0m06:01:04  10 of 21 PASS not_null_dim_producto_costo_base ................................. [[32mPASS[0m in 0.03s]
+[0m06:01:04  11 of 21 START test not_null_dim_producto_id_categoria ......................... [RUN]
+[0m06:01:04  11 of 21 PASS not_null_dim_producto_id_categoria ............................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  12 of 21 START test not_null_dim_producto_id_marca ............................. [RUN]
+[0m06:01:04  12 of 21 PASS not_null_dim_producto_id_marca ................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  13 of 21 START test not_null_dim_producto_id_producto .......................... [RUN]
+[0m06:01:04  13 of 21 PASS not_null_dim_producto_id_producto ................................ [[32mPASS[0m in 0.03s]
+[0m06:01:04  14 of 21 START test not_null_dim_producto_nombre ............................... [RUN]
+[0m06:01:04  14 of 21 PASS not_null_dim_producto_nombre ..................................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  15 of 21 START test not_null_dim_producto_precio_lista ......................... [RUN]
+[0m06:01:04  15 of 21 PASS not_null_dim_producto_precio_lista ............................... [[32mPASS[0m in 0.03s]
+[0m06:01:04  16 of 21 START test not_null_dim_producto_sku .................................. [RUN]
+[0m06:01:04  16 of 21 PASS not_null_dim_producto_sku ........................................ [[32mPASS[0m in 0.03s]
+[0m06:01:04  17 of 21 START test not_null_dim_producto_unidad_medida ........................ [RUN]
+[0m06:01:04  17 of 21 PASS not_null_dim_producto_unidad_medida .............................. [[32mPASS[0m in 0.03s]
+[0m06:01:04  18 of 21 START test relationships_dim_producto_id_categoria__id_categoria__ref_stg_oltp_categoria_  [RUN]
+[0m06:01:05  18 of 21 PASS relationships_dim_producto_id_categoria__id_categoria__ref_stg_oltp_categoria_  [[32mPASS[0m in 0.03s]
+[0m06:01:05  19 of 21 START test relationships_dim_producto_id_marca__id_marca__ref_stg_oltp_marca_  [RUN]
+[0m06:01:05  19 of 21 PASS relationships_dim_producto_id_marca__id_marca__ref_stg_oltp_marca_  [[32mPASS[0m in 0.04s]
+[0m06:01:05  20 of 21 START test unique_dim_producto_id_producto ............................ [RUN]
+[0m06:01:05  20 of 21 PASS unique_dim_producto_id_producto .................................. [[32mPASS[0m in 0.03s]
+[0m06:01:05  21 of 21 START test unique_dim_producto_sku .................................... [RUN]
+[0m06:01:05  21 of 21 PASS unique_dim_producto_sku .......................................... [[32mPASS[0m in 0.03s]
+[0m06:01:05  
+[0m06:01:05  Finished running 21 data tests in 0 hours 0 minutes and 0.93 seconds (0.93s).
+[0m06:01:05  
+[0m06:01:05  [32mCompleted successfully[0m
+[0m06:01:05  
+[0m06:01:05  Done. PASS=21 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=21
+

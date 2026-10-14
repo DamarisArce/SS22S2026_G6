@@ -105,3 +105,66 @@ models:
       - name: _etl_extracted_at
         description: "Instante técnico de extracción conservado desde staging."
         tests: [not_null]
+
+  - name: dim_producto
+    description: >-
+      Dimensión de productos disponible en el origen. Su fuente única es
+      stg_oltp_producto y su grano es exactamente una fila por id_producto,
+      que actúa como clave natural. Conserva atributos comerciales, estado y
+      metadatos técnicos ETL sin joins, filtros, cálculos ni deduplicación.
+      Se relaciona 1:N con fct_ventas_detalle mediante id_producto y conserva
+      también productos sin ventas. id_categoria e id_marca mantienen sus
+      relaciones naturales hacia staging. costo_base y precio_lista son
+      valores disponibles en origen, no precios históricos de venta ni costos
+      vendidos. El contrato no contiene historia confiable, por lo que no se
+      implementa SCD2 ni se crean registros históricos artificiales.
+    columns:
+      - name: id_producto
+        description: "Clave natural y grano de la dimensión: una fila por producto."
+        tests: [not_null, unique]
+      - name: sku
+        description: "SKU original, único y no nulo según el DDL de origen."
+        tests: [not_null, unique]
+      - name: nombre
+        description: "Nombre comercial original del producto."
+        tests: [not_null]
+      - name: id_categoria
+        description: "Clave natural de categoría del producto."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_categoria')
+                field: id_categoria
+      - name: id_marca
+        description: "Clave natural de marca del producto."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_marca')
+                field: id_marca
+      - name: unidad_medida
+        description: "Unidad de medida original del producto."
+        tests: [not_null]
+      - name: costo_base
+        description: "Costo base original; no se recalcula ni se interpreta como costo vendido."
+        tests: [not_null]
+      - name: precio_lista
+        description: "Precio de lista original; no se presenta como precio histórico de venta."
+        tests: [not_null]
+      - name: activo
+        description: "Indicador de actividad registrado en origen."
+        tests: [not_null]
+      - name: _etl_load_id
+        description: "Identificador técnico de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_loaded_at
+        description: "Instante técnico de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_source_table
+        description: "Tabla OLTP de procedencia conservada desde staging."
+        tests: [not_null]
+      - name: _etl_extracted_at
+        description: "Instante técnico de extracción conservado desde staging."
+        tests: [not_null]

@@ -1,5 +1,53 @@
 name: sgfood-ss2-g6-proyecto1
 
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: docker/airflow/Dockerfile
+  image: sgfood-airflow:3.1.0-python3.12
+  user: "${AIRFLOW_UID:-50000}:0"
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-api-server:8080/execution/
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:?Define AIRFLOW_FERNET_KEY}
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "${AIRFLOW_UI_USER:?Define AIRFLOW_UI_USER}:admin"
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: /opt/airflow/auth/simple_auth_manager_passwords.json
+    AIRFLOW__CORE__TEST_CONNECTION: Disabled
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:?Define AIRFLOW_JWT_SECRET}
+    AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY:?Define AIRFLOW_API_SECRET_KEY}
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN_CMD: >-
+      python -c "import os; import sys; from urllib.parse import quote; sys.stdout.write('postgresql+psycopg2://' + quote(os.environ['POSTGRES_AIRFLOW_USER'], safe='') + ':' + quote(os.environ['POSTGRES_AIRFLOW_PASSWORD'], safe='') + '@sgfood-airflow-postgres:5432/' + quote(os.environ['POSTGRES_AIRFLOW_DB'], safe=''))"
+    POSTGRES_AIRFLOW_DB: ${POSTGRES_AIRFLOW_DB:?Define POSTGRES_AIRFLOW_DB}
+    POSTGRES_AIRFLOW_USER: ${POSTGRES_AIRFLOW_USER:?Define POSTGRES_AIRFLOW_USER}
+    POSTGRES_AIRFLOW_PASSWORD: ${POSTGRES_AIRFLOW_PASSWORD:?Define POSTGRES_AIRFLOW_PASSWORD}
+    POSTGRES_OLTP_HOST: sgfood-oltp-postgres
+    POSTGRES_OLTP_HOST_PORT: "5432"
+    POSTGRES_DW_HOST: sgfood-dw-postgres
+    POSTGRES_DW_HOST_PORT: "5432"
+    DBT_HOST: sgfood-dw-postgres
+    DBT_PORT: "5432"
+    DBT_PROFILES_DIR: /opt/airflow/dbt-profiles
+    DBT_ENGINE_TARGET_PATH: /opt/airflow/dbt-artifacts/target
+    DBT_ENGINE_LOG_PATH: /opt/airflow/dbt-artifacts/logs
+    SGFOOD_OLTP_READER_PASSWORD: ${SGFOOD_OLTP_READER_PASSWORD:?Define SGFOOD_OLTP_READER_PASSWORD}
+    SGFOOD_RAW_LOADER_PASSWORD: ${SGFOOD_RAW_LOADER_PASSWORD:?Define SGFOOD_RAW_LOADER_PASSWORD}
+    SGFOOD_DBT_RUNNER_PASSWORD: ${SGFOOD_DBT_RUNNER_PASSWORD:?Define SGFOOD_DBT_RUNNER_PASSWORD}
+  volumes:
+    - ./etl:/opt/airflow/etl:ro
+    - ./data:/opt/airflow/data:ro
+    - ./sql:/opt/airflow/sql:ro
+    - ./dbt:/opt/airflow/dbt:ro
+    - ./dags:/opt/airflow/dags:ro
+    - sgfood_elt_airflow_logs:/opt/airflow/logs
+    - sgfood_elt_dbt_artifacts:/opt/airflow/dbt-artifacts
+    - sgfood_elt_airflow_auth:/opt/airflow/auth
+  networks:
+    - sgfood_elt_net
+  security_opt:
+    - no-new-privileges:true
+  restart: "no"
+
 services:
   sgfood-oltp-postgres:
     image: postgres:16.15-bookworm
@@ -66,6 +114,54 @@ services:
     mem_limit: 512m
     cpus: 0.75
 
+  airflow-init:
+    <<: *airflow-common
+    command: airflow db migrate
+    depends_on:
+      sgfood-airflow-postgres:
+        condition: service_healthy
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "airflow", "jobs", "check", "--job-type", "SchedulerJob", "--local"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-api-server:
+    <<: *airflow-common
+    command: api-server
+    restart: unless-stopped
+    networks:
+      - sgfood_elt_net
+      - sgfood_access_net
+    ports:
+      - "127.0.0.1:${AIRFLOW_HOST_PORT:?Define AIRFLOW_HOST_PORT}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    restart: unless-stopped
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
 networks:
   sgfood_elt_net:
     internal: true
@@ -77,3 +173,6 @@ volumes:
   sgfood_elt_oltp_data:
   sgfood_elt_dw_data:
   sgfood_elt_airflow_data:
+  sgfood_elt_airflow_logs:
+  sgfood_elt_dbt_artifacts:
+  sgfood_elt_airflow_auth:

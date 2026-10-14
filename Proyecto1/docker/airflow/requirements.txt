@@ -1,0 +1,7 @@
+psycopg[binary]==3.3.6
+dbt-core==1.11.12
+dbt-postgres==1.10.2
+dbt-adapters==1.22.10
+dbt-common==1.37.5
+dbt-extractor==0.6.0
+dbt-semantic-interfaces==0.9.0

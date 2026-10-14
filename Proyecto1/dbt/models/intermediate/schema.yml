@@ -134,3 +134,87 @@ models:
         description: "TRUE solo cuando fecha_vencimiento es anterior a fecha_corte; NULL si se desconoce."
       - name: dias_para_vencer
         description: "Diferencia fecha_vencimiento - fecha_corte; admite negativos, cero el mismo día y NULL sin vencimiento."
+
+  - name: int_devoluciones_enriquecida
+    description: >-
+      Una fila por id_devolucion, conservando las seis columnas funcionales
+      y los cinco metadatos técnicos del CSV. Enriquece únicamente con
+      atributos de la venta y del producto relacionados; no calcula importes
+      ni ventas netas.
+    columns:
+      - name: id_devolucion
+        description: "Clave natural y grano del modelo: una fila por devolución."
+        tests: [not_null, unique]
+      - name: fecha
+        description: "Fecha original de la devolución; conserva su nombre y valor."
+        tests: [not_null]
+      - name: id_venta
+        description: "Venta asociada en el CSV de devoluciones."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_venta')
+                field: id_venta
+      - name: id_producto
+        description: "Producto asociado en el CSV de devoluciones."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_producto')
+                field: id_producto
+      - name: cantidad
+        description: "Cantidad original devuelta; no se altera ni se agrega."
+        tests: [not_null]
+      - name: motivo
+        description: "Motivo original de la devolución; no se normaliza."
+        tests: [not_null]
+      - name: _etl_load_id
+        description: "Identificador técnico de carga conservado del CSV."
+        tests: [not_null]
+      - name: _etl_loaded_at
+        description: "Instante técnico de carga conservado del CSV."
+        tests: [not_null]
+      - name: _etl_source_name
+        description: "Archivo de procedencia conservado del CSV."
+        tests: [not_null]
+      - name: _etl_source_sha256
+        description: "Huella SHA-256 de procedencia conservada del CSV."
+        tests: [not_null]
+      - name: _etl_row_number
+        description: "Fila original del archivo conservada del CSV."
+        tests: [not_null]
+      - name: fecha_venta
+        description: "Fecha de la venta padre, diferenciada de la fecha de devolución."
+        tests: [not_null]
+      - name: id_cliente
+        description: "Cliente obligatorio de la venta padre."
+        tests: [not_null]
+      - name: id_sucursal
+        description: "Sucursal obligatoria de la venta padre."
+        tests: [not_null]
+      - name: canal
+        description: "Canal obligatorio de la venta padre; no se filtra."
+        tests: [not_null]
+      - name: metodo_pago
+        description: "Método de pago obligatorio de la venta padre."
+        tests: [not_null]
+      - name: estado
+        description: "Estado obligatorio de la venta padre; no se filtra."
+        tests: [not_null]
+      - name: sku
+        description: "SKU obligatorio del producto padre."
+        tests: [not_null]
+      - name: nombre_producto
+        description: "Nombre obligatorio del producto padre."
+        tests: [not_null]
+      - name: id_categoria
+        description: "Categoría obligatoria del producto padre."
+        tests: [not_null]
+      - name: id_marca
+        description: "Marca obligatoria del producto padre."
+        tests: [not_null]
+      - name: unidad_medida
+        description: "Unidad de medida obligatoria del producto padre."
+        tests: [not_null]

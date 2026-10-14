@@ -1,0 +1,69 @@
+[0m02:19:14  Running with dbt=1.11.12
+[0m02:19:15  Registered adapter: postgres=1.10.2
+[0m02:19:16  Found 15 models, 101 data tests, 12 sources, 466 macros
+[0m02:19:16  
+[0m02:19:16  Concurrency: 1 threads (target='dev')
+[0m02:19:16  
+[0m02:19:16  1 of 28 START test int_devoluciones_integridad_enriquecimiento ................. [RUN]
+[0m02:19:16  1 of 28 PASS int_devoluciones_integridad_enriquecimiento ....................... [[32mPASS[0m in 0.04s]
+[0m02:19:16  2 of 28 START test int_devoluciones_integridad_origen .......................... [RUN]
+[0m02:19:16  2 of 28 PASS int_devoluciones_integridad_origen ................................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  3 of 28 START test int_devoluciones_reconciliacion ............................. [RUN]
+[0m02:19:16  3 of 28 PASS int_devoluciones_reconciliacion ................................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  4 of 28 START test not_null_int_devoluciones_enriquecida__etl_load_id .......... [RUN]
+[0m02:19:16  4 of 28 PASS not_null_int_devoluciones_enriquecida__etl_load_id ................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  5 of 28 START test not_null_int_devoluciones_enriquecida__etl_loaded_at ........ [RUN]
+[0m02:19:16  5 of 28 PASS not_null_int_devoluciones_enriquecida__etl_loaded_at .............. [[32mPASS[0m in 0.02s]
+[0m02:19:16  6 of 28 START test not_null_int_devoluciones_enriquecida__etl_row_number ....... [RUN]
+[0m02:19:16  6 of 28 PASS not_null_int_devoluciones_enriquecida__etl_row_number ............. [[32mPASS[0m in 0.02s]
+[0m02:19:16  7 of 28 START test not_null_int_devoluciones_enriquecida__etl_source_name ...... [RUN]
+[0m02:19:16  7 of 28 PASS not_null_int_devoluciones_enriquecida__etl_source_name ............ [[32mPASS[0m in 0.02s]
+[0m02:19:16  8 of 28 START test not_null_int_devoluciones_enriquecida__etl_source_sha256 .... [RUN]
+[0m02:19:16  8 of 28 PASS not_null_int_devoluciones_enriquecida__etl_source_sha256 .......... [[32mPASS[0m in 0.02s]
+[0m02:19:16  9 of 28 START test not_null_int_devoluciones_enriquecida_canal ................. [RUN]
+[0m02:19:16  9 of 28 PASS not_null_int_devoluciones_enriquecida_canal ....................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  10 of 28 START test not_null_int_devoluciones_enriquecida_cantidad ............. [RUN]
+[0m02:19:16  10 of 28 PASS not_null_int_devoluciones_enriquecida_cantidad ................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  11 of 28 START test not_null_int_devoluciones_enriquecida_estado ............... [RUN]
+[0m02:19:16  11 of 28 PASS not_null_int_devoluciones_enriquecida_estado ..................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  12 of 28 START test not_null_int_devoluciones_enriquecida_fecha ................ [RUN]
+[0m02:19:16  12 of 28 PASS not_null_int_devoluciones_enriquecida_fecha ...................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  13 of 28 START test not_null_int_devoluciones_enriquecida_fecha_venta .......... [RUN]
+[0m02:19:16  13 of 28 PASS not_null_int_devoluciones_enriquecida_fecha_venta ................ [[32mPASS[0m in 0.01s]
+[0m02:19:16  14 of 28 START test not_null_int_devoluciones_enriquecida_id_categoria ......... [RUN]
+[0m02:19:16  14 of 28 PASS not_null_int_devoluciones_enriquecida_id_categoria ............... [[32mPASS[0m in 0.02s]
+[0m02:19:16  15 of 28 START test not_null_int_devoluciones_enriquecida_id_cliente ........... [RUN]
+[0m02:19:16  15 of 28 PASS not_null_int_devoluciones_enriquecida_id_cliente ................. [[32mPASS[0m in 0.02s]
+[0m02:19:16  16 of 28 START test not_null_int_devoluciones_enriquecida_id_devolucion ........ [RUN]
+[0m02:19:16  16 of 28 PASS not_null_int_devoluciones_enriquecida_id_devolucion .............. [[32mPASS[0m in 0.02s]
+[0m02:19:16  17 of 28 START test not_null_int_devoluciones_enriquecida_id_marca ............. [RUN]
+[0m02:19:16  17 of 28 PASS not_null_int_devoluciones_enriquecida_id_marca ................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  18 of 28 START test not_null_int_devoluciones_enriquecida_id_producto .......... [RUN]
+[0m02:19:16  18 of 28 PASS not_null_int_devoluciones_enriquecida_id_producto ................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  19 of 28 START test not_null_int_devoluciones_enriquecida_id_sucursal .......... [RUN]
+[0m02:19:16  19 of 28 PASS not_null_int_devoluciones_enriquecida_id_sucursal ................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  20 of 28 START test not_null_int_devoluciones_enriquecida_id_venta ............. [RUN]
+[0m02:19:16  20 of 28 PASS not_null_int_devoluciones_enriquecida_id_venta ................... [[32mPASS[0m in 0.01s]
+[0m02:19:16  21 of 28 START test not_null_int_devoluciones_enriquecida_metodo_pago .......... [RUN]
+[0m02:19:16  21 of 28 PASS not_null_int_devoluciones_enriquecida_metodo_pago ................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  22 of 28 START test not_null_int_devoluciones_enriquecida_motivo ............... [RUN]
+[0m02:19:16  22 of 28 PASS not_null_int_devoluciones_enriquecida_motivo ..................... [[32mPASS[0m in 0.02s]
+[0m02:19:16  23 of 28 START test not_null_int_devoluciones_enriquecida_nombre_producto ...... [RUN]
+[0m02:19:16  23 of 28 PASS not_null_int_devoluciones_enriquecida_nombre_producto ............ [[32mPASS[0m in 0.02s]
+[0m02:19:16  24 of 28 START test not_null_int_devoluciones_enriquecida_sku .................. [RUN]
+[0m02:19:16  24 of 28 PASS not_null_int_devoluciones_enriquecida_sku ........................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  25 of 28 START test not_null_int_devoluciones_enriquecida_unidad_medida ........ [RUN]
+[0m02:19:16  25 of 28 PASS not_null_int_devoluciones_enriquecida_unidad_medida .............. [[32mPASS[0m in 0.01s]
+[0m02:19:16  26 of 28 START test relationships_int_devoluciones_enriquecida_id_producto__id_producto__ref_stg_oltp_producto_  [RUN]
+[0m02:19:16  26 of 28 PASS relationships_int_devoluciones_enriquecida_id_producto__id_producto__ref_stg_oltp_producto_  [[32mPASS[0m in 0.02s]
+[0m02:19:16  27 of 28 START test relationships_int_devoluciones_enriquecida_id_venta__id_venta__ref_stg_oltp_venta_  [RUN]
+[0m02:19:16  27 of 28 PASS relationships_int_devoluciones_enriquecida_id_venta__id_venta__ref_stg_oltp_venta_  [[32mPASS[0m in 0.02s]
+[0m02:19:16  28 of 28 START test unique_int_devoluciones_enriquecida_id_devolucion .......... [RUN]
+[0m02:19:16  28 of 28 PASS unique_int_devoluciones_enriquecida_id_devolucion ................ [[32mPASS[0m in 0.02s]
+[0m02:19:16  
+[0m02:19:16  Finished running 28 data tests in 0 hours 0 minutes and 0.64 seconds (0.64s).
+[0m02:19:16  
+[0m02:19:16  [32mCompleted successfully[0m
+[0m02:19:16  
+[0m02:19:16  Done. PASS=28 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=28
+

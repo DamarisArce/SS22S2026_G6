@@ -22,10 +22,11 @@ class DbtIntermediateContractTest(unittest.TestCase):
             (DBT / "models" / "intermediate").glob("*.sql")
         )
 
-    def test_has_exactly_the_two_intermediate_models(self):
+    def test_has_exactly_the_three_intermediate_models(self):
         self.assertEqual(
             [path.name for path in self.intermediate_models],
             [
+                "int_devoluciones_enriquecida.sql",
                 "int_inventario_snapshot.sql",
                 "int_venta_detalle_enriquecida.sql",
             ],

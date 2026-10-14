@@ -1,0 +1,13 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE DEVOLUCIONES
+Fecha: 2026-10-13T20:24:53.929919-06:00
+OK: identidad PostgreSQL y READ ONLY
+OK: tres vistas intermediate y propietarios correctos
+OK: 80 devoluciones y 80 identificadores únicos
+OK: suma de cantidades devueltas = 149
+OK: igualdad bidireccional de las 11 columnas originales
+OK: relaciones y atributos de venta/producto correctos
+OK: enriquecimiento sin fanout
+DIAGNÓSTICO: 80 devoluciones y 80 pares venta-producto distintos
+OK: ventas anteriores preservadas
+OK: inventario anterior preservado
+VALIDACIÓN INDEPENDIENTE DEVOLUCIONES APROBADA

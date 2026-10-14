@@ -120,9 +120,8 @@ class DbtMartsDateContractTest(unittest.TestCase):
         self.assertNotIn("extract(week from date '2024-02-29')", sql)
 
     def test_previous_marts_are_preserved(self):
-        for model_name in ("fct_ventas_detalle", "dim_sucursal", "dim_producto"):
+        for model_name in ("fct_ventas_detalle", "dim_sucursal", "dim_producto", "dim_fecha"):
             self.assertRegex(self.schema, rf"name: {model_name}\b")
-        self.assertEqual(len(list((DBT / "models" / "marts").glob("*.sql"))), 4)
         self.assertNotRegex(
             self.schema.split("name: dim_fecha", 1)[1],
             re.compile(r"fiscal|feriado|hábil", re.I),

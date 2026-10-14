@@ -1,0 +1,23 @@
+SG-FOOD - VALIDACION INDEPENDIENTE DIM_CLIENTE
+Fecha: 2026-10-14T10:31:26.146091-06:00
+OK: PostgreSQL y transaccion READ ONLY
+OK: cuatro vistas intermediate preservadas
+OK: cinco vistas marts con propietario correcto
+OK: once columnas y tipos PostgreSQL correctos
+OK: 250 clientes y 250 claves unicas
+OK: nueve columnas obligatorias sin NULL
+OK: EXCEPT ALL bidireccional sin diferencias
+OK: once columnas y metadatos ETL preservados
+OK: municipio y departamento sin alteraciones
+OK: 1200 ventas y 249 clientes referenciados
+OK: cliente sin ventas preservado
+OK: cobertura sin ventas reconciliada en ambos sentidos
+OK: cabeceras sin referencias invalidas
+OK: relacion cabeceras-clientes sin fanout
+OK: 3209 detalles de ventas preservados
+OK: cantidad registrada 19174 preservada
+OK: subtotal registrado 838452.07 preservado
+OK: relacion cliente-ventas sin fanout
+OK: tres dimensiones anteriores preservadas
+OK: cuatro modelos intermediate preservados
+VALIDACION INDEPENDIENTE DIM_CLIENTE APROBADA

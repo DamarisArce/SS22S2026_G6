@@ -1,0 +1,39 @@
+[0m16:26:55  Running with dbt=1.11.12
+[0m16:26:56  Registered adapter: postgres=1.10.2
+[0m16:26:58  Found 21 models, 201 data tests, 12 sources, 466 macros
+[0m16:26:58  
+[0m16:26:58  Concurrency: 1 threads (target='dev')
+[0m16:26:58  
+[0m16:26:58  1 of 13 START test dim_cliente_cobertura_sin_ventas ............................ [RUN]
+[0m16:26:58  1 of 13 PASS dim_cliente_cobertura_sin_ventas .................................. [[32mPASS[0m in 0.06s]
+[0m16:26:58  2 of 13 START test dim_cliente_integridad_origen ............................... [RUN]
+[0m16:26:58  2 of 13 PASS dim_cliente_integridad_origen ..................................... [[32mPASS[0m in 0.03s]
+[0m16:26:58  3 of 13 START test dim_cliente_integridad_ventas ............................... [RUN]
+[0m16:26:58  3 of 13 PASS dim_cliente_integridad_ventas ..................................... [[32mPASS[0m in 0.04s]
+[0m16:26:58  4 of 13 START test not_null_dim_cliente__etl_extracted_at ...................... [RUN]
+[0m16:26:59  4 of 13 PASS not_null_dim_cliente__etl_extracted_at ............................ [[32mPASS[0m in 0.03s]
+[0m16:26:59  5 of 13 START test not_null_dim_cliente__etl_load_id ........................... [RUN]
+[0m16:26:59  5 of 13 PASS not_null_dim_cliente__etl_load_id ................................. [[32mPASS[0m in 0.03s]
+[0m16:26:59  6 of 13 START test not_null_dim_cliente__etl_loaded_at ......................... [RUN]
+[0m16:26:59  6 of 13 PASS not_null_dim_cliente__etl_loaded_at ............................... [[32mPASS[0m in 0.04s]
+[0m16:26:59  7 of 13 START test not_null_dim_cliente__etl_source_table ...................... [RUN]
+[0m16:26:59  7 of 13 PASS not_null_dim_cliente__etl_source_table ............................ [[32mPASS[0m in 0.03s]
+[0m16:26:59  8 of 13 START test not_null_dim_cliente_fecha_alta ............................. [RUN]
+[0m16:26:59  8 of 13 PASS not_null_dim_cliente_fecha_alta ................................... [[32mPASS[0m in 0.03s]
+[0m16:26:59  9 of 13 START test not_null_dim_cliente_id_cliente ............................. [RUN]
+[0m16:26:59  9 of 13 PASS not_null_dim_cliente_id_cliente ................................... [[32mPASS[0m in 0.03s]
+[0m16:26:59  10 of 13 START test not_null_dim_cliente_nit ................................... [RUN]
+[0m16:26:59  10 of 13 PASS not_null_dim_cliente_nit ......................................... [[32mPASS[0m in 0.02s]
+[0m16:26:59  11 of 13 START test not_null_dim_cliente_nombre ................................ [RUN]
+[0m16:26:59  11 of 13 PASS not_null_dim_cliente_nombre ...................................... [[32mPASS[0m in 0.03s]
+[0m16:26:59  12 of 13 START test not_null_dim_cliente_tipo_cliente .......................... [RUN]
+[0m16:26:59  12 of 13 PASS not_null_dim_cliente_tipo_cliente ................................ [[32mPASS[0m in 0.02s]
+[0m16:26:59  13 of 13 START test unique_dim_cliente_id_cliente .............................. [RUN]
+[0m16:26:59  13 of 13 PASS unique_dim_cliente_id_cliente .................................... [[32mPASS[0m in 0.03s]
+[0m16:26:59  
+[0m16:26:59  Finished running 13 data tests in 0 hours 0 minutes and 0.64 seconds (0.64s).
+[0m16:26:59  
+[0m16:26:59  [32mCompleted successfully[0m
+[0m16:26:59  
+[0m16:26:59  Done. PASS=13 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=13
+

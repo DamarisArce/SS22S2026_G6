@@ -223,3 +223,51 @@ models:
       - name: _etl_extracted_at
         description: "Instante técnico de extracción conservado desde staging."
         tests: [not_null]
+
+  - name: dim_cliente
+    description: >-
+      Dimensión de clientes disponible en el origen. Su grano es exactamente
+      una fila por id_cliente, que actúa como clave natural. La fuente única y
+      autorizada es stg_oltp_cliente y la materialización es VIEW. Conserva
+      los atributos del cliente, los valores NULL permitidos en municipio y
+      departamento y los cuatro metadatos técnicos ETL, sin joins, filtros,
+      deduplicación ni transformaciones. Se relaciona 1:N con
+      fct_ventas_detalle mediante id_cliente; los clientes sin cabeceras de
+      venta son válidos y permanecen incluidos. fecha_alta significa
+      exclusivamente la fecha de alta registrada en origen. El contrato no
+      demuestra historia de atributos, por lo que no implementa SCD2 ni
+      versiones históricas. NIT, nombre y ubicación son datos potencialmente
+      sensibles: el acceso debe controlarse y podrían requerirse vistas
+      anonimizadas. No se declara relación inversa obligatoria hacia ventas.
+    columns:
+      - name: id_cliente
+        description: "Clave natural y grano de la dimensión: una fila por cliente."
+        tests: [not_null, unique]
+      - name: nit
+        description: "Identificador tributario original; su unicidad no se impone en este contrato."
+        tests: [not_null]
+      - name: nombre
+        description: "Nombre original del cliente."
+        tests: [not_null]
+      - name: tipo_cliente
+        description: "Tipo de cliente registrado en origen."
+        tests: [not_null]
+      - name: municipio
+        description: "Municipio original; puede ser NULL en el origen."
+      - name: departamento
+        description: "Departamento original; puede ser NULL en el origen."
+      - name: fecha_alta
+        description: "Fecha DATE de alta del cliente en origen; no es fecha de compra ni de vigencia."
+        tests: [not_null]
+      - name: _etl_load_id
+        description: "Identificador técnico UUID de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_loaded_at
+        description: "Instante técnico TIMESTAMPTZ de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_source_table
+        description: "Tabla TEXT de procedencia conservada desde staging."
+        tests: [not_null]
+      - name: _etl_extracted_at
+        description: "Instante técnico TIMESTAMPTZ de extracción conservado desde staging."
+        tests: [not_null]

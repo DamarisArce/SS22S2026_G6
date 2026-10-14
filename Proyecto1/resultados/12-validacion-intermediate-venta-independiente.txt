@@ -1,0 +1,12 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE INTERMEDIATE
+Fecha: 2026-10-13T17:53:44.221298-06:00
+OK: identidad PostgreSQL validada
+OK: única vista intermediate y propietario correctos
+OK: 3209 líneas, todas con id_detalle único
+OK: unidades originales = 19174
+OK: subtotal original = 838452.07
+OK: raw, staging e intermediate reconciliados
+OK: todas las columnas de la vista evaluadas
+OK: detalle y metadatos originales preservados
+OK: enriquecimiento de venta y producto correcto
+VALIDACIÓN INDEPENDIENTE INTERMEDIATE APROBADA

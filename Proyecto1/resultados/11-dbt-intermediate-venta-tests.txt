@@ -1,0 +1,51 @@
+[0m23:51:01  Running with dbt=1.11.12
+[0m23:51:01  Registered adapter: postgres=1.10.2
+[0m23:51:02  Found 13 models, 60 data tests, 12 sources, 466 macros
+[0m23:51:02  
+[0m23:51:02  Concurrency: 1 threads (target='dev')
+[0m23:51:02  
+[0m23:51:02  1 of 19 START test int_venta_detalle_integridad_origen ......................... [RUN]
+[0m23:51:02  1 of 19 PASS int_venta_detalle_integridad_origen ............................... [[32mPASS[0m in 0.03s]
+[0m23:51:02  2 of 19 START test int_venta_detalle_reconciliacion ............................ [RUN]
+[0m23:51:02  2 of 19 PASS int_venta_detalle_reconciliacion .................................. [[32mPASS[0m in 0.02s]
+[0m23:51:02  3 of 19 START test not_null_int_venta_detalle_enriquecida_canal ................ [RUN]
+[0m23:51:02  3 of 19 PASS not_null_int_venta_detalle_enriquecida_canal ...................... [[32mPASS[0m in 0.02s]
+[0m23:51:02  4 of 19 START test not_null_int_venta_detalle_enriquecida_estado ............... [RUN]
+[0m23:51:02  4 of 19 PASS not_null_int_venta_detalle_enriquecida_estado ..................... [[32mPASS[0m in 0.02s]
+[0m23:51:02  5 of 19 START test not_null_int_venta_detalle_enriquecida_fecha ................ [RUN]
+[0m23:51:02  5 of 19 PASS not_null_int_venta_detalle_enriquecida_fecha ...................... [[32mPASS[0m in 0.02s]
+[0m23:51:02  6 of 19 START test not_null_int_venta_detalle_enriquecida_id_categoria ......... [RUN]
+[0m23:51:02  6 of 19 PASS not_null_int_venta_detalle_enriquecida_id_categoria ............... [[32mPASS[0m in 0.02s]
+[0m23:51:02  7 of 19 START test not_null_int_venta_detalle_enriquecida_id_cliente ........... [RUN]
+[0m23:51:02  7 of 19 PASS not_null_int_venta_detalle_enriquecida_id_cliente ................. [[32mPASS[0m in 0.02s]
+[0m23:51:02  8 of 19 START test not_null_int_venta_detalle_enriquecida_id_detalle ........... [RUN]
+[0m23:51:02  8 of 19 PASS not_null_int_venta_detalle_enriquecida_id_detalle ................. [[32mPASS[0m in 0.01s]
+[0m23:51:02  9 of 19 START test not_null_int_venta_detalle_enriquecida_id_marca ............. [RUN]
+[0m23:51:02  9 of 19 PASS not_null_int_venta_detalle_enriquecida_id_marca ................... [[32mPASS[0m in 0.01s]
+[0m23:51:02  10 of 19 START test not_null_int_venta_detalle_enriquecida_id_producto ......... [RUN]
+[0m23:51:02  10 of 19 PASS not_null_int_venta_detalle_enriquecida_id_producto ............... [[32mPASS[0m in 0.01s]
+[0m23:51:02  11 of 19 START test not_null_int_venta_detalle_enriquecida_id_sucursal ......... [RUN]
+[0m23:51:02  11 of 19 PASS not_null_int_venta_detalle_enriquecida_id_sucursal ............... [[32mPASS[0m in 0.01s]
+[0m23:51:02  12 of 19 START test not_null_int_venta_detalle_enriquecida_id_venta ............ [RUN]
+[0m23:51:02  12 of 19 PASS not_null_int_venta_detalle_enriquecida_id_venta .................. [[32mPASS[0m in 0.01s]
+[0m23:51:02  13 of 19 START test not_null_int_venta_detalle_enriquecida_metodo_pago ......... [RUN]
+[0m23:51:02  13 of 19 PASS not_null_int_venta_detalle_enriquecida_metodo_pago ............... [[32mPASS[0m in 0.01s]
+[0m23:51:02  14 of 19 START test not_null_int_venta_detalle_enriquecida_nombre_producto ..... [RUN]
+[0m23:51:02  14 of 19 PASS not_null_int_venta_detalle_enriquecida_nombre_producto ........... [[32mPASS[0m in 0.02s]
+[0m23:51:02  15 of 19 START test not_null_int_venta_detalle_enriquecida_sku ................. [RUN]
+[0m23:51:02  15 of 19 PASS not_null_int_venta_detalle_enriquecida_sku ....................... [[32mPASS[0m in 0.01s]
+[0m23:51:02  16 of 19 START test not_null_int_venta_detalle_enriquecida_unidad_medida ....... [RUN]
+[0m23:51:02  16 of 19 PASS not_null_int_venta_detalle_enriquecida_unidad_medida ............. [[32mPASS[0m in 0.02s]
+[0m23:51:02  17 of 19 START test relationships_int_venta_detalle_enriquecida_id_producto__id_producto__ref_stg_oltp_producto_  [RUN]
+[0m23:51:02  17 of 19 PASS relationships_int_venta_detalle_enriquecida_id_producto__id_producto__ref_stg_oltp_producto_  [[32mPASS[0m in 0.02s]
+[0m23:51:02  18 of 19 START test relationships_int_venta_detalle_enriquecida_id_venta__id_venta__ref_stg_oltp_venta_  [RUN]
+[0m23:51:03  18 of 19 PASS relationships_int_venta_detalle_enriquecida_id_venta__id_venta__ref_stg_oltp_venta_  [[32mPASS[0m in 0.02s]
+[0m23:51:03  19 of 19 START test unique_int_venta_detalle_enriquecida_id_detalle ............ [RUN]
+[0m23:51:03  19 of 19 PASS unique_int_venta_detalle_enriquecida_id_detalle .................. [[32mPASS[0m in 0.02s]
+[0m23:51:03  
+[0m23:51:03  Finished running 19 data tests in 0 hours 0 minutes and 0.46 seconds (0.46s).
+[0m23:51:03  
+[0m23:51:03  [32mCompleted successfully[0m
+[0m23:51:03  
+[0m23:51:03  Done. PASS=19 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=19
+

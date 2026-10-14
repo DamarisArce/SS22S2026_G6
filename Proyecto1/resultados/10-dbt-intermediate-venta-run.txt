@@ -1,0 +1,15 @@
+[0m22:35:53  Running with dbt=1.11.12
+[0m22:35:53  Registered adapter: postgres=1.10.2
+[0m22:35:54  Found 13 models, 60 data tests, 12 sources, 466 macros
+[0m22:35:54  
+[0m22:35:54  Concurrency: 1 threads (target='dev')
+[0m22:35:54  
+[0m22:35:54  1 of 1 START sql view model intermediate.int_venta_detalle_enriquecida ......... [RUN]
+[0m22:35:54  1 of 1 OK created sql view model intermediate.int_venta_detalle_enriquecida .... [[32mCREATE VIEW[0m in 0.06s]
+[0m22:35:54  
+[0m22:35:54  Finished running 1 view model in 0 hours 0 minutes and 0.20 seconds (0.20s).
+[0m22:35:54  
+[0m22:35:54  [32mCompleted successfully[0m
+[0m22:35:54  
+[0m22:35:54  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+

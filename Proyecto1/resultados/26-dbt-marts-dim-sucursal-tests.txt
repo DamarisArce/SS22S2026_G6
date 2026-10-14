@@ -1,0 +1,39 @@
+[0m05:30:24  Running with dbt=1.11.12
+[0m05:30:24  Registered adapter: postgres=1.10.2
+[0m05:30:26  Found 18 models, 146 data tests, 12 sources, 466 macros
+[0m05:30:26  
+[0m05:30:26  Concurrency: 1 threads (target='dev')
+[0m05:30:26  
+[0m05:30:27  1 of 13 START test dim_sucursal_clave_unica .................................... [RUN]
+[0m05:30:27  1 of 13 PASS dim_sucursal_clave_unica .......................................... [[32mPASS[0m in 0.07s]
+[0m05:30:27  2 of 13 START test dim_sucursal_integridad_origen .............................. [RUN]
+[0m05:30:27  2 of 13 PASS dim_sucursal_integridad_origen .................................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  3 of 13 START test dim_sucursal_integridad_ventas .............................. [RUN]
+[0m05:30:27  3 of 13 PASS dim_sucursal_integridad_ventas .................................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  4 of 13 START test dim_sucursal_reconciliacion ................................. [RUN]
+[0m05:30:27  4 of 13 PASS dim_sucursal_reconciliacion ....................................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  5 of 13 START test not_null_dim_sucursal__etl_extracted_at ..................... [RUN]
+[0m05:30:27  5 of 13 PASS not_null_dim_sucursal__etl_extracted_at ........................... [[32mPASS[0m in 0.04s]
+[0m05:30:27  6 of 13 START test not_null_dim_sucursal__etl_load_id .......................... [RUN]
+[0m05:30:27  6 of 13 PASS not_null_dim_sucursal__etl_load_id ................................ [[32mPASS[0m in 0.03s]
+[0m05:30:27  7 of 13 START test not_null_dim_sucursal__etl_loaded_at ........................ [RUN]
+[0m05:30:27  7 of 13 PASS not_null_dim_sucursal__etl_loaded_at .............................. [[32mPASS[0m in 0.03s]
+[0m05:30:27  8 of 13 START test not_null_dim_sucursal__etl_source_table ..................... [RUN]
+[0m05:30:27  8 of 13 PASS not_null_dim_sucursal__etl_source_table ........................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  9 of 13 START test not_null_dim_sucursal_ciudad ................................ [RUN]
+[0m05:30:27  9 of 13 PASS not_null_dim_sucursal_ciudad ...................................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  10 of 13 START test not_null_dim_sucursal_departamento ......................... [RUN]
+[0m05:30:27  10 of 13 PASS not_null_dim_sucursal_departamento ............................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  11 of 13 START test not_null_dim_sucursal_id_sucursal .......................... [RUN]
+[0m05:30:27  11 of 13 PASS not_null_dim_sucursal_id_sucursal ................................ [[32mPASS[0m in 0.03s]
+[0m05:30:27  12 of 13 START test not_null_dim_sucursal_nombre ............................... [RUN]
+[0m05:30:27  12 of 13 PASS not_null_dim_sucursal_nombre ..................................... [[32mPASS[0m in 0.03s]
+[0m05:30:27  13 of 13 START test unique_dim_sucursal_id_sucursal ............................ [RUN]
+[0m05:30:27  13 of 13 PASS unique_dim_sucursal_id_sucursal .................................. [[32mPASS[0m in 0.04s]
+[0m05:30:27  
+[0m05:30:27  Finished running 13 data tests in 0 hours 0 minutes and 0.67 seconds (0.67s).
+[0m05:30:27  
+[0m05:30:27  [32mCompleted successfully[0m
+[0m05:30:27  
+[0m05:30:27  Done. PASS=13 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=13
+

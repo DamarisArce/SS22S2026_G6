@@ -1,0 +1,21 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE DIM_SUCURSAL
+Fecha: 2026-10-13T23:33:16.689912-06:00
+OK: PostgreSQL, rol y READ ONLY
+OK: cuatro vistas intermediate preservadas
+OK: dos vistas marts y propietarios correctos
+OK: ocho columnas originales preservadas
+OK: tipos PostgreSQL idénticos al origen
+OK: seis sucursales conservadas
+OK: seis identificadores únicos
+OK: ocho campos sin valores NULL
+OK: EXCEPT ALL bidireccional sin diferencias
+OK: atributos y metadatos preservados
+OK: todas las ventas tienen sucursal
+OK: relación 1:N sin multiplicación de ventas
+OK: 3209 detalles preservados tras JOIN
+OK: cantidad 19174 y subtotal 838452.07
+OK: fct_ventas_detalle preservado
+OK: ventas mensuales preservadas
+OK: inventario histórico preservado
+OK: devoluciones preservadas
+VALIDACIÓN INDEPENDIENTE DIM_SUCURSAL APROBADA

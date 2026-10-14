@@ -1,0 +1,15 @@
+[0m05:26:23  Running with dbt=1.11.12
+[0m05:26:23  Registered adapter: postgres=1.10.2
+[0m05:26:26  Found 18 models, 146 data tests, 12 sources, 466 macros
+[0m05:26:26  
+[0m05:26:26  Concurrency: 1 threads (target='dev')
+[0m05:26:26  
+[0m05:26:26  1 of 1 START sql view model marts.dim_sucursal ................................. [RUN]
+[0m05:26:26  1 of 1 OK created sql view model marts.dim_sucursal ............................ [[32mCREATE VIEW[0m in 0.12s]
+[0m05:26:26  
+[0m05:26:26  Finished running 1 view model in 0 hours 0 minutes and 0.32 seconds (0.32s).
+[0m05:26:26  
+[0m05:26:26  [32mCompleted successfully[0m
+[0m05:26:26  
+[0m05:26:26  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+

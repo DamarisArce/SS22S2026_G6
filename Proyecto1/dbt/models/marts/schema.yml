@@ -70,3 +70,38 @@ models:
       - name: _etl_extracted_at
         description: "Instante técnico de extracción conservado desde el detalle."
         tests: [not_null]
+
+  - name: dim_sucursal
+    description: >-
+      Dimensión de sucursales disponible en el origen. Su fuente es
+      stg_oltp_sucursal y su grano es exactamente una fila por id_sucursal,
+      que actúa como clave natural. Conserva los atributos originales y los
+      metadatos técnicos ETL sin joins ni filtros. Se relaciona 1:N con
+      fct_ventas_detalle mediante id_sucursal. Describe el estado disponible
+      en el origen; no demuestra historia de sucursales ni implementa SCD2
+      porque el contrato no contiene una historia confiable.
+    columns:
+      - name: id_sucursal
+        description: "Clave natural y grano de la dimensión: una fila por sucursal."
+        tests: [not_null, unique]
+      - name: nombre
+        description: "Nombre original de la sucursal."
+        tests: [not_null]
+      - name: ciudad
+        description: "Ciudad original de la sucursal."
+        tests: [not_null]
+      - name: departamento
+        description: "Departamento original de la sucursal."
+        tests: [not_null]
+      - name: _etl_load_id
+        description: "Identificador técnico de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_loaded_at
+        description: "Instante técnico de carga conservado desde staging."
+        tests: [not_null]
+      - name: _etl_source_table
+        description: "Tabla de procedencia conservada desde staging."
+        tests: [not_null]
+      - name: _etl_extracted_at
+        description: "Instante técnico de extracción conservado desde staging."
+        tests: [not_null]

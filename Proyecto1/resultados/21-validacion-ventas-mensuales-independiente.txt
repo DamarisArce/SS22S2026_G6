@@ -1,0 +1,19 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE VENTAS MENSUALES
+Fecha: 2026-10-13T22:14:37.276341-06:00
+OK: PostgreSQL, rol y transacción READ ONLY
+OK: exactamente cuatro vistas intermediate autorizadas
+OK: 3209 detalles de ventas preservados
+OK: 19174 unidades originales preservadas
+OK: subtotal original 838452.07 preservado
+OK: 48 grupos mes-sucursal únicos
+OK: períodos mensuales normalizados
+OK: 3209 líneas agregadas
+OK: cantidad agregada = 19174
+OK: subtotal agregado = 838452.07
+OK: igualdad bidireccional de las seis columnas
+OK: cero grupos faltantes o adicionales
+OK: cuatro medidas reconciliadas exactamente
+OK: ventas distintas al grano mensual-sucursal = 1200
+OK: inventario histórico preservado
+OK: devoluciones anteriores preservadas
+VALIDACIÓN INDEPENDIENTE VENTAS MENSUALES APROBADA

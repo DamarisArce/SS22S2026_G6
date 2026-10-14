@@ -218,3 +218,34 @@ models:
       - name: unidad_medida
         description: "Unidad de medida obligatoria del producto padre."
         tests: [not_null]
+
+  - name: int_ventas_mensuales_sucursal
+    description: >-
+      Una fila por periodo mensual e id_sucursal, agregada desde los detalles
+      de venta enriquecidos. Las medidas representan registros del sistema:
+      no son ventas oficiales, ingresos contables, ventas netas ni métricas
+      de cumplimiento comercial.
+    columns:
+      - name: periodo
+        description: "Primer día del mes en que se registró la venta; grano temporal del modelo."
+        tests: [not_null]
+      - name: id_sucursal
+        description: "Sucursal del registro de venta; parte del grano mensual-sucursal."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_sucursal')
+                field: id_sucursal
+      - name: lineas_registradas
+        description: "COUNT(*) de líneas registradas en el mes y sucursal."
+        tests: [not_null]
+      - name: ventas_distintas_registradas
+        description: "COUNT(DISTINCT id_venta) de ventas registradas en el mes y sucursal."
+        tests: [not_null]
+      - name: cantidad_registrada
+        description: "SUM(cantidad) original de las líneas registradas; no se recalcula ni se convierte en una medida oficial."
+        tests: [not_null]
+      - name: subtotal_registrado
+        description: "SUM(subtotal) original de las líneas registradas; no equivale necesariamente a ingreso oficial."
+        tests: [not_null]

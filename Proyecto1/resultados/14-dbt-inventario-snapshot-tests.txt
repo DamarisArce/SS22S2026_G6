@@ -1,0 +1,39 @@
+[0m00:59:09  Running with dbt=1.11.12
+[0m00:59:09  Registered adapter: postgres=1.10.2
+[0m00:59:11  Found 14 models, 73 data tests, 12 sources, 466 macros
+[0m00:59:11  
+[0m00:59:11  Concurrency: 1 threads (target='dev')
+[0m00:59:11  
+[0m00:59:11  1 of 13 START test int_inventario_snapshot_clave_unica ......................... [RUN]
+[0m00:59:11  1 of 13 PASS int_inventario_snapshot_clave_unica ............................... [[32mPASS[0m in 0.04s]
+[0m00:59:11  2 of 13 START test int_inventario_snapshot_integridad_origen ................... [RUN]
+[0m00:59:11  2 of 13 PASS int_inventario_snapshot_integridad_origen ......................... [[32mPASS[0m in 0.03s]
+[0m00:59:11  3 of 13 START test int_inventario_snapshot_reconciliacion ...................... [RUN]
+[0m00:59:11  3 of 13 PASS int_inventario_snapshot_reconciliacion ............................ [[32mPASS[0m in 0.02s]
+[0m00:59:11  4 of 13 START test int_inventario_snapshot_vencimiento ......................... [RUN]
+[0m00:59:11  4 of 13 PASS int_inventario_snapshot_vencimiento ............................... [[32mPASS[0m in 0.03s]
+[0m00:59:11  5 of 13 START test not_null_int_inventario_snapshot_fecha_corte ................ [RUN]
+[0m00:59:11  5 of 13 PASS not_null_int_inventario_snapshot_fecha_corte ...................... [[32mPASS[0m in 0.03s]
+[0m00:59:11  6 of 13 START test not_null_int_inventario_snapshot_id_producto ................ [RUN]
+[0m00:59:11  6 of 13 PASS not_null_int_inventario_snapshot_id_producto ...................... [[32mPASS[0m in 0.02s]
+[0m00:59:11  7 of 13 START test not_null_int_inventario_snapshot_id_sucursal ................ [RUN]
+[0m00:59:11  7 of 13 PASS not_null_int_inventario_snapshot_id_sucursal ...................... [[32mPASS[0m in 0.02s]
+[0m00:59:11  8 of 13 START test not_null_int_inventario_snapshot_lote ....................... [RUN]
+[0m00:59:11  8 of 13 PASS not_null_int_inventario_snapshot_lote ............................. [[32mPASS[0m in 0.02s]
+[0m00:59:11  9 of 13 START test not_null_int_inventario_snapshot_nombre_producto ............ [RUN]
+[0m00:59:11  9 of 13 PASS not_null_int_inventario_snapshot_nombre_producto .................. [[32mPASS[0m in 0.02s]
+[0m00:59:11  10 of 13 START test not_null_int_inventario_snapshot_nombre_sucursal ........... [RUN]
+[0m00:59:11  10 of 13 PASS not_null_int_inventario_snapshot_nombre_sucursal ................. [[32mPASS[0m in 0.02s]
+[0m00:59:11  11 of 13 START test not_null_int_inventario_snapshot_sku ....................... [RUN]
+[0m00:59:11  11 of 13 PASS not_null_int_inventario_snapshot_sku ............................. [[32mPASS[0m in 0.02s]
+[0m00:59:11  12 of 13 START test relationships_int_inventario_snapshot_id_producto__id_producto__ref_stg_oltp_producto_  [RUN]
+[0m00:59:11  12 of 13 PASS relationships_int_inventario_snapshot_id_producto__id_producto__ref_stg_oltp_producto_  [[32mPASS[0m in 0.02s]
+[0m00:59:11  13 of 13 START test relationships_int_inventario_snapshot_id_sucursal__id_sucursal__ref_stg_oltp_sucursal_  [RUN]
+[0m00:59:11  13 of 13 PASS relationships_int_inventario_snapshot_id_sucursal__id_sucursal__ref_stg_oltp_sucursal_  [[32mPASS[0m in 0.02s]
+[0m00:59:11  
+[0m00:59:11  Finished running 13 data tests in 0 hours 0 minutes and 0.41 seconds (0.41s).
+[0m00:59:11  
+[0m00:59:11  [32mCompleted successfully[0m
+[0m00:59:11  
+[0m00:59:11  Done. PASS=13 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=13
+

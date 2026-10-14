@@ -1,0 +1,13 @@
+SG-FOOD — VALIDACIÓN INDEPENDIENTE DEL INVENTARIO HISTÓRICO
+Fecha: 2026-10-13T19:02:27.979610-06:00
+OK: identidad PostgreSQL y transacción READ ONLY
+OK: exactamente dos vistas intermediate; propietarios correctos
+OK: 3,840 filas, 3,840 claves compuestas únicas
+OK: ocho cortes históricos de 480 filas cada uno
+OK: stock_disponible / stock_minimo / stock_maximo = 179654 / 63228 / 311724
+OK: igualdad bidireccional de las 13 columnas originales
+OK: enriquecimiento producto/sucursal sin fanout
+OK: derivaciones de vencimiento relativas a fecha_corte
+OK: vencimiento nulo=0, vencido=0, mismo_día=0, posterior=3840
+OK: modelo de ventas conservado y reconciliado
+VALIDACIÓN INDEPENDIENTE INVENTARIO APROBADA

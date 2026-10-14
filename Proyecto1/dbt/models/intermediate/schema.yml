@@ -74,3 +74,63 @@ models:
         description: "Tabla de origen del detalle."
       - name: _etl_extracted_at
         description: "Instante de extracción del detalle."
+
+  - name: int_inventario_snapshot
+    description: >-
+      Una fila por fecha_corte, id_sucursal, id_producto y lote. Conserva
+      stocks, vencimiento y metadatos del snapshot de inventario, y agrega
+      atributos descriptivos de producto y sucursal sin alterar el grano.
+    columns:
+      - name: fecha_corte
+        description: "Fecha del corte histórico del inventario; parte de la clave compuesta."
+        tests: [not_null]
+      - name: id_sucursal
+        description: "Sucursal del inventario; parte de la clave compuesta."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_sucursal')
+                field: id_sucursal
+      - name: id_producto
+        description: "Producto del inventario; parte de la clave compuesta."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_oltp_producto')
+                field: id_producto
+      - name: lote
+        description: "Lote del inventario; parte de la clave compuesta."
+        tests: [not_null]
+      - name: stock_disponible
+        description: "Existencia disponible original del snapshot; no se reemplaza ni agrega entre cortes."
+      - name: stock_minimo
+        description: "Stock mínimo reportado originalmente; no se interpreta como regla comercial."
+      - name: stock_maximo
+        description: "Stock máximo reportado originalmente; no se interpreta como regla comercial."
+      - name: fecha_vencimiento
+        description: "Fecha de vencimiento original; puede ser NULL si es desconocida."
+      - name: _etl_load_id
+        description: "Identificador técnico de carga conservado desde inventario."
+      - name: _etl_loaded_at
+        description: "Instante técnico de carga conservado desde inventario."
+      - name: _etl_source_name
+        description: "Archivo de procedencia conservado desde inventario."
+      - name: _etl_source_sha256
+        description: "Huella SHA-256 de procedencia conservada desde inventario."
+      - name: _etl_row_number
+        description: "Fila original del archivo conservada desde inventario."
+      - name: sku
+        description: "SKU obligatorio del producto padre."
+        tests: [not_null]
+      - name: nombre_producto
+        description: "Nombre obligatorio del producto padre."
+        tests: [not_null]
+      - name: nombre_sucursal
+        description: "Nombre obligatorio de la sucursal padre."
+        tests: [not_null]
+      - name: es_vencido_en_corte
+        description: "TRUE solo cuando fecha_vencimiento es anterior a fecha_corte; NULL si se desconoce."
+      - name: dias_para_vencer
+        description: "Diferencia fecha_vencimiento - fecha_corte; admite negativos, cero el mismo día y NULL sin vencimiento."

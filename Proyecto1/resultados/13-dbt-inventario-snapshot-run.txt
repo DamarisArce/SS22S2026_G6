@@ -1,0 +1,15 @@
+[0m00:56:26  Running with dbt=1.11.12
+[0m00:56:26  Registered adapter: postgres=1.10.2
+[0m00:56:27  Found 14 models, 73 data tests, 12 sources, 466 macros
+[0m00:56:27  
+[0m00:56:27  Concurrency: 1 threads (target='dev')
+[0m00:56:27  
+[0m00:56:27  1 of 1 START sql view model intermediate.int_inventario_snapshot ............... [RUN]
+[0m00:56:27  1 of 1 OK created sql view model intermediate.int_inventario_snapshot .......... [[32mCREATE VIEW[0m in 0.07s]
+[0m00:56:27  
+[0m00:56:27  Finished running 1 view model in 0 hours 0 minutes and 0.17 seconds (0.17s).
+[0m00:56:27  
+[0m00:56:27  [32mCompleted successfully[0m
+[0m00:56:27  
+[0m00:56:27  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+

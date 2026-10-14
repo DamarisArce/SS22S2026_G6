@@ -1,0 +1,28 @@
+SG-FOOD - VALIDACIÓN INDEPENDIENTE DIM_FECHA
+Fecha: 2026-10-14T09:41:32.826976-06:00
+OK: PostgreSQL, rol y READ ONLY
+OK: cuatro vistas intermediate preservadas
+OK: exactamente cuatro vistas marts
+OK: propietarios y materialización correctos
+OK: 13 columnas con tipos PostgreSQL correctos
+OK: rango autorizado 2026-01-01 a 2026-08-31
+OK: 243 días calendario esperados
+OK: 243 fechas conservadas
+OK: 243 claves DATE únicas
+OK: 13 columnas sin valores NULL
+OK: EXCEPT ALL bidireccional sin diferencias
+OK: sin días faltantes ni adicionales
+OK: doce atributos derivados consistentes
+OK: año gregoriano y año ISO consistentes
+OK: fixtures ISO y año bisiesto
+OK: todas las ventas tienen fecha calendario
+OK: relación con ventas sin fanout
+OK: 3209 detalles de venta preservados
+OK: cantidad 19174 y subtotal 838452.07
+OK: 48 períodos por sucursal preservados
+OK: períodos normalizados al primer día del mes
+OK: relación mensual sin fanout
+OK: dim_sucursal y dim_producto preservadas
+OK: inventario histórico preservado
+OK: devoluciones preservadas
+VALIDACIÓN INDEPENDIENTE DIM_FECHA APROBADA

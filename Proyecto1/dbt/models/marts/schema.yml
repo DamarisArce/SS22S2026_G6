@@ -106,6 +106,61 @@ models:
         description: "Instante técnico de extracción conservado desde staging."
         tests: [not_null]
 
+  - name: dim_fecha
+    description: >-
+      Dimensión calendario con una fila por día calendario dentro del rango
+      dinámico determinado por las fechas no nulas de stg_oltp_venta.fecha y
+      int_ventas_mensuales_sucursal.periodo. La clave natural es fecha, de
+      tipo DATE. El modelo incluye todos los días entre los límites, incluso
+      los que no tienen ventas. Las partes del calendario siguen la convención
+      gregoriana; dia_semana y numero_semana usan ISO, al igual que anio_iso.
+      Si ambas fuentes no tienen fechas válidas, el rango es vacío y la vista
+      no crea filas artificiales. La cobertura se limita al mínimo y máximo de
+      esas dos fuentes: no incluye devoluciones, snapshots de inventario,
+      vencimientos futuros ni fechas técnicas ETL. Las relaciones desde hechos
+      hacia esta dimensión son posibles por fecha, pero no se declara una
+      relación inversa obligatoria porque los días sin ventas son válidos.
+    columns:
+      - name: fecha
+        description: "Clave natural DATE; una fila por día calendario del rango autorizado."
+        tests: [not_null, unique]
+      - name: anio
+        description: "Año gregoriano de fecha."
+        tests: [not_null]
+      - name: anio_iso
+        description: "Año ISO-8601 al que pertenece la semana de fecha."
+        tests: [not_null]
+      - name: trimestre
+        description: "Trimestre gregoriano de fecha, de 1 a 4."
+        tests: [not_null]
+      - name: mes
+        description: "Mes gregoriano de fecha, de 1 a 12."
+        tests: [not_null]
+      - name: dia_mes
+        description: "Día del mes gregoriano."
+        tests: [not_null]
+      - name: dia_semana
+        description: "Día ISO de la semana: lunes 1 a domingo 7."
+        tests: [not_null]
+      - name: numero_semana
+        description: "Número de semana ISO-8601."
+        tests: [not_null]
+      - name: inicio_mes
+        description: "Primer día del mes gregoriano."
+        tests: [not_null]
+      - name: fin_mes
+        description: "Último día del mes gregoriano."
+        tests: [not_null]
+      - name: inicio_trimestre
+        description: "Primer día del trimestre gregoriano."
+        tests: [not_null]
+      - name: inicio_anio
+        description: "Primer día del año gregoriano."
+        tests: [not_null]
+      - name: es_fin_semana
+        description: "TRUE para sábado o domingo ISO; FALSE para lunes a viernes."
+        tests: [not_null]
+
   - name: dim_producto
     description: >-
       Dimensión de productos disponible en el origen. Su fuente única es

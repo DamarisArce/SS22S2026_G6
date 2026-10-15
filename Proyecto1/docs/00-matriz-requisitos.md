@@ -14,7 +14,7 @@
 | R-06 | ELT documentado y validado; 12 bloques y 16 SELECT analíticos ejecutados en lectura. | `README.md`, `docs/01`–`17`, `sql/05-consultas-analiticas.sql`, `resultados/40-validacion-consultas-analiticas.txt` | VALIDADO |
 | R-07 | Python, Airflow, PostgreSQL y dbt están configurados y conectados. | `compose.yaml`, `docker/airflow/Dockerfile`, `docker/airflow/requirements.txt` | VALIDADO |
 | R-08 | Loader y raw integran OLTP y CSV con claves y hashes. | `etl/raw_loader.py`, `data/`, `sql/03-create-raw.sql` | VALIDADO |
-| R-09 | Componentes, DDL contractual/exportado, consultas, documentación y evidencias están presentes localmente en `Proyecto1`; su integración en el repositorio de entrega sigue pendiente para las 17 rutas del Bloque 3C7. | Árbol local, `git status --short`, `README.md`, `sql/04-ddl-dw.sql`, `sql/05-consultas-analiticas.sql`, `sql/06-ddl-dw-reproducible.sql`, `docs/17-manual-implementacion.md` | PARCIAL |
+| R-09 | Componentes, DDL contractual/exportado, consultas, documentación y evidencias están integrados en `Proyecto1` dentro de `main`, junto con los 18 commits de la integración y sus 171 archivos versionados. | Commit integrado `a8738061a92c6276e9ab6e6327be25e4bf5cfd8e`, árbol de `Proyecto1`, `README.md`, `sql/04-ddl-dw.sql`, `sql/05-consultas-analiticas.sql`, `sql/06-ddl-dw-reproducible.sql`, `docs/17-manual-implementacion.md` | VALIDADO |
 | R-10 | Los dos integrantes aparecen sin cambios en README. | `README.md`, PDF académico | VALIDADO |
 
 ## Criterios de rúbrica
@@ -23,7 +23,7 @@
 |---|---|---|---|
 | Q-01 | Flujo Python + Airflow | Dos runs exitosos, cinco tareas por corrida y códigos 0 de raw/dbt/reconciliación. | VALIDADO |
 | Q-02 | Documentación y manual | README y manual cubren instalación, configuración, PostgreSQL, raw, dbt, Airflow, pruebas, evidencias, parada segura y limitaciones; respaldados por ejecuciones previas. La repetición independiente por tercero no es requisito expreso del PDF. | VALIDADO |
-| Q-03 | Entregables y repositorio | Componentes, DDL 04/06, consultas 05, documentación y evidencias están presentes localmente, pero las 17 rutas del Bloque 3C7 aún no están integradas en la entrega versionada; no se asigna puntuación. | PARCIAL |
+| Q-03 | Entregables y repositorio | Componentes, DDL 04/06, consultas 05, documentación y evidencias quedaron integrados en `main` mediante los 18 commits de la integración, con 171 archivos versionados en `Proyecto1`. | VALIDADO |
 | Q-04 | DW y modelos dbt | 21 modelos, 201 tests declarados; `PASS=222`, `WARN=0`, `ERROR=0`. | VALIDADO |
 | Q-05 | Fuentes, pruebas y validación | Fuentes, raw, dbt, reconciliación, idempotencia observacional y `resultados/40` con 16 SELECT efectivos. | VALIDADO |
 
@@ -37,7 +37,7 @@
 
 Las evidencias 37 y 38 registran dos DAG runs exitosos, cinco tareas exitosas por corrida, 21 modelos, 201 pruebas, `PASS=222`, `WARN=0`, `ERROR=0` y reconciliación con código 0. La evidencia 39 compara exactamente 17 objetos y sustenta idempotencia observacional solo de esas fotografías, no inmutabilidad global. La evidencia 40 registra 12 bloques y 16 SELECT efectivos, con 3,209 filas conservadas en el hecho y sin errores.
 
-Al precheck, las 17 rutas del Bloque 3C7 seguían modificadas o sin seguimiento en Git; no se integraron ni versionaron aquí. La clasificación de R-09 y Q-03 refleja esa pendiente de entrega, no una ausencia de implementación local. Permanece pendiente la restauración del DDL exportado sobre una base limpia; el PDF no la exige expresamente. La ejecución independiente del manual por un tercero tampoco es requisito expreso. No se asignan calificaciones.
+La integración de los 18 commits y los 171 archivos de `Proyecto1` en `main` elimina la pendiente de versionado que sustentaba los estados anteriores de R-09 y Q-03. El commit integrado es `a8738061a92c6276e9ab6e6327be25e4bf5cfd8`, confirmado en `main` y sincronizado con `origin/main`. Permanece pendiente la restauración del DDL exportado sobre una base limpia; el PDF no la exige expresamente. La ejecución independiente del manual por un tercero tampoco es requisito expreso. No se declara realizada la entrega UEDI.
 
 ## Archivo histórico de la matriz inicial — no autoritativo
 

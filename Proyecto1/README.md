@@ -70,7 +70,7 @@ Proyecto1/
 
 ## Limitaciones y pendientes
 
-- El DDL contractual, la exportación reproducible y las consultas analíticas están entregados; la exportación no fue restaurada sobre una base limpia (`PENDIENTE`). R-03 permanece `PARCIAL` porque los modelos dbt son vistas y sus relaciones no son constraints físicos PostgreSQL.
+- El DDL contractual, la exportación reproducible y las consultas analíticas están entregados. R-03 está `VALIDADO` conforme a la interpretación del requisito oficial documentada en la matriz: los modelos dbt son vistas, no existen PK/FK físicas en dichas vistas y la integridad se verificó mediante pruebas dbt. La exportación no fue restaurada sobre una base limpia (`PENDIENTE`).
 - La ejecución programada es opcional/recomendada y permanece manual (`schedule=None`).
 - La idempotencia documentada se limita a los 17 objetos de las fotografías 3C3.
 - La evidencia 40 valida 12 bloques y 16 SELECT efectivos sobre el DW verificado; sus resultados son agregados y no incluyen filas de negocio.

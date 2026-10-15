@@ -10,7 +10,7 @@ SG-Food integra información transaccional de ventas y archivos operativos media
 
 El proyecto está implementado y cuenta con dos ejecuciones integrales exitosas registradas. Las verificaciones reportadas en este documento corresponden al conjunto de datos académico utilizado; no representan disponibilidad permanente de un servicio productivo.
 
-![Arquitectura ELT de SG-Food](docs/diagramas/01-arquitectura-elt.svg)
+![Arquitectura ELT de SG-Food](docs/diagramas/SG-Food%20·%20Arquitectura%20ELT.drawio.png)
 
 [Editar arquitectura en draw.io](docs/diagramas/01-arquitectura-elt.drawio) · [Descripción técnica completa](docs/02-arquitectura-y-decisiones.md)
 
@@ -30,7 +30,7 @@ El proyecto está implementado y cuenta con dos ejecuciones integrales exitosas 
 
 Los cuatro esquemas del DW tienen funciones diferenciadas: `raw` conserva las fuentes y su linaje; `staging` normaliza tipos y estructura; `intermediate` integra entidades y prepara agregaciones; `marts` expone el modelo dimensional para consultas. Los **21 modelos de dbt son vistas PostgreSQL**; las relaciones de estas vistas se verifican mediante pruebas y reconciliación, no mediante claves foráneas físicas sobre las vistas.
 
-![Modelo dimensional](docs/diagramas/03-modelo-dimensional.svg)
+![Modelo dimensional](docs/diagramas/SG-Food%20·%20Modelo%20dimensional%20de%20ventas.drawio.png)
 
 [Editar modelo en draw.io](docs/diagramas/03-modelo-dimensional.drawio) · [Documentación de marts](docs/11-dbt-marts-ventas-detalle.md)
 

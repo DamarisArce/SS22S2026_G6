@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="02-dag-airflow" name="DAG Airflow">
+    <mxGraphModel dx="1600" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1610" pageHeight="510" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="p" value="1 · precheck_config&lt;br&gt;validación de entorno" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="240" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="r" value="2 · raw_load&lt;br&gt;Python OLTP + CSV" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="360" y="200" width="240" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="b" value="3 · dbt_build_all&lt;br&gt;21 modelos · 201 tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="670" y="200" width="245" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="v" value="4 · integrity_reconciliation&lt;br&gt;controles de integridad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="985" y="200" width="265" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="s" value="5 · pipeline_success&lt;br&gt;finalización" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EEF4;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="200" width="230" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="p" target="r">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="r" target="b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="b" target="v">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="v" target="s">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

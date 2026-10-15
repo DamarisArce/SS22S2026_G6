@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="03-modelo-dimensional" name="Modelo dimensional">
+    <mxGraphModel dx="1600" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1580" pageHeight="690" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cliente" value="dim_cliente&lt;br&gt;PK lógica: id_cliente&lt;br&gt;250 filas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="70" y="90" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="producto" value="dim_producto&lt;br&gt;PK lógica: id_producto&lt;br&gt;80 filas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="90" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="fecha" value="dim_fecha&lt;br&gt;PK lógica: fecha&lt;br&gt;243 días" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="70" y="430" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sucursal" value="dim_sucursal&lt;br&gt;PK lógica: id_sucursal&lt;br&gt;6 filas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="430" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="hecho" value="fct_ventas_detalle&lt;br&gt;Grano: id_detalle&lt;br&gt;3,209 líneas · 14 columnas&lt;br&gt;cantidad · precio · descuento · subtotal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EEF4;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="590" y="245" width="390" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="id_cliente" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="hecho" target="cliente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="id_producto" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="hecho" target="producto">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="fecha" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="hecho" target="fecha">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="id_sucursal" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="hecho" target="sucursal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,78 +1,92 @@
-# Proyecto 1 — SG-Food ELT
+# SG-Food — Plataforma de integración y análisis de datos
 
-## Identificación
+**Universidad de San Carlos de Guatemala · Facultad de Ingeniería · Seminario de Sistemas 2 · Proyecto 1**
 
-Proyecto académico de Seminario de Sistemas 2, USAC, para diseñar e implementar un flujo reproducible de extracción, carga, transformación, orquestación y validación para SG-Food.
+**Integrantes:** Dámaris Magali Arce Guzmán (202006636) y Nelson Emanuel Cún Bálan (201222010).
 
-## Integrantes
+## Resumen ejecutivo
 
-- Dámaris Magali Arce Guzmán — 202006636
-- Nelson Emanuel Cún Bálan — 201222010
+SG-Food integra información transaccional de ventas y archivos operativos mediante un pipeline **ELT (Extract, Load, Transform)**. Python extrae siete tablas de PostgreSQL OLTP y procesa cinco archivos CSV; carga sus datos en el esquema `raw` de un Data Warehouse PostgreSQL. **Apache Airflow** coordina la ejecución; **dbt Core** transforma los datos en las capas `staging`, `intermediate` y `marts`, construye dimensiones y un hecho de ventas y ejecuta pruebas de calidad. Una reconciliación independiente y consultas SQL verifican la integridad de los resultados.
 
-## Objetivo y problema
+El proyecto está implementado y cuenta con dos ejecuciones integrales exitosas registradas. Las verificaciones reportadas en este documento corresponden al conjunto de datos académico utilizado; no representan disponibilidad permanente de un servicio productivo.
 
-SG-Food necesita integrar una fuente transaccional y archivos operativos para disponer de datos analíticos trazables. El objetivo académico es construir un flujo ELT con Python, Apache Airflow, PostgreSQL y dbt Core que cargue datos raw, construya modelos analíticos y ejecute controles de calidad. El PDF exige extracción/carga Python, orquestación Airflow, DW PostgreSQL, modelos dbt y validación documentada.
+![Arquitectura ELT de SG-Food](docs/diagramas/01-arquitectura-elt.svg)
 
-## Arquitectura implementada
+[Editar arquitectura en draw.io](docs/diagramas/01-arquitectura-elt.drawio) · [Descripción técnica completa](docs/02-arquitectura-y-decisiones.md)
 
-```text
-PostgreSQL OLTP (oltp_sgfood) ─┐
-                                ├─ etl/raw_loader.py ─> PostgreSQL DW.raw
-CSV en data/ ───────────────────┘                         │
-                                      Airflow             v
-                              dbt: staging -> intermediate -> marts
-                                      │                    │
-                         reconciliación y pruebas     consultas/controles
+## Alcance funcional
+
+| Componente | Implementación |
+|---|---|
+| Fuentes | PostgreSQL `sgfood_oltp` (7 tablas) y 5 CSV operativos |
+| Extracción/carga | `etl/raw_loader.py`; 12 tablas físicas en `raw`, carga transaccional y metadatos de procedencia |
+| Orquestación | DAG `sgfood_elt_integral`: 5 tareas secuenciales, ejecución manual |
+| Transformación | dbt Core: 12 vistas `staging`, 4 `intermediate` y 5 `marts` |
+| Modelo dimensional | `dim_cliente`, `dim_fecha`, `dim_producto`, `dim_sucursal`, `fct_ventas_detalle` |
+| Seguridad | Roles separados para lectura OLTP, carga raw y ejecución dbt; contraseñas locales por entorno |
+| Verificación | Pruebas dbt, reconciliación Python, consultas SQL y comprobaciones de idempotencia |
+
+## Arquitectura y modelo de datos
+
+Los cuatro esquemas del DW tienen funciones diferenciadas: `raw` conserva las fuentes y su linaje; `staging` normaliza tipos y estructura; `intermediate` integra entidades y prepara agregaciones; `marts` expone el modelo dimensional para consultas. Los **21 modelos de dbt son vistas PostgreSQL**; las relaciones de estas vistas se verifican mediante pruebas y reconciliación, no mediante claves foráneas físicas sobre las vistas.
+
+![Modelo dimensional](docs/diagramas/03-modelo-dimensional.svg)
+
+[Editar modelo en draw.io](docs/diagramas/03-modelo-dimensional.drawio) · [Documentación de marts](docs/11-dbt-marts-ventas-detalle.md)
+
+## Resultados de validación
+
+| Control | Resultado documentado | Evidencia |
+|---|---|---|
+| DAG de Airflow | 2 ejecuciones exitosas; 5 tareas `success` en cada una | [37](resultados/37-airflow-3c3-primera-ejecucion.txt), [38](resultados/38-airflow-3c3-segunda-ejecucion.txt) |
+| `dbt build` | 21 modelos + 201 pruebas = 222 operaciones; `PASS=222`, `WARN=0`, `ERROR=0` | [37](resultados/37-airflow-3c3-primera-ejecucion.txt), [38](resultados/38-airflow-3c3-segunda-ejecucion.txt) |
+| Reconciliación | Finalizada con código 0 en ambas ejecuciones | [37](resultados/37-airflow-3c3-primera-ejecucion.txt), [38](resultados/38-airflow-3c3-segunda-ejecucion.txt) |
+| Idempotencia observacional | 17 objetos con conteos y SHA-256 coincidentes en tres fotografías | [39](resultados/39-airflow-3c3-idempotencia.txt) |
+| Consultas analíticas | 12 bloques y 16 `SELECT` ejecutados en lectura sin errores; hecho con 3,209 filas | [40](resultados/40-validacion-consultas-analiticas.txt) |
+
+Las huellas de idempotencia demuestran igualdad de los **17 objetos fotografiados**, no identidad de todo el entorno ni una prueba general de cambios incrementales.
+
+## Instalación y ejecución
+
+**Requisitos:** Docker Engine con Compose, Python 3 y recursos suficientes para los contenedores. Trabajar desde `Proyecto1/`.
+
+```bash
+cp .env.example .env
+# Editar .env y sustituir todos los placeholders por secretos locales
+
+docker compose --env-file .env config --quiet
+docker compose --env-file .env build
+docker compose --env-file .env up -d
+
+python scripts/provision_roles.py --env-file .env oltp
+python scripts/provision_roles.py --env-file .env dw
+
+docker compose --env-file .env exec airflow-scheduler airflow dags trigger sgfood_elt_integral
 ```
 
-`compose.yaml` define `sgfood-oltp-postgres`, `sgfood-dw-postgres`, `sgfood-airflow-postgres`, `airflow-init`, `airflow-scheduler`, `airflow-api-server` y `airflow-dag-processor`. Los tres PostgreSQL usan `postgres:16.15-bookworm`; Airflow usa `apache/airflow:3.1.0-python3.12`, `LocalExecutor` y un virtualenv separado para dbt y Psycopg. Las conexiones internas usan nombres de servicio y puerto 5432; los puertos publicados están limitados a localhost.
+Se debe verificar el estado de las cinco tareas en Airflow. La inicialización de roles y los procedimientos detallados, alternativas de ejecución y parada segura se describen en el **[manual de implementación](docs/17-manual-implementacion.md)**. No versionar `.env` ni utilizar `docker compose down -v`.
 
-## Fuentes y pipeline
+## Guía de documentación
 
-El OLTP `data/sgfood_oltp.sql` contiene el schema `oltp_sgfood` y siete tablas: `sucursal`, `categoria`, `marca`, `producto`, `cliente`, `venta` y `venta_detalle`. Los CSV operativos son `inventario_bodega.csv`, `devoluciones.csv`, `metas_ventas.csv`, `promociones.csv` y `proveedores_precios.csv`. El loader administra doce tablas raw: siete OLTP y cinco CSV; valida encabezados, claves naturales, identidades de conexión y contratos de tablas, y carga de forma transaccional.
+| Documento | Descripción |
+|---|---|
+| [Matriz de cumplimiento](docs/00-matriz-requisitos.md) | Correspondencia con requisitos, pruebas y entregables |
+| [Catálogo de fuentes](docs/01-catalogo-fuentes.md) | Datos de entrada, claves, granularidades y anomalías observadas |
+| [Arquitectura](docs/02-arquitectura-y-decisiones.md) | Componentes, flujos, decisiones y diagramas |
+| [Infraestructura](docs/03-infraestructura.md) · [Seguridad](docs/04-permisos.md) | Despliegue lógico, redes, persistencia y privilegios |
+| [Carga raw](docs/05-carga-raw.md) | Contratos de extracción/carga e idempotencia |
+| [Staging](docs/06-dbt-staging.md) · [Intermediate](docs/07-dbt-intermediate.md) | Transformaciones y linaje |
+| [Inventario](docs/08-dbt-inventario-snapshot.md) · [Devoluciones](docs/09-dbt-devoluciones.md) · [Ventas mensuales](docs/10-dbt-ventas-mensuales.md) | Modelos intermedios de apoyo |
+| [Hecho](docs/11-dbt-marts-ventas-detalle.md) · [Sucursal](docs/12-dbt-marts-dim-sucursal.md) · [Producto](docs/13-dbt-marts-dim-producto.md) · [Fecha](docs/14-dbt-marts-dim-fecha.md) · [Cliente](docs/15-dbt-marts-dim-cliente.md) | Modelo dimensional de consumo |
+| [Airflow](docs/16-airflow-infraestructura.md) · [Manual](docs/17-manual-implementacion.md) | Orquestación y procedimientos |
 
-El DAG `sgfood_elt_integral` tiene `schedule=None` (la programación es opcional/recomendada por el PDF) y ejecuta estrictamente: `precheck_config`, `raw_load`, `dbt_build_all`, `integrity_reconciliation` y `pipeline_success`. Las tareas tienen `retries=0`, `catchup=False` y `max_active_runs=1`.
+**Scripts SQL:** [DDL de raw](sql/03-create-raw.sql), [DDL descriptivo DW](sql/04-ddl-dw.sql), [consultas analíticas](sql/05-consultas-analiticas.sql), [exportación de esquema](sql/06-ddl-dw-reproducible.sql). Las evidencias de pruebas se conservan sin alteración en [`resultados/`](resultados/).
 
-## PostgreSQL, dbt y modelo dimensional
+## Límites del diseño verificado
 
-El DW separa `raw`, `staging`, `intermediate` y `marts`. `raw` contiene 12 tablas físicas; `staging`, `intermediate` y `marts` contienen las 21 vistas administradas por dbt. `marts` contiene `dim_cliente`, `dim_fecha`, `dim_producto`, `dim_sucursal` y `fct_ventas_detalle`. El proyecto dbt declara 12 sources y 201 tests en su inventario; los modelos usan `source()` y `ref()`. La imagen instala dbt Core 1.11.12, dbt-postgres 1.10.2 y Psycopg 3.3.6.
-
-Los entregables DDL tienen alcances distintos: `sql/04-ddl-dw.sql` es el DDL contractual/documental y explica el catálogo sin recrear las vistas dbt; `sql/06-ddl-dw-reproducible.sql` es la exportación estática de esquema obtenida con `pg_dump`, con 12 tablas raw, 21 vistas y 13 constraints físicos raw. `sql/03-create-raw.sql` es el DDL ejecutable de las tablas raw. La exportación no fue restaurada sobre una base limpia en este bloque: `PENDIENTE`.
-
-## Pruebas y validación
-
-Hay contratos Python en `tests/`, tests SQL en `dbt/tests/`, validaciones de permisos y reconciliación independiente en `etl/integrity_reconciliation.py`. Las dos ejecuciones Airflow documentadas terminaron con las cinco tareas en `success`. En ambas, dbt ejecutó 21 modelos y 201 pruebas con `PASS=222`, `WARN=0`, `ERROR=0` y código 0; la reconciliación terminó con código 0.
-
-La evidencia 3C3 comparó tres fotografías para 17 objetos, con igualdad exacta de conteos y SHA-256 por objeto. Esto sustenta idempotencia observacional de esos datos fotografiados; no demuestra inmutabilidad de toda la infraestructura ni de objetos fuera de las fotografías.
-
-Las consultas de `sql/05-consultas-analiticas.sql` se validaron en `resultados/40-validacion-consultas-analiticas.txt`: 12 bloques, 16 SELECT efectivos, sin errores, con integridad referencial y conservación de las 3,209 filas del hecho. Son consultas de conteo, cobertura y valores registrados; no se inventan métricas comerciales.
-
-## Configuración y seguridad
-
-Copiar `.env.example` a `.env` y sustituir localmente sus placeholders por valores aleatorios y persistentes. No versionar `.env` ni imprimir secretos. Las contraseñas se leen desde variables de entorno y el perfil dbt usa `env_var('SGFOOD_DBT_RUNNER_PASSWORD')`.
-
-## Inicio y documentación
-
-Los pasos reproducibles están en [docs/17-manual-implementacion.md](docs/17-manual-implementacion.md). La arquitectura, permisos, carga raw, modelos y decisiones están en `docs/01` a `docs/15`; Airflow está en `docs/16-airflow-infraestructura.md`; la matriz en `docs/00-matriz-requisitos.md`. Entregables SQL: [04](sql/04-ddl-dw.sql), [05](sql/05-consultas-analiticas.sql) y [06](sql/06-ddl-dw-reproducible.sql). Evidencias: [37](resultados/37-airflow-3c3-primera-ejecucion.txt), [38](resultados/38-airflow-3c3-segunda-ejecucion.txt), [39](resultados/39-airflow-3c3-idempotencia.txt) y [40](resultados/40-validacion-consultas-analiticas.txt).
-
-## Estructura actual
-
-```text
-Proyecto1/
-├── compose.yaml  .env.example
-├── dags/  etl/  data/  sql/  scripts/
-├── dbt/{models,tests,macros}  docker/  tests/
-├── docs/00...17-*.md  resultados/01...40-*.txt
-├── sql/03-create-raw.sql  sql/04-ddl-dw.sql
-│   sql/05-consultas-analiticas.sql  sql/06-ddl-dw-reproducible.sql
-└── insumos/798_Proyecto_1_2S2026.pdf
-```
-
-## Limitaciones y pendientes
-
-- El DDL contractual, la exportación reproducible y las consultas analíticas están entregados. R-03 está `VALIDADO` conforme a la interpretación del requisito oficial documentada en la matriz: los modelos dbt son vistas, no existen PK/FK físicas en dichas vistas y la integridad se verificó mediante pruebas dbt. La exportación no fue restaurada sobre una base limpia (`PENDIENTE`).
-- La ejecución programada es opcional/recomendada y permanece manual (`schedule=None`).
-- La idempotencia documentada se limita a los 17 objetos de las fotografías 3C3.
-- La evidencia 40 valida 12 bloques y 16 SELECT efectivos sobre el DW verificado; sus resultados son agregados y no incluyen filas de negocio.
-- No se declara dimensión de proveedor, atribución de promociones ni reglas SCD históricas sin decisión de negocio.
-- La ejecución independiente de este manual por un tercero queda `PENDIENTE`.
+- Los marts y demás modelos dbt son **vistas** con claves y relaciones lógicas; no tienen PK/FK físicas. Las 12 tablas raw sí disponen de restricciones físicas documentadas.
+- El DAG tiene `schedule=None`, `retries=0`, `catchup=False` y `max_active_runs=1`; la ejecución periódica no está configurada.
+- La exportación DDL está disponible, pero no se realizó una restauración independiente sobre una base limpia.
+- Los resultados de Airflow conservados son resúmenes de ejecución; no sustituyen el conjunto completo de logs de operación.
+- No se implementaron SCD tipo 2, atribución de promociones a ventas ni dashboard; no se definieron reglas comerciales suficientes para justificarlos.
+- La ejecución independiente del manual por otra persona no se ha documentado; la presentación en UEDI es un acto de entrega separado del desarrollo.

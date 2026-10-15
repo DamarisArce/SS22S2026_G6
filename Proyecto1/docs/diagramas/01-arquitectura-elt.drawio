@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="01-arquitectura-elt" name="Arquitectura ELT">
+    <mxGraphModel dx="1600" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1550" pageHeight="650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oltp" value="PostgreSQL OLTP&lt;br&gt;7 tablas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="125" width="215" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="csv" value="Archivos CSV&lt;br&gt;5 fuentes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="215" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="py" value="Python · raw_loader&lt;br&gt;extracción y carga" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="330" y="205" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="raw" value="DW PostgreSQL&lt;br&gt;raw · 12 tablas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="625" y="205" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="stg" value="dbt · staging&lt;br&gt;12 vistas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="925" y="130" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="int" value="dbt · intermediate&lt;br&gt;4 vistas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="925" y="275" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="marts" value="dbt · marts&lt;br&gt;4 dims + 1 hecho" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EEF4;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="205" width="255" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="airflow" value="Apache Airflow&lt;br&gt;DAG · 5 tareas secuenciales" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="640" y="25" width="340" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="tests" value="dbt tests · reconciliación · SQL&lt;br&gt;validación y trazabilidad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F5F7;strokeColor=#343A40;fontColor=#24292F;fontSize=15;align=center;verticalAlign=middle;spacing=11;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="850" y="475" width="360" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="oltp" target="py">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="csv" target="py">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="py" target="raw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="raw" target="stg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="stg" target="int">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="int" target="marts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;" edge="1" parent="1" source="marts" target="tests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="orquesta" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;dashed=1;" edge="1" parent="1" source="airflow" target="py">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="verifica" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#59636E;strokeWidth=1.6;fontSize=12;fontColor=#343A40;dashed=1;" edge="1" parent="1" source="airflow" target="tests">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

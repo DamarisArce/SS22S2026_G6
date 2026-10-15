@@ -1,0 +1,69 @@
+Validación SQL analítica — Proyecto 1 SG-Food — Bloque 3C6C
+
+Fecha real de ejecución: 2026-10-14T19:57:39-06:00
+Entorno verificado: base sgfood_dw, PostgreSQL 16.15, contenedor del servicio
+sgfood-dw-postgres del Compose del proyecto. El servicio estaba operativo y
+saludable; no se iniciaron servicios.
+
+Mecanismo de lectura
+- Sesión administrativa usada únicamente para establecer SET ROLE
+  sgfood_dbt_runner.
+- Usuario efectivo de las consultas: sgfood_dbt_runner; sesión de conexión:
+  sgfood_dw_admin.
+- El rol efectivo no es superusuario, no puede crear roles ni bases de datos.
+- Se confirmó acceso SELECT a marts.fct_ventas_detalle y uso de schemas.
+- Cada ejecución ocurrió dentro de BEGIN; SET TRANSACTION READ ONLY; SET LOCAL
+  statement_timeout = '10s'; y terminó con ROLLBACK.
+- No se mostraron filas de negocio, datos personales, contraseñas ni secretos.
+
+Consultas ejecutadas
+Se ejecutaron los 12 bloques de sql/05-consultas-analiticas.sql. El bloque 5
+contiene cuatro SELECT independientes; por ello se validaron 16 SELECT efectivos.
+Los SELECT se envolvieron únicamente en conteos para evitar registrar datos de
+resultados.
+
+Identificador | Descripción resumida | Estado | Filas devueltas
+Q01 | Conteos generales de relaciones y grano | OK | 7
+Q02 | Ventas registradas por sucursal | OK | 6
+Q03 | Ventas registradas por período | OK | 48
+Q04 | Cantidades registradas por producto | OK | 80
+Q05a | Dimensión sucursal | OK | 6
+Q05b | Dimensión cliente | OK | 250
+Q05c | Dimensión producto | OK | 80
+Q05d | Dimensión fecha | OK | 243
+Q06 | Inventario por corte y sucursal | OK | 48
+Q07 | Inventario por producto y lote | OK | 3840
+Q08 | Inventario según vencimiento | OK | 3840
+Q09 | Devoluciones registradas | OK | 80
+Q10 | Hechos sin dimensión correspondiente | OK | 0
+Q11 | Cobertura del hecho | OK | 1
+Q12 | Reconciliación marts frente a procedencia | OK | 4
+
+Validaciones comprobadas
+- Q01: marts.dim_sucursal=6, dim_cliente=250, dim_producto=80,
+  dim_fecha=243, fct_ventas_detalle=3209, int_inventario_snapshot=3840 e
+  int_devoluciones_enriquecida=80.
+- Q10 no devolvió filas sin dimensión correspondiente.
+- Q11 devolvió 3209 líneas de hecho, 3209 detalles distintos y 3209 líneas
+  con sucursal, producto, cliente y fecha.
+- Q12 coincidió en filas y claves distintas: hecho frente a intermediate
+  3209/3209/3209/3209; sucursal 6/6/6/6; producto 80/80/80/80; cliente
+  250/250/250/250.
+
+Errores y correcciones
+- Las consultas analíticas no produjeron errores, timeouts ni correcciones.
+- No se modificó sql/05-consultas-analiticas.sql.
+
+Conclusión
+Las consultas analíticas son ejecutables en PostgreSQL 16.15 y sus validaciones
+de cobertura y reconciliación resultaron consistentes para el DW verificado.
+La ejecución fue exclusivamente de lectura y no produjo efectos secundarios.
+
+Limitaciones
+- Esta evidencia registra conteos y validaciones agregadas; no registra filas
+  de resultados ni valores personales.
+- No se ejecutaron DAG, ETL, dbt build ni DDL, conforme al alcance de 3C6C.
+- La cuenta efectiva conserva privilegio CREATE en schemas administrados por
+  dbt por su función de propietario; la transacción READ ONLY impidió efectos
+  de escritura durante esta validación. No existe en los archivos revisados un
+  rol separado de solo lectura para marts/intermediate.

@@ -73,6 +73,8 @@ class AirflowInfrastructureContractTest(unittest.TestCase):
         )
         self.assertIn("POSTGRES_OLTP_HOST: sgfood-oltp-postgres", self.compose)
         self.assertIn("POSTGRES_DW_HOST: sgfood-dw-postgres", self.compose)
+        self.assertIn("POSTGRES_OLTP_DB: ${POSTGRES_OLTP_DB:?Define POSTGRES_OLTP_DB}", self.compose)
+        self.assertIn("POSTGRES_DW_DB: ${POSTGRES_DW_DB:?Define POSTGRES_DW_DB}", self.compose)
         services = self.compose.split("services:", 1)[1].split("\nnetworks:\n", 1)[0]
         self.assertEqual(
             set(re.findall(r"^  ([a-z0-9-]+):$", services, re.MULTILINE)),

@@ -1,0 +1,35 @@
+BLOQUE 3C4 — Idempotencia de datos de negocio
+
+Fotografías verificadas
+- baseline: sgfood-3c3-baseline.json
+- primera posterior exitosa: sgfood-3c3-post-primera-success.json
+- segunda posterior exitosa: sgfood-3c3-post-segunda-success.json
+- run_id disponible para la segunda: manual__sgfood_3c3_segunda_20261014T231923559136Z
+
+Estructura verificada
+- Las tres fuentes son JSON válidos.
+- Cada fotografía contiene exactamente 17 objetos con clave de objeto y estructura `{count, sha256}`.
+- Todos los `count` son enteros y todos los `sha256` tienen 64 caracteres hexadecimales.
+- Objetos comparados: 17 por fotografía.
+- Suma de conteos: baseline=12652, primera=12652, segunda=12652.
+
+Conteos observados por objeto
+- marts.dim_cliente=250; marts.dim_fecha=243; marts.dim_producto=80; marts.dim_sucursal=6; marts.fct_ventas_detalle=3209
+- raw.csv_devoluciones=80; raw.csv_inventario_bodega=3840; raw.csv_metas_ventas=48; raw.csv_promociones=30; raw.csv_proveedores_precios=103
+- raw.oltp_categoria=8; raw.oltp_cliente=250; raw.oltp_marca=10; raw.oltp_producto=80; raw.oltp_sucursal=6; raw.oltp_venta=1200; raw.oltp_venta_detalle=3209
+
+Resultados de comparación verificados
+- igualdad exacta baseline = primera: True.
+- igualdad exacta baseline = segunda: True.
+- igualdad exacta primera = segunda: True.
+- SHA-256 de archivo baseline: 98e23988e723ed30c1a10fd26df9620c4a22174811d05bc1a98bc986ccc1eadc
+- SHA-256 de archivo primera: 98e23988e723ed30c1a10fd26df9620c4a22174811d05bc1a98bc986ccc1eadc
+- SHA-256 de archivo segunda: 98e23988e723ed30c1a10fd26df9620c4a22174811d05bc1a98bc986ccc1eadc
+
+Conclusión sustentada
+- En el alcance de estas fotografías, las tres instantáneas son idénticas en estructura, conteos y hashes por objeto. Esto sustenta idempotencia observacional de los datos fotografiados entre baseline y las dos ejecuciones exitosas.
+
+Alcance y limitaciones
+- La prueba compara únicamente los 17 objetos registrados en las tres fotografías.
+- No demuestra por sí sola propiedades fuera de esas fotografías ni cambios no representados en ellas.
+- Las fotografías originales no fueron modificadas ni regeneradas.

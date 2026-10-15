@@ -1,9 +1,32 @@
-# SG-Food — cierre de infraestructura Airflow 3B2
+# SG-Food — infraestructura y ejecución Airflow (estado actualizado)
 
-Estado: **CIERRE 3B2**. La construcción de la imagen, la inicialización del
-metastore y la operación básica de Airflow quedaron aprobadas según la
-evidencia operativa del bloque. El pipeline ELT no se ejecutó mediante Airflow
-y el DAG integral aún no está implementado.
+## Estado vigente
+
+La infraestructura y el DAG integral están implementados y validados. Esta sección supersede las afirmaciones históricas de 3B2 que indiquen que el DAG no existía.
+
+Compose define `sgfood-airflow-postgres`, `airflow-init`, `airflow-scheduler`, `airflow-api-server` y `airflow-dag-processor`, con `LocalExecutor`, la imagen `sgfood-airflow:3.1.0-python3.12` y PostgreSQL 16.15 para el metastore. `airflow-init` ejecuta `airflow db migrate`; los demás servicios dependen de su finalización. Solo el API server publica `127.0.0.1:${AIRFLOW_HOST_PORT}:8080`. El código y datos se montan de solo lectura; logs, artefactos dbt y autenticación usan volúmenes separados.
+
+El DAG `sgfood_elt_integral` usa `schedule=None`, `catchup=False`, `max_active_runs=1` y `retries=0`. La programación es opcional/recomendada por el PDF, por lo que `schedule=None` no es incumplimiento obligatorio. Sus cinco tareas y dependencias son:
+
+```text
+precheck_config >> raw_load >> dbt_build_all >> integrity_reconciliation >> pipeline_success
+```
+
+`precheck_config` valida configuración, rutas, ejecutables, artefactos y conexiones; `raw_load` ejecuta `etl/raw_loader.py`; `dbt_build_all` ejecuta `dbt build` con el proyecto y perfil montados; `integrity_reconciliation` ejecuta la reconciliación; `pipeline_success` es el marcador terminal.
+
+La imagen instala dbt Core 1.11.12, dbt-postgres 1.10.2 y Psycopg 3.3.6 en `/opt/airflow/sgfood-venv`. Las conexiones usan `.env`, perfiles dbt y los roles `sgfood_oltp_reader`, `sgfood_raw_loader` y `sgfood_dbt_runner`; no se registran secretos.
+
+## Evidencias 3C3
+
+`resultados/37-airflow-3c3-primera-ejecucion.txt` y `resultados/38-airflow-3c3-segunda-ejecucion.txt` documentan dos DAG runs exitosos. Cada ejecución tiene las cinco tareas en `success`; dbt ejecuta 21 modelos y 201 pruebas con `PASS=222`, `WARN=0`, `ERROR=0`, `SKIP=0`, `NO-OP=0`, `TOTAL=222`, código 0; la reconciliación termina con código 0.
+
+`resultados/39-airflow-3c3-idempotencia.txt` compara baseline, primera y segunda fotografía para exactamente 17 objetos. Los conteos y SHA-256 son iguales. Esto sustenta idempotencia observacional de esos datos fotografiados; no demuestra inmutabilidad de toda la infraestructura, volúmenes ni objetos fuera de las fotografías.
+
+## Riesgos y limitaciones vigentes
+
+La ejecución es manual y los retries están deshabilitados. Las evidencias son resúmenes y no logs completos. Las consultas analíticas se validaron en `resultados/40` con 12 bloques y 16 SELECT efectivos. La reconciliación es de solo lectura y cubre contenido OLTP/raw/CSV, claves, relaciones, hechos, cobertura dimensional, enriquecimiento e inventario/devoluciones. El DDL exportado no fue restaurado sobre una base limpia; la exportación fue validada estáticamente.
+
+Registro histórico del cierre 3B2. La construcción de la imagen, la inicialización del metastore y la operación básica quedaron aprobadas en ese bloque; el estado vigente del DAG y las ejecuciones está documentado en las secciones anteriores.
 
 Imagen validada: `sgfood-airflow:3.1.0-python3.12`.
 
@@ -37,7 +60,7 @@ son:
 - Loader: `/opt/airflow/sgfood-venv/bin/python`
 - dbt: `/opt/airflow/sgfood-venv/bin/dbt`
 
-El DAG no se implementa en este bloque. Los checks de `pip` son separados para
+El DAG no formaba parte del alcance de ese bloque histórico. Los checks de `pip` son separados para
 el entorno principal y SG-Food, y el Dockerfile usa rutas absolutas para todas
 las comprobaciones del virtualenv.
 
@@ -102,8 +125,8 @@ evita que `@`, `:`, `/`, `#` o `%` rompan la URI sin exponer secretos.
 
 **Comprobado:** `.env.example` contiene únicamente placeholders para
 JWT, API secret y Fernet; deben sustituirse localmente por valores aleatorios
-y persistentes, iguales entre componentes. No se creó un DAG ni un archivo
-marcador para `./dags`.
+y persistentes, iguales entre componentes. El DAG y sus archivos de soporte se
+montan desde `./dags`.
 
 **Comprobado:** el API server, scheduler, DAG processor y PostgreSQL del
 metastore quedaron saludables; el DAG processor mostró heartbeat `healthy` y
@@ -116,8 +139,7 @@ verificados como escribibles. Simple Auth Manager quedó configurado, con
 archivo de contraseñas `0600`, directorio `0700` y permisos persistentes tras
 reiniciar el API server.
 
-**Comprobado:** el directorio `dags` fue creado y el baseline de errores de
-importación fue 0. El DAG integral aún no está implementado.
+**Comprobado en 3B2:** el directorio `dags` fue creado y el baseline de errores de importación fue 0. El DAG integral se implementó posteriormente y está validado en las evidencias 37 y 38.
 
 **Fuentes oficiales:** [configuración Airflow
 3.1.0](https://airflow.apache.org/docs/apache-airflow/3.1.0/configurations-ref.html)
@@ -211,13 +233,10 @@ internas.
 
 ## Cierre, riesgos y límites
 
-La construcción de la imagen, la inicialización del metastore y la operación
-básica quedaron aprobadas. El pipeline ELT no se ejecutó mediante Airflow y el
-DAG integral aún no está implementado.
+La construcción de la imagen, la inicialización del metastore y la operación básica quedaron aprobadas en 3B2. El pipeline ELT se validó posteriormente mediante Airflow en las evidencias 37 y 38. Las consultas analíticas asociadas se validaron de forma independiente en [resultados/40](../resultados/40-validacion-consultas-analiticas.txt), sin volver a ejecutar el DAG.
 
-No se ha probado recrear el volumen de autenticación ni regenerar su archivo.
-Tampoco se han probado dos ejecuciones consecutivas del DAG integral. Las
-pruebas de rendimiento y recuperación operativa quedan fuera de 3B2.
+No se ha probado recrear el volumen de autenticación ni regenerar su archivo. Tampoco se ha restaurado `sql/06-ddl-dw-reproducible.sql` sobre una base limpia; la exportación está validada estáticamente. `sql/04-ddl-dw.sql` es contractual y las vistas de staging, intermediate y marts siguen siendo propiedad operativa de dbt, no tablas físicas con constraints PostgreSQL.
+Las pruebas de rendimiento y recuperación operativa quedan fuera de 3B2; las dos ejecuciones consecutivas del DAG están documentadas en las evidencias 37 y 38.
 
 El heartbeat `healthy` del DAG processor no se documenta como un healthcheck
 Docker si no está configurado como tal. No se documentan contraseñas, tokens,

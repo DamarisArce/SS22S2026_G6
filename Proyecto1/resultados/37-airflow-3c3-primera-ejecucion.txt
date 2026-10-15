@@ -1,0 +1,34 @@
+BLOQUE 3C4 — Primera ejecución exitosa del DAG
+
+Ejecución verificada
+- dag_id: sgfood_elt_integral
+- run_id: manual__sgfood_3c3_corregida_20261014T231144491716Z
+- estado final del DAG: success
+- inicio: 2026-10-14T23:11:47.549656+00:00
+- fin: 2026-10-14T23:12:02.698271+00:00
+
+Estados de tareas verificados
+- precheck_config: success (23:11:47.625426Z — 23:11:48.019800Z)
+- raw_load: success (23:11:48.618999Z — 23:11:49.045923Z)
+- dbt_build_all: success (23:11:49.725987Z — 23:11:59.645940Z)
+- integrity_reconciliation: success (23:11:59.967232Z — 23:12:00.602323Z)
+- pipeline_success: success (23:12:01.676261Z — 23:12:02.070380Z)
+
+Resultado dbt verificado
+- comando observado en el log: dbt build --project-dir /opt/airflow/dbt --profiles-dir /opt/airflow/dbt-profiles --target dev
+- 201 data tests y 21 view models ejecutados.
+- PASS=222, WARN=0, ERROR=0, SKIP=0, NO-OP=0, TOTAL=222.
+- código de salida: 0.
+
+Resultado de reconciliación verificado
+- tarea integrity_reconciliation ejecutada.
+- comando terminó con código de salida 0.
+
+Procedencia
+- metadatos Airflow consultados en el contenedor airflow-scheduler.
+- estados de tareas consultados con `airflow tasks states-for-dag-run`.
+- dbt: /opt/airflow/logs/dag_id=sgfood_elt_integral/run_id=manual__sgfood_3c3_corregida_20261014T231144491716Z/task_id=dbt_build_all/attempt=1.log
+- reconciliación: /opt/airflow/logs/dag_id=sgfood_elt_integral/run_id=manual__sgfood_3c3_corregida_20261014T231144491716Z/task_id=integrity_reconciliation/attempt=1.log
+
+Limitaciones
+- La evidencia conserva resúmenes verificados; no copia logs completos ni variables de entorno.

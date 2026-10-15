@@ -23,8 +23,10 @@ x-airflow-common: &airflow-common
     POSTGRES_AIRFLOW_PASSWORD: ${POSTGRES_AIRFLOW_PASSWORD:?Define POSTGRES_AIRFLOW_PASSWORD}
     POSTGRES_OLTP_HOST: sgfood-oltp-postgres
     POSTGRES_OLTP_HOST_PORT: "5432"
+    POSTGRES_OLTP_DB: ${POSTGRES_OLTP_DB:?Define POSTGRES_OLTP_DB}
     POSTGRES_DW_HOST: sgfood-dw-postgres
     POSTGRES_DW_HOST_PORT: "5432"
+    POSTGRES_DW_DB: ${POSTGRES_DW_DB:?Define POSTGRES_DW_DB}
     DBT_HOST: sgfood-dw-postgres
     DBT_PORT: "5432"
     DBT_PROFILES_DIR: /opt/airflow/dbt-profiles

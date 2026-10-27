@@ -1,0 +1,23 @@
+DRY RUN OK: evaluacion-tres-modelos
+  Bytes iniciales estimados: 465971 (NO es costo total de entrenamiento)
+=== RESULTADOS SOBRE NOVIEMBRE INDEPENDIENTE ===
+[
+  {
+    "mae_usd": "4.94262",
+    "modelo": "LINEAL_SEQ_EVAL20_L2_0_1",
+    "r2": "0.69212",
+    "rmse_usd": "7.32104"
+  },
+  {
+    "mae_usd": "4.94586",
+    "modelo": "LINEAL_ORIGINAL_CUSTOM_L2_0_1",
+    "r2": "0.69204",
+    "rmse_usd": "7.322"
+  },
+  {
+    "mae_usd": "4.95013",
+    "modelo": "LINEAL_CUSTOM_L2_1_0",
+    "r2": "0.69282",
+    "rmse_usd": "7.31267"
+  }
+]

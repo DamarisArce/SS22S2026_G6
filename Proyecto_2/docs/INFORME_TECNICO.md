@@ -46,7 +46,7 @@ Empleamos división temporal interna `CUSTOM` para separar entrenamiento y valid
 
 Para comparar los modelos bajo el mismo objetivo de detección de tarifas elevadas, discretizamos la estimación monetaria de la regresión lineal. La logística alcanzó F1 de 75.15 %, frente a 73.07 % de la variante lineal. Por otra parte, la regresión lineal continúa siendo necesaria cuando interesa estimar un importe en dólares.
 
-La parametrización de ambos modelos fue explícita y basada en un compromiso entre complejidad y costo. No se ejecutó una búsqueda comparativa exhaustiva ni una segunda configuración exitosa de cada modelo. Un ensayo con Boosted Tree no concluyó por límites de bytes facturables y no forma parte de los dos modelos evaluados.
+La parametrización de ambos modelos fue explícita y basada en un compromiso entre complejidad y costo. Complementamos los dos modelos principales con dos regresiones lineales experimentales: una con división `CUSTOM` y L2=1.0, y otra con división `SEQ`, `DATA_SPLIT_EVAL_FRACTION=0.20` y L2=0.1. Las tres regresiones se evaluaron sobre el mismo TEST de noviembre. El split `SEQ` obtuvo MAE de USD 4.94262; el modelo `CUSTOM` con L2=1.0 alcanzó RMSE de USD 7.31267 y R² de 0.69282. Las diferencias son pequeñas y no justifican conclusiones de superioridad estadística. La [evaluación experimental](EXPERIMENTOS_SPLIT_REGULARIZACION_20261027.md) presenta la comparación completa. No se efectuó una búsqueda exhaustiva ni una optimización de parámetros sobre el TEST. Un ensayo con Boosted Tree no concluyó por límites de bytes facturables y no forma parte de los dos algoritmos principales evaluados.
 
 ## 5. Pronóstico temporal con origen móvil
 
@@ -68,8 +68,8 @@ Las fuentes exploratorias se apoyan en una tabla agregada de 297 registros. Las 
 2. La clasificación logística mostró mejor F1 y recall que la regresión lineal discretizada, aunque ambos métodos subestimaron la proporción de viajes de tarifa elevada.
 3. La referencia histórica superó a los pronósticos diarios derivados de ML, por lo que no interpretamos un buen desempeño por viaje como prueba de capacidad superior de pronóstico agregado.
 4. La escasa cobertura de diciembre, el tamaño de la muestra para ML y la disponibilidad temporal de las características condicionan la interpretación de los resultados.
-5. La evaluación de hiperparámetros se limitó a configuraciones definidas explícitamente, sin búsqueda experimental amplia; el Rolling Forecast corresponde a backtesting de modelos fijos.
+5. La comparación controlada de L2 y de las estrategias `CUSTOM`/`SEQ` produjo errores externos muy cercanos, sin búsqueda experimental exhaustiva; el Rolling Forecast corresponde a backtesting de modelos fijos.
 
 ## 8. Evidencia y trazabilidad
 
-Las consultas SQL, los resultados de ejecución y las capturas disponibles acompañan el informe dentro del repositorio. Los documentos [Validación de benchmark](VALIDACION_BENCHMARK_20261026.md), [Modelado](MODELADO.md), [Rolling Forecast](RESULTADOS_ROLLING_FORECAST_20261027.md) y [Matriz de trazabilidad](MATRIZ_RUBRICA.md) amplían los métodos y permiten relacionar cada componente con sus evidencias observadas.
+Las consultas SQL, los resultados de ejecución y las capturas disponibles acompañan el informe dentro del repositorio. Los documentos [Validación de benchmark](VALIDACION_BENCHMARK_20261026.md), [Experimentos de modelado](EXPERIMENTOS_SPLIT_REGULARIZACION_20261027.md), [Modelado](MODELADO.md), [Rolling Forecast](RESULTADOS_ROLLING_FORECAST_20261027.md) y [Matriz de trazabilidad](MATRIZ_RUBRICA.md) amplían los métodos y permiten relacionar cada componente con sus evidencias observadas.

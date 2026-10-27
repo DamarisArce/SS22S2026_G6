@@ -44,6 +44,10 @@ Para comparar ambos algoritmos sobre una tarea común, transformamos la estimaci
 
 Este modelado utiliza distancia recorrida y destino observados; su interpretación es la **evaluación de viajes concluidos**, no la predicción anticipada del precio antes de realizar el recorrido. La metodología y las limitaciones se detallan en [Modelado BigQuery ML](docs/MODELADO.md).
 
+### Comparación adicional de separación temporal y regularización
+
+Contrastamos tres regresiones lineales sobre los mismos **6,449 viajes de noviembre**. El split `CUSTOM` con L2=0.1 obtuvo MAE de **USD 4.94586**; al aumentar L2 a 1.0, MAE fue **USD 4.95013** y RMSE **USD 7.31267**. La configuración `SEQ` con `DATA_SPLIT_EVAL_FRACTION=0.20` y L2=0.1 obtuvo el menor MAE (**USD 4.94262**). Las diferencias fueron pequeñas y se interpretaron como resultados de comparación externa, no como criterio para ajustar modelos sobre el TEST. El [informe de experimentos](docs/EXPERIMENTOS_SPLIT_REGULARIZACION_20261027.md) documenta la metodología y las limitaciones.
+
 ## Rolling Forecast
 
 Implementamos una evaluación retrospectiva con origen móvil para pronosticar la proporción diaria de viajes con tarifa de al menos USD 20. Se utilizaron **siete días históricos**, un horizonte de **un día** y **23 pronósticos** entre el 8 y el 30 de noviembre. El pronóstico de cada fecha se calculó exclusivamente con información de días anteriores; los modelos BigQuery ML permanecieron fijos.
@@ -74,4 +78,4 @@ El [informe técnico completo](docs/INFORME_TECNICO.md) integra la metodología,
 
 ## Alcance de los resultados
 
-La evaluación externa de los modelos se realizó sobre la muestra de noviembre. El proceso no incluyó una búsqueda experimental de varias configuraciones de hiperparámetros exitosamente entrenadas. Un intento alternativo con Boosted Tree se interrumpió por límites de bytes facturables, por lo que sus resultados no se utilizan como evidencia de un tercer modelo. El dashboard presenta un *Rolling Forecast* retrospectivo con origen móvil y modelos fijos; no representa pronósticos operativos sobre viajes futuros desconocidos.
+La evaluación externa de los modelos se realizó sobre la muestra de noviembre. El proceso incluyó una comparación controlada de dos regularizaciones lineales y dos métodos de división temporal, sin búsqueda exhaustiva de hiperparámetros ni ajuste estadístico sobre múltiples ventanas. Un intento alternativo con Boosted Tree se interrumpió por límites de bytes facturables, por lo que sus resultados no se utilizan como evidencia de un tercer modelo. El dashboard presenta un *Rolling Forecast* retrospectivo con origen móvil y modelos fijos; no representa pronósticos operativos sobre viajes futuros desconocidos.

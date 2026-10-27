@@ -1,0 +1,483 @@
+{
+  "modelos": {
+    "modelo_lineal": {
+      "entrenamientos_registrados": 1,
+      "id": null,
+      "opciones_entrenamiento": [
+        {
+          "calculatePValues": false,
+          "categoryEncodingMethod": "ONE_HOT_ENCODING",
+          "dataSplitColumn": "es_validacion",
+          "dataSplitMethod": "CUSTOM",
+          "enableGlobalExplain": false,
+          "fitIntercept": true,
+          "inputLabelColumns": [
+            "tarifa"
+          ],
+          "l2Regularization": 0.1,
+          "lossType": "MEAN_SQUARED_LOSS",
+          "optimizationStrategy": "NORMAL_EQUATION",
+          "standardizeFeatures": true
+        }
+      ],
+      "tipo_modelo": "LINEAR_REGRESSION"
+    },
+    "modelo_lineal_custom_l2_1": null,
+    "modelo_lineal_seq_eval20": null,
+    "modelo_logistico": {
+      "entrenamientos_registrados": 1,
+      "id": null,
+      "opciones_entrenamiento": [
+        {
+          "autoClassWeights": false,
+          "calculatePValues": false,
+          "categoryEncodingMethod": "ONE_HOT_ENCODING",
+          "dataSplitColumn": "es_validacion",
+          "dataSplitMethod": "CUSTOM",
+          "earlyStop": true,
+          "enableGlobalExplain": false,
+          "fitIntercept": true,
+          "initialLearnRate": 0.1,
+          "inputLabelColumns": [
+            "tarifa_alta"
+          ],
+          "l1Regularization": 0,
+          "l2Regularization": 0.1,
+          "learnRateStrategy": "LINE_SEARCH",
+          "lossType": "MEAN_LOG_LOSS",
+          "maxIterations": "20",
+          "minRelativeProgress": 0.01,
+          "standardizeFeatures": true,
+          "warmStart": false
+        }
+      ],
+      "tipo_modelo": "LOGISTIC_REGRESSION"
+    }
+  },
+  "origen": {
+    "bytes_almacenados": "7487651196",
+    "clustering": null,
+    "columnas": [
+      {
+        "nombre": "vendor_id",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "pickup_datetime",
+        "tipo": "TIMESTAMP"
+      },
+      {
+        "nombre": "dropoff_datetime",
+        "tipo": "TIMESTAMP"
+      },
+      {
+        "nombre": "passenger_count",
+        "tipo": "INTEGER"
+      },
+      {
+        "nombre": "trip_distance",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "rate_code",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "store_and_fwd_flag",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "payment_type",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "fare_amount",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "extra",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "mta_tax",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "tip_amount",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "tolls_amount",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "imp_surcharge",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "airport_fee",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "total_amount",
+        "tipo": "NUMERIC"
+      },
+      {
+        "nombre": "pickup_location_id",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "dropoff_location_id",
+        "tipo": "STRING"
+      },
+      {
+        "nombre": "data_file_year",
+        "tipo": "INTEGER"
+      },
+      {
+        "nombre": "data_file_month",
+        "tipo": "INTEGER"
+      }
+    ],
+    "id": "bigquery-public-data:new_york_taxi_trips.tlc_yellow_trips_2022",
+    "particionamiento": null,
+    "registros": "36256539",
+    "tipo": "TABLE"
+  },
+  "tablas": {
+    "datos_ml": {
+      "bytes_almacenados": "8180274",
+      "clustering": null,
+      "columnas": [
+        {
+          "nombre": "id_registro",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "pickup_date",
+          "tipo": "DATE"
+        },
+        {
+          "nombre": "fecha_orden",
+          "tipo": "TIMESTAMP"
+        },
+        {
+          "nombre": "tarifa",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "distancia_millas",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "pasajeros",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "hora_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "dia_semana_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "mes_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "proveedor",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "origen",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "destino",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "es_validacion",
+          "tipo": "BOOLEAN"
+        }
+      ],
+      "id": "ss2-p2-g6-2026-nc-1026:ss2_proyecto2_g6.datos_ml",
+      "particionamiento": {
+        "field": "pickup_date",
+        "type": "DAY"
+      },
+      "registros": "70753",
+      "tipo": "TABLE"
+    },
+    "metricas_modelos": {
+      "bytes_almacenados": "125",
+      "clustering": null,
+      "columnas": [
+        {
+          "nombre": "modelo",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "tarea",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "mae",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "rmse",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "mse",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "r2",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "precision",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "recall",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "accuracy",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "f1",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "roc_auc",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "log_loss",
+          "tipo": "FLOAT"
+        }
+      ],
+      "id": "ss2-p2-g6-2026-nc-1026:ss2_proyecto2_g6.metricas_modelos",
+      "particionamiento": null,
+      "registros": "2",
+      "tipo": "TABLE"
+    },
+    "predicciones_comparadas": {
+      "bytes_almacenados": "657798",
+      "clustering": null,
+      "columnas": [
+        {
+          "nombre": "id_registro",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "pickup_date",
+          "tipo": "DATE"
+        },
+        {
+          "nombre": "valor_real",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "pred_lineal",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "error_lineal",
+          "tipo": "FLOAT"
+        },
+        {
+          "nombre": "clase_real",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "clase_lineal",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "clase_logistica",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "prob_tarifa_alta",
+          "tipo": "FLOAT"
+        }
+      ],
+      "id": "ss2-p2-g6-2026-nc-1026:ss2_proyecto2_g6.predicciones_comparadas",
+      "particionamiento": null,
+      "registros": "6449",
+      "tipo": "TABLE"
+    },
+    "viajes_base": {
+      "bytes_almacenados": "5092853856",
+      "clustering": null,
+      "columnas": [
+        {
+          "nombre": "pickup_date",
+          "tipo": "DATE"
+        },
+        {
+          "nombre": "pickup_datetime",
+          "tipo": "TIMESTAMP"
+        },
+        {
+          "nombre": "dropoff_datetime",
+          "tipo": "TIMESTAMP"
+        },
+        {
+          "nombre": "vendor_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "passenger_count",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "trip_distance",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "rate_code",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "store_and_fwd_flag",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "payment_type",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "fare_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "total_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "tip_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "pickup_location_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "dropoff_location_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "pickup_hour_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "pickup_weekday_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "duracion_segundos",
+          "tipo": "INTEGER"
+        }
+      ],
+      "id": "ss2-p2-g6-2026-nc-1026:ss2_proyecto2_g6.viajes_base",
+      "particionamiento": null,
+      "registros": "35526984",
+      "tipo": "TABLE"
+    },
+    "viajes_optimizada": {
+      "bytes_almacenados": "5092853856",
+      "clustering": {
+        "fields": [
+          "pickup_location_id",
+          "dropoff_location_id"
+        ]
+      },
+      "columnas": [
+        {
+          "nombre": "pickup_date",
+          "tipo": "DATE"
+        },
+        {
+          "nombre": "pickup_datetime",
+          "tipo": "TIMESTAMP"
+        },
+        {
+          "nombre": "dropoff_datetime",
+          "tipo": "TIMESTAMP"
+        },
+        {
+          "nombre": "vendor_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "passenger_count",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "trip_distance",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "rate_code",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "store_and_fwd_flag",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "payment_type",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "fare_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "total_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "tip_amount",
+          "tipo": "NUMERIC"
+        },
+        {
+          "nombre": "pickup_location_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "dropoff_location_id",
+          "tipo": "STRING"
+        },
+        {
+          "nombre": "pickup_hour_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "pickup_weekday_utc",
+          "tipo": "INTEGER"
+        },
+        {
+          "nombre": "duracion_segundos",
+          "tipo": "INTEGER"
+        }
+      ],
+      "id": "ss2-p2-g6-2026-nc-1026:ss2_proyecto2_g6.viajes_optimizada",
+      "particionamiento": {
+        "field": "pickup_date",
+        "requirePartitionFilter": true,
+        "type": "DAY"
+      },
+      "registros": "35526984",
+      "tipo": "TABLE"
+    }
+  }
+}

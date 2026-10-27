@@ -1,0 +1,14 @@
+=== ENTORNO ===
+Proyecto: ss2-p2-g6-2026-nc-1026; dataset: ss2_proyecto2_g6; ubicación: US
+OK: muestra, columna temporal, modelo original y métricas presentes
+modelo_lineal_custom_l2_1: NO EXISTE
+DRY RUN OK: custom
+  Bytes iniciales estimados: 4476561 (NO es costo total de entrenamiento)
+modelo_lineal_seq_eval20: NO EXISTE
+DRY RUN OK: seq
+  Bytes iniciales estimados: 4926689 (NO es costo total de entrenamiento)
+PREFLIGHT COMPLETADO. No se creó ni reentrenó ningún modelo.
+INICIANDO UN SOLO ENTRENAMIENTO: modelo_lineal_custom_l2_1
+AVISO: máximo de bytes facturables no es garantía de tope monetario para ML.
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.modelo_lineal_custom_l2_1
+MODELO EXISTENTE Y VERIFICADO: modelo_lineal_custom_l2_1

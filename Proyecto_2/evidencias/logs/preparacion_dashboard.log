@@ -1,0 +1,74 @@
+========== PRERREQUISITOS ==========
+OK: viajes_optimizada
+OK: predicciones_comparadas
+OK: metricas_modelos
+OK: metricas_comparacion_clasificacion
+
+========== RECURSOS DEL DASHBOARD ==========
+resumen_eda_dashboard: PENDIENTE
+vw_viajes_mes: PENDIENTE
+vw_zonas: PENDIENTE
+vw_horas: PENDIENTE
+vw_predicciones_diarias: PENDIENTE
+vw_comparacion_clasificacion: PENDIENTE
+vw_metricas_modelos: PENDIENTE
+vw_rolling_7dias: PENDIENTE
+
+========== resumen_eda_dashboard ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 2445337559
+Creando TABLE resumen_eda_dashboard sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.resumen_eda_dashboard
+TABLA VERIFICADA: 297 filas.
+
+========== vw_viajes_mes ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_viajes_mes sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_viajes_mes
+VISTA VERIFICADA.
+
+========== vw_zonas ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_zonas sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_zonas
+VISTA VERIFICADA.
+
+========== vw_horas ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_horas sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_horas
+VISTA VERIFICADA.
+
+========== vw_predicciones_diarias ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_predicciones_diarias sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_predicciones_diarias
+VISTA VERIFICADA.
+
+========== vw_comparacion_clasificacion ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_comparacion_clasificacion sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_comparacion_clasificacion
+VISTA VERIFICADA.
+
+========== vw_metricas_modelos ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_metricas_modelos sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_metricas_modelos
+VISTA VERIFICADA.
+
+========== vw_rolling_7dias ==========
+Dry run con limite de 6,000,000,000 bytes...
+Bytes estimados: 0
+Creando VIEW vw_rolling_7dias sin OR REPLACE...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_rolling_7dias
+VISTA VERIFICADA.
+
+DASHBOARD LISTO EN BIGQUERY: 1 tabla y 7 vistas.
+Pendiente: crear el informe visual en Looker Studio y compartir enlace.

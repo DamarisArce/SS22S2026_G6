@@ -1,0 +1,30 @@
+[
+  {
+    "accuracy": null,
+    "f1": null,
+    "log_loss": null,
+    "mae": "4.9458636216748912",
+    "modelo": "LINEAL",
+    "mse": "53.611699401449322",
+    "precision": null,
+    "r2": "0.692038269335417",
+    "recall": null,
+    "rmse": "7.3220010517241336",
+    "roc_auc": null,
+    "tarea": "REGRESION"
+  },
+  {
+    "accuracy": "0.91254458055512477",
+    "f1": "0.75154185022026432",
+    "log_loss": "0.26520317343047561",
+    "mae": null,
+    "modelo": "LOGISTICA",
+    "mse": null,
+    "precision": "0.86511156186612581",
+    "r2": null,
+    "recall": "0.66433021806853587",
+    "rmse": null,
+    "roc_auc": "0.90616083916083912",
+    "tarea": "CLASIFICACION"
+  }
+]

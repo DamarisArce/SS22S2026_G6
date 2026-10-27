@@ -1,0 +1,138 @@
+[[
+  {
+    "mediana_tarifa_aprox": "9.0",
+    "mes_utc": "1",
+    "millas_promedio": "5.45",
+    "tarifa_promedio": "12.94",
+    "total_promedio": "19.22",
+    "viajes": "2422820"
+  },
+  {
+    "mediana_tarifa_aprox": "9.5",
+    "mes_utc": "2",
+    "millas_promedio": "5.93",
+    "tarifa_promedio": "13.14",
+    "total_promedio": "19.57",
+    "viajes": "2932880"
+  },
+  {
+    "mediana_tarifa_aprox": "10.0",
+    "mes_utc": "3",
+    "millas_promedio": "5.84",
+    "tarifa_promedio": "13.93",
+    "total_promedio": "20.65",
+    "viajes": "3568613"
+  },
+  {
+    "mediana_tarifa_aprox": "10.0",
+    "mes_utc": "4",
+    "millas_promedio": "5.63",
+    "tarifa_promedio": "14.45",
+    "total_promedio": "21.24",
+    "viajes": "3541718"
+  },
+  {
+    "mediana_tarifa_aprox": "10.5",
+    "mes_utc": "5",
+    "millas_promedio": "6.93",
+    "tarifa_promedio": "15.17",
+    "total_promedio": "22.15",
+    "viajes": "3523522"
+  },
+  {
+    "mediana_tarifa_aprox": "10.5",
+    "mes_utc": "6",
+    "millas_promedio": "6.07",
+    "tarifa_promedio": "15.25",
+    "total_promedio": "22.2",
+    "viajes": "3485741"
+  },
+  {
+    "mediana_tarifa_aprox": "10.0",
+    "mes_utc": "7",
+    "millas_promedio": "5.9",
+    "tarifa_promedio": "14.72",
+    "total_promedio": "21.51",
+    "viajes": "3109478"
+  },
+  {
+    "mediana_tarifa_aprox": "10.0",
+    "mes_utc": "8",
+    "millas_promedio": "5.82",
+    "tarifa_promedio": "14.82",
+    "total_promedio": "21.63",
+    "viajes": "3083476"
+  },
+  {
+    "mediana_tarifa_aprox": "11.0",
+    "mes_utc": "9",
+    "millas_promedio": "7.25",
+    "tarifa_promedio": "15.63",
+    "total_promedio": "22.73",
+    "viajes": "3112770"
+  },
+  {
+    "mediana_tarifa_aprox": "10.5",
+    "mes_utc": "10",
+    "millas_promedio": "6.31",
+    "tarifa_promedio": "15.29",
+    "total_promedio": "22.32",
+    "viajes": "3590025"
+  },
+  {
+    "mediana_tarifa_aprox": "10.5",
+    "mes_utc": "11",
+    "millas_promedio": "6.45",
+    "tarifa_promedio": "15.16",
+    "total_promedio": "22.17",
+    "viajes": "3171100"
+  },
+  {
+    "mediana_tarifa_aprox": "10.5",
+    "mes_utc": "12",
+    "millas_promedio": "2.86",
+    "tarifa_promedio": "14.41",
+    "total_promedio": "20.79",
+    "viajes": "57"
+  }
+]
+,
+[
+  {
+    "payment_type": "1",
+    "propina_media_registrada": "3.41",
+    "total_medio": "22.23",
+    "viajes": "27531738"
+  },
+  {
+    "payment_type": "2",
+    "propina_media_registrada": "0.0",
+    "total_medio": "17.95",
+    "viajes": "7102140"
+  },
+  {
+    "payment_type": "0",
+    "propina_media_registrada": "3.72",
+    "total_medio": "28.18",
+    "viajes": "1241840"
+  },
+  {
+    "payment_type": "4",
+    "propina_media_registrada": "0.05",
+    "total_medio": "-1.54",
+    "viajes": "207833"
+  },
+  {
+    "payment_type": "3",
+    "propina_media_registrada": "0.0",
+    "total_medio": "10.08",
+    "viajes": "172427"
+  },
+  {
+    "payment_type": "5",
+    "propina_media_registrada": "0.0",
+    "total_medio": "4.47",
+    "viajes": "5"
+  }
+]
+]

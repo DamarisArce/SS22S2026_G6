@@ -1,0 +1,30 @@
+SQL ya contiene p.prob.
+
+========== VERIFICACION INICIAL ==========
+predicciones_lineal: EXISTE
+predicciones_logistica: FALTA
+predicciones_comparadas: FALTA
+metricas_comparacion_clasificacion: FALTA
+
+========== predicciones_lineal ==========
+YA EXISTE: 6449 filas. No se modifica.
+
+========== predicciones_logistica ==========
+Validando SQL (dry run)...
+Creando SOLO la tabla faltante...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.predicciones_logistica
+VALIDADA: 6449 filas.
+
+========== predicciones_comparadas ==========
+Validando SQL (dry run)...
+Creando SOLO la tabla faltante...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.predicciones_comparadas
+VALIDADA: 6449 filas.
+
+========== metricas_comparacion_clasificacion ==========
+Validando SQL (dry run)...
+Creando SOLO la tabla faltante...
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.metricas_comparacion_clasificacion
+VALIDADA: 2 filas.
+
+RECUPERACION COMPLETADA: las cuatro tablas existen con sus conteos esperados.

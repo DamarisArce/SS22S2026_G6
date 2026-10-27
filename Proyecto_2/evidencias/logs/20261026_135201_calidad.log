@@ -1,0 +1,17 @@
+[
+  {
+    "destino_faltante": "0",
+    "distancia_no_positiva": "511442",
+    "dropoff_nulo": "0",
+    "duracion_invalida": "30368",
+    "fuera_2022_utc": "556",
+    "origen_faltante": "0",
+    "pasajeros_nulos": "1241840",
+    "pickup_nulo": "0",
+    "primer_pickup": "2001-01-01 00:03:14",
+    "tarifa_no_positiva": "241621",
+    "total_no_positivo": "234038",
+    "total_registros": "36256539",
+    "ultimo_pickup": "2023-04-18 14:30:05"
+  }
+]

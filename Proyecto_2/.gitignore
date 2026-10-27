@@ -1,0 +1,17 @@
+# Archivos locales y compilados (no son parte de la entrega)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+service-account*.json
+*token-secret*.json
+*.bak
+*.tar.gz
+*.zip
+.DS_Store

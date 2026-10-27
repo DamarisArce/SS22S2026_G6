@@ -1,0 +1,59 @@
+========== PRERREQUISITOS ==========
+OK: existe predicciones_comparadas.
+OK: columnas historicas verificadas.
+
+========== ESTADO DE VISTAS ==========
+vw_forecast_origen_movil: PENDIENTE
+vw_forecast_metricas: PENDIENTE
+
+========== CREANDO vw_forecast_origen_movil ==========
+Dry run aceptado.
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_forecast_origen_movil
+VALIDADA: vw_forecast_origen_movil.
+
+========== CREANDO vw_forecast_metricas ==========
+Dry run aceptado.
+Created ss2-p2-g6-2026-nc-1026.ss2_proyecto2_g6.vw_forecast_metricas
+VALIDADA: vw_forecast_metricas.
+
+========== VALIDACION DE ORIGEN MOVIL ==========
+{
+  "dias": "23",
+  "primera_fecha": "2022-11-08",
+  "tasas_invalidas": "0",
+  "ultima_fecha": "2022-11-30",
+  "ventanas_incorrectas": "0"
+}
+
+========== METRICAS DE PRONOSTICO ==========
+[
+  {
+    "dias_evaluados": "23",
+    "mae_puntos_porcentuales": "2.2079",
+    "modelo": "BASELINE_HISTORICO",
+    "primera_fecha": "2022-11-08",
+    "rmse_puntos_porcentuales": "2.5633",
+    "sesgo_puntos_porcentuales": "-0.5161",
+    "ultima_fecha": "2022-11-30"
+  },
+  {
+    "dias_evaluados": "23",
+    "mae_puntos_porcentuales": "5.9523",
+    "modelo": "LINEAL",
+    "primera_fecha": "2022-11-08",
+    "rmse_puntos_porcentuales": "6.4231",
+    "sesgo_puntos_porcentuales": "-5.9523",
+    "ultima_fecha": "2022-11-30"
+  },
+  {
+    "dias_evaluados": "23",
+    "mae_puntos_porcentuales": "5.2465",
+    "modelo": "LOGISTICA",
+    "primera_fecha": "2022-11-08",
+    "rmse_puntos_porcentuales": "5.7875",
+    "sesgo_puntos_porcentuales": "-5.2465",
+    "ultima_fecha": "2022-11-30"
+  }
+]
+
+ROLLING-ORIGIN VALIDADO: 23 pronosticos de 1 dia, 7 dias historicos, 2 modelos ML + baseline.

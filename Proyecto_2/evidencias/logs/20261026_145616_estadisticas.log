@@ -1,0 +1,26 @@
+[
+  {
+    "cache_hit": "false",
+    "creation_time": "2026-10-26 20:56:22",
+    "error": null,
+    "gib_procesados": "0.087",
+    "job_id": "bqjob_r9bdf5031031d141_000001a179fffd56_1",
+    "milisegundos": "305",
+    "total_bytes_billed": "94371840",
+    "total_bytes_processed": "93941224",
+    "total_slot_ms": "257",
+    "variante": "OPTIMIZADA"
+  },
+  {
+    "cache_hit": "false",
+    "creation_time": "2026-10-26 20:56:19",
+    "error": null,
+    "gib_procesados": "0.954",
+    "job_id": "bqjob_r58c2a24881982a4b_000001a179ffeecd_1",
+    "milisegundos": "321",
+    "total_bytes_billed": "1024458752",
+    "total_bytes_processed": "1024262123",
+    "total_slot_ms": "5166",
+    "variante": "BASE"
+  }
+]

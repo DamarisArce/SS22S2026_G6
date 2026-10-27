@@ -10,9 +10,17 @@ Diseñamos el informe visual a partir de vistas BigQuery que separan los hallazg
 
 **Viajes por mes:** la vista `vw_viajes_mes` presenta el comportamiento temporal por `mes_2022`, de enero a noviembre. **Zonas de origen:** `vw_zonas` permite comparar los diez identificadores de zona con mayor cantidad de viajes; se presentan códigos y no denominaciones geográficas. **Distribución horaria:** `vw_horas` representa la actividad de 0 a 23 horas en UTC. Las comprobaciones en BigQuery identificaron 11 meses, 262 zonas de origen y 24 horas.
 
+![viajes por mes](./img/viajes_por_mes.png)
+![zonas de origen](./img/zonas_de_origen.png)
+![distribución horaria](./img/Distribucion_de_viajes.png)
+
 ## Página 2. Evaluación de BigQuery ML
 
 **Tarifa real frente a estimada:** `vw_predicciones_diarias` compara los importes diarios medios de noviembre. **Clasificación:** `vw_comparacion_clasificacion` enfrenta Accuracy, Recall y F1 de las dos tareas binarias comparables. **Media móvil descriptiva:** `vw_rolling_comparativo` representa tasas reales y tasas pronosticadas por viaje suavizadas sobre siete días. Esta última visualización es descriptiva y distinta del Rolling Forecast de la tercera página.
+
+![tarifa real frente a la estimada](./img/Tarifa_real_estimada.png)
+![clasificacion](./img/Clasificacion.png)
+![movil comparativo](./img/Tasa_viajes_terifa_elevada.png)
 
 ## Página 3. Rolling Forecast con origen móvil
 
@@ -20,10 +28,12 @@ La vista `vw_forecast_origen_movil` muestra la proporción diaria observada junt
 
 La referencia histórica obtuvo el menor error. Los modelos se mantuvieron fijos; el origen del pronóstico avanzó cada día y la fecha objetivo se excluyó de la ventana histórica. No se trató de reentrenamiento diario ni de un pronóstico operativo del volumen total de taxis.
 
+![errores](./img/evaluacion_errores.png)
+![forecast](./img/Rolling_forecast.png)
+
+
 ## Evidencia visual disponible
 
 - [Análisis exploratorio](../evidencias/capturas/dashboard_01_exploracion.png)
 - [Evaluación BigQuery ML](../evidencias/capturas/dashboard_02_modelos_bqml.png)
 - [Rolling Forecast — captura del editor](../evidencias/capturas/dashboard_03_rolling_forecast_editor.png)
-
-El acceso al enlace se encuentra sujeto a las credenciales y permisos de visualización del recurso. La presencia de capturas obtenidas desde la cuenta propietaria no constituye por sí sola evidencia de acceso externo por otra identidad.

@@ -26,4 +26,4 @@ Los modelos permanecen fijos. No ejecutamos reentrenamiento en cada origen ni de
 
 ## Evaluación cuantitativa
 
-La comparación utiliza MAE, RMSE y sesgo firmado de las tasas diarias, expresados en puntos porcentuales. Las tres series se evalúan sobre las mismas 23 fechas. Las consultas que definen la metodología son `sql/05_dashboard/03_rolling_forecast_origen_movil.sql` y `04_rolling_forecast_metricas.sql`; sus resultados se desarrollan en [Resultados del Rolling Forecast](RESULTADOS_ROLLING_FORECAST_20261027.md).
+La comparación utiliza MAE, RMSE y sesgo firmado de las tasas diarias, expresados en puntos porcentuales. Las tres series se evalúan sobre las mismas 23 fechas. Las consultas que definen la metodología son `sql/05_dashboard/03_rolling_forecast_origen_movil.sql` y `04_rolling_forecast_metricas.sql`; sus resultados se desarrollan en [Resultados del Rolling Forecast](RESULTADOS_ROLLING_FORECAST.md).

@@ -79,3 +79,11 @@ El [informe técnico completo](docs/INFORME_TECNICO.md) integra la metodología,
 ## Alcance de los resultados
 
 La evaluación externa de los modelos se realizó sobre la muestra de noviembre. El proceso incluyó una comparación controlada de dos regularizaciones lineales y dos métodos de división temporal, sin búsqueda exhaustiva de hiperparámetros ni ajuste estadístico sobre múltiples ventanas. Un intento alternativo con Boosted Tree se interrumpió por límites de bytes facturables, por lo que sus resultados no se utilizan como evidencia de un tercer modelo. El dashboard presenta un *Rolling Forecast* retrospectivo con origen móvil y modelos fijos; no representa pronósticos operativos sobre viajes futuros desconocidos.
+
+
+## Evidencia en diagramas
+
+![separación temporal](/Proyecto_2/docs/img/Proyecto%202-Separación%20temporal.drawio.png)
+![tabla estándar vs particionada](/Proyecto_2/docs/img/Proyecto%202-tabla%20estándar%20vs%20particionada%20+%20clustering.drawio.png)
+![Arquitectura y linaje de datos](/Proyecto_2/docs/img/Proyecto%202-Arquitectura%20y%20linaje%20de%20datos%20.drawio.png)
+![Rolling Forecast con origen móvil](/Proyecto_2/docs/img/Proyecto%202-Rolling%20Forecast%20con%20origen%20móvil.drawio.png)
